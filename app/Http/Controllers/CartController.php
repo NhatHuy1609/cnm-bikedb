@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -11,7 +12,9 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $cart = Cart::with(['cartItems.product'])->where('user_id', 1)->first();
+
+        return view('cart.index', compact('cart'));
     }
 
     /**

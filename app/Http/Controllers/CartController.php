@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Http\Requests\Api\CartCreateRequest;
 use App\Http\Requests\Api\CartUpdateRequest;
 use App\Http\Requests\Api\CartDeleteRequest;
 use App\Models\User;
 use App\Services\CartService;
 use App\Services\UserService;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -28,7 +30,9 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $cart = Cart::with(['cartItems.product'])->where('user_id', 1)->first();
+
+        return view('cart.index', compact('cart'));
     }
 
     /**

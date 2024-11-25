@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -33,11 +34,12 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Product $product)
     {
-        //
+        $product->load('productImages');
+        return view('products.show',['product'=> $product]);
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      */

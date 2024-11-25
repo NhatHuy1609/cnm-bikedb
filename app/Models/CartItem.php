@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CartItem extends Model
 {
@@ -13,6 +12,22 @@ class CartItem extends Model
         'product_id',
         'quantity'
     ];
+
+    protected $primaryKey = 'cart_id';
+
+    public $incrementing = false;
+
+    protected function setKeysForSaveQuery($query)
+    {
+        $query->where('cart_id', $this->cart_id);
+        return $query->where('product_id', $this->product_id);
+    }
+
+    protected function setKeysForDeleteQuery($query)
+    {
+        $query->where('cart_id', $this->cart_id);
+        return $query->where('product_id', $this->product_id);
+    }
 
     public function cart(): BelongsTo
     {

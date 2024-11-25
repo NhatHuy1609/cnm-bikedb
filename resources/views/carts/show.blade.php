@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="vi">
 
+
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>
-        {{ $product->name }}
+        Cart
     </title>
 
     <!-- Bootstrap 3.3.7 CSS -->
@@ -109,9 +111,10 @@
             transition: all 0.3s ease;
         }
     </style>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
-    <!-- Main content -->
+    <!-- Keep header section -->
     <header class="header">
         <div class="container">
             <div class="header-main">
@@ -128,10 +131,10 @@
 						</a>
                         </div>
                         <div class="mobile-cart visible-sm visible-xs">
-                            <a href="{{ route('users.cart.show', 1) }}" title="Cart">
-                                <i class="ion ion-md-basket"></i>
-                                <span class="cnt crl-bg count_item_pr">1</span>
-                            </a>
+                            <a href="/cart" title="Cart">
+							<i class="ion ion-md-basket"></i>
+							<span class="cnt crl-bg count_item_pr">1</span>
+						</a>
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -152,8 +155,8 @@
                         <div class="index-cart cart-wishlist">
                             <ul class="clearfix">
                                 <li>
-                                    <a href="{{ route('users.cart.show', 1) }}" class="header-cart">
-									<i class="ion ion-md-basket"></i> Giỏ hàng <span class="cart-wishlist-number cartCount">1</span>
+                                    <a href="/cart" class="header-cart">
+									<i class="ion ion-md-basket"></i> Giỏ hàng <span class="cart-wishlist-number cartCount">{{ count($cart['cart_items']) }}</span>
 								</a>
                                 </li>
                             </ul>
@@ -451,230 +454,128 @@
             </nav>
         </div>
     </header>
-    <section class="bread-crumb margin-bottom-10">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <ul class="breadcrumb">					
-					<li class="home ">
-						<a  href="/ " title="Trang chủ "><span >Trang chủ</span></a>						
-						<span><i class="fa fa-angle-right "></i></span>
-					</li>
-					<li>
-						<a  href="/xe-dap-dua-road-1 " title="XE ĐẠP ĐUA - ROAD "><span >XE ĐẠP ĐUA - ROAD</span></a>						
-						<span><i class="fa fa-angle-right "></i></span>
-					</li>
-					<li ><strong><span >{{ $product->name }}</span></strong><li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</section>
 
-<section class="product " itemscope itemtype="http://schema.org/Product ">	
-	<div class="container ">
-		<div class="row ">
-			<div class="col-lg-12 details-product ">
-				<div class="row product-bottom ">
-					<div class="col-lg-12 ">
-						<div class="border-bg clearfix padding-bottom-10 padding-top-10 ">
-							<div class="col-xs-12 col-sm-6 col-lg-5 col-md-6 ">
-								<div class="relative product-image-block ">
-                                <div class="large-image">
-                                    <!-- Main image slider -->
-                                    <div id="productImageSlider" class="carousel slide" data-ride="carousel">
-                                        <!-- Indicators -->
-                                        <ol class="carousel-indicators">
-                                            @foreach($product->productImages as $index => $image)
-                                                <li data-target="#productImageSlider" 
-                                                    data-slide-to="{{ $index }}" 
-                                                    class="{{ $index === 0 ? 'active' : '' }}">
-                                                </li>
-                                            @endforeach
-                                        </ol>
-
-                                        <!-- Wrapper for slides -->
-                                        <div class="carousel-inner">
-                                            @forelse($product->productImages as $index => $image)
-                                                <div class="item {{ $index === 0 ? 'active' : '' }}">
-                                                    <img src="{{ $image->link }}" 
-                                                         alt="{{ $product->name }}" 
-                                                         class="img-responsive center-block">
-                                                </div>
-                                            @empty
-                                                <div class="item active">
-                                                    <img src="https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7898.jpg" 
-                                                         alt="Default Image" 
-                                                         class="img-responsive center-block">
-                                                </div>
-                                            @endforelse
-                                        </div>
-
-                                        <!-- Controls -->
-                                        <a class="left carousel-control" href="#productImageSlider" data-slide="prev">
-                                            <span class="glyphicon glyphicon-chevron-left"></span>
-                                        </a>
-                                        <a class="right carousel-control" href="#productImageSlider" data-slide="next">
-                                            <span class="glyphicon glyphicon-chevron-right"></span>
-                                        </a>
-                                    </div>
-                                </div>	
-								</div>
-								<div class="social-sharing margin-top-20 ">
-									<!-- Go to www.addthis.com/dashboard to customize your tools -->
-									<script type="text/javascript " src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a099baca270babc "></script>
-									<!-- Go to www.addthis.com/dashboard to customize your tools -->
-									<div class="addthis_inline_share_toolbox_uu9r "></div>
-								</div>
-								
-							</div>
-							<div class="col-xs-12 col-sm-6 col-lg-7 col-md-6 details-pro ">
-								<h1 class="title-head bk-product-name ">{{ $product->name }}</h1>
-								<div class="panel-product-line panel-product-rating clearfix ">
-									<div class="sapo-product-reviews-badge sapo-product-reviews-badge-detail " data-id="36568086 "></div>
-									<div class="iddanhgia " onclick="scrollToxx(); ">
-										<span>Viết đánh giá</span>
-									</div>
-								</div>
-								<div class="divider-full-1 "></div>
-								<div class="inventory_quantity d-inline-block">
-									<span class="stock-brand-title"><strong>Tình trạng:</strong></span>
-									@if($product->quantity > 0)
-										<span class="a-stock">Còn hàng ({{$product->quantity}})</span>
-									@else
-										<span class="a-stock a-stock-out">Hết hàng (0)</span>
-									@endif
-								</div>
-								<div class="price-box " itemprop="offers " itemscope itemtype="http://schema.org/Offer ">
-									<link itemprop="availability " href="http://schema.org/InStock ">
-									<meta itemprop="priceCurrency " content="VND ">
-									<meta itemprop="price " content="2490000 ">
-									<meta itemprop="url " content="https://dngbike.com/xe-dap-dua-youma-3-7 ">
-									<meta itemprop="priceValidUntil " content="2099-01-01 ">
-									<span class="special-price ">
-										<span class="price product-price bk-product-price ">Giá: {{ $product->price }}₫</span>
-									</span> <!-- Giá Khuyến mại -->
-									<span class="old-price "><del class="price product-price-old "></del>
-									</span> <!-- Giá gốca -->
-								</div>
-								<div class="product-summary product_description margin-bottom-15 ">
-									<div class="rte description ">
-										<p>
-<style type="text/css ">
-</style>
-<span style="color:#e74c3c; "><strong>CAM KẾT GIÁ RẺ NHẤT THỊ TRƯỜNG</strong></span><br />
-** Ở đâu giá rẻ, liên hệ Onebike.vn để được giảm rẻ hơn!<br />
-** Tặng bộ phụ kiện trị giá 100.000đ khi checkin<br />
-** Bảo hành chính hãng - 1 Đổi 1 trong vòng 30 ngày<br />
-** Xe chính hãng - Dịch vụ tốt - Chốt Onebike.vn / Dngbike.com </p>
-										
-									</div>
-								</div>
-								
-								<div class="form-product ">
-									<form enctype="multipart/form-data" id="add-to-cart-form " action="" method="post " class="form-inline ">
-										<div class="form-group ">
-											<div class="custom custom-btn-number form-control ">									
-												<label>Số lượng</label>
-												<button onclick="var result=document.getElementById( 'qty'); var qty=result.value; if( !isNaN(qty) & qty> 1 ) result.value--;return false;" class="btn-minus btn-cts" type="button">–</button>
-                        <input type="text" class="qty bk-product-qty input-text" id="qty" name="quantity" size="4" value="1" />
-                        <button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN(qty)) result.value++;return false;" class="btn-plus btn-cts" type="button">+</button>
+    <!-- After header, before footer -->
+    <div class="container" style="margin-top: 30px; margin-bottom: 30px;">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Giỏ hàng của bạn</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped" data-cart-id="{{ $cart['id'] }}">
+                        <thead>
+                            <tr>
+                                <th>Hình ảnh</th>
+                                <th>Sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Tổng tiền</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($cart['cart_items'] as $item)
+                                <tr>
+                                    <td>
+                                    <img src="{{ $item['product']['first_image'] }}" alt="product image" style="width: 100px; height: auto;">
+                                    </td>
+                                    <td>{{ $item['product']['name'] }}</td>
+                                    <td>${{ number_format($item['product']['price'], 2) }}</td>
+                                    <td>
+                                        <input type="number" 
+                                               class="form-control" 
+                                               style="width: 80px;" 
+                                               value="{{ $item['quantity'] }}" 
+                                               min="1"
+                                               onchange="updateQuantity('{{ $item['product_id'] }}', this.value)">
+                                    </td>
+                                    <td>${{ number_format($item['product']['price'] * $item['quantity'], 2) }}</td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm" onclick="removeItem('{{ $item['product_id'] }}')">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-                <div class="clearfix margin-bottom-20"></div>
-                <div class="clearfix">
-                <button 
-                            class="btn btn-lg btn-gray btn-cart" 
-                            onclick="addToCart('{{ 1 }}', '{{ $product->id }}', document.getElementById('qty').value)">
-                            <span class="txt-main">THÊM VÀO GIỎ HÀNG</span>
-                            <span class="txt-sub">Giao hàng tận nơi</span>
-                        </button>
-                    <button type="submit" class="btn btn-lg btn-gray btn-cart">
-                            <span class="txt-main">TƯ VẤN SẢN PHẨM</span>
-                            <span class="txt-sub">Gọi ngay</span>
-                        </button>
-
-
+                <div class="text-right">
+                    <a href="/" class="btn btn-default">Tiếp tục mua hàng</a>
+                    <a href="/checkout" class="btn btn-primary">Thanh toán</a>
                 </div>
             </div>
-            <div class="ab-available-notice-button ab-hide" data-ab-product-id="36568086">
-                <button class="ab-notice-btn" title="" type="button" onclick="ABAvailableNotice.noticeButtonClick()">
-		BÁO KHI CÓ HÀNG
-	</button>
-            </div>
-            </form>
         </div>
-        </div>
-        </div>
-        </div>
-        <div class="row margin-top-20">
-            <div class="col-md-9">
-                <div class="border-bg clearfix">
-                    <div class="col-xs-12 col-lg-12">
-                        <!-- Nav tabs -->
-                        <div class="product-tab e-tabs padding-bottom-10">
-                            <ul class="tabs tabs-title clearfix">
-                                <li class="tab-link" data-tab="tab-1">
-                                    <h3><span>Mô tả sản phẩm</span></h3>
-                                </li>
-                                <li class="tab-link" data-tab="tab-2">
-                                    <h3><span>Bảo hành Đổi trả</span></h3>
-                                </li>
-                                <li class="tab-link" data-tab="tab-3">
-                                    <h3><span>Đánh giá</span></h3>
-                                </li>
-                            </ul>
-                            <div id="tab-1" class="tab-content">
-                                <h2 style="text-align: center;"><strong><span style="font-size:20px;">MÔ TẢ SẢN PHẨM&nbsp;TẠI DNGBIKE</span></strong></h2>
-                                <div class="rte">
-                                    <p style="text-align: justify;">
-                                        <span style="font-size:16px;">{{ $product->description }}&nbsp;</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div id="tab-2" class="tab-content">
-                                <h2 style="text-align: center;"><strong><span style="font-size:20px;">CHÍNH SÁCH BẢO HÀNH&nbsp;TẠI DNGBIKE</span></strong></h2>
-                                <h3><span style="font-size:18px;"><strong>I.&nbsp;NỘI DUNG&nbsp;BẢO HÀNH</strong></span></h3>
-                                <h4 style="text-align: justify;"><span style="font-size:16px;"><strong>1.1. Thời gian&nbsp;bảo hành</strong></span></h4>
-                                <p style="text-align: justify;"><span style="font-size:16px;">- Thời gian bảo hành tùy thuộc vào chế độ bảo hành của từng&nbsp;loại xe và từng nhà sản xuất. Cửa hàng sẽ áp dụng theo quy định của nhà sản xuất.</span></p>
-                                <h4 style="text-align: justify;"><span style="font-size:16px;"><strong>1.2. Điều kiện&nbsp;bảo hành</strong></span></h4>
-                                <p style="text-align: justify;"><span style="font-size:16px;">- Sản phẩm bảo hành&nbsp;trong thời gian bảo hành phải còn nguyên vẹn,&nbsp;không có dấu hiệu cạy, mở, hay tháo rời,&nbsp;chưa qua sửa chữa<br />
-- Lỗi&nbsp;được đội ngũ kỹ thuật của&nbsp;DNGBIKE&nbsp;xác định là&nbsp;do lỗi kỹ thuật sản phẩm&nbsp;hoặc do lỗi của nhà sản xuất.</span></p>
-                                <h4 style="text-align: justify;"><strong><span style="font-size:16px;">1.3. Thủ tục bảo hành</span></strong></h4>
-                                <p style="text-align: justify;"><span style="font-size:16px;">- Đối với sản phẩm là&nbsp;xe đạp: Khách hàng mang sản phẩm cần bảo hành kèm&nbsp;theo sổ bảo hành chính hãng do công ty phát hành&nbsp;khi bán hàng, nếu khách hàng không có sổ bảo hành do công ty DNGBIKE phát hành thì khách hàng cần&nbsp;xuất trình được thông tin sản phẩm và thông tin&nbsp;người mua hàng trùng khớp với thông tin lưu trữ&nbsp;trên hệ thống lưu trữ của công ty.</span></p>
-                                <p style="text-align: justify;"><span style="font-size:16px;">-&nbsp;Đối với sản phẩm là&nbsp;phụ tùng phụ kiện: Khách hàng mang sản phẩm cần bảo hành kèm&nbsp;theo hóa đơn mua hàng, nếu khách hàng không có hóa đơn mua hàng&nbsp;thì khách hàng cần&nbsp;xuất trình được thông tin sản phẩm và thông tin&nbsp;người mua hàng trùng khớp với thông tin lưu trữ&nbsp;trên hệ thống lưu trữ của công ty.</span></p>
-                                <h4 style="text-align: justify;"><strong><span style="font-size:16px;">1.4. Các trường hợp không được bảo hành miễn phí</span></strong></h4>
-                                <div style="text-align: justify;"><span style="font-size:16px;">- Lỗi được xác định là&nbsp;do từ phía&nbsp;khách hàng: Sản phẩm&nbsp;hư hỏng do tai nạn, va chạm, bóp méo, biến dạng,&nbsp;trầy sước sơn, rỉ két,&nbsp;do tháo lắp không đúng cách,&nbsp;không đọc kỹ hướng dẫn sử dụng trước khi dùng,&nbsp;tự ý tháo lắp và thay đổi&nbsp;các thành phần đã được nhà sản xuất cài đặt sẵn</span></div>
-                                <div style="text-align: justify;"><span style="font-size:16px;">- Hư hỏng do thiên tai, hỏa hoạn&nbsp;hoặc do vận chuyển không đúng quy cách.&nbsp;</span></div>
-                                <div style="text-align: justify;"><span style="font-size:16px;">- Trường hợp xe xuống cấp do thiếu bảo trì tốt.&nbsp;&nbsp;</span></div>
-                                <div>
-                                    <div style="text-align: justify;"><span style="font-size:16px;">- Sử dụng xe không đúng cách, không đúng mục đích...</span></div>
-                                    <div style="text-align: justify;"><span style="font-size:16px;">-&nbsp;Vui lòng không tự ý tháo ráp, sửa chửa trước khi đem đến bảo hành.&nbsp;&nbsp;</span></div>
-                                    <div style="text-align: center;"><strong><span style="color:#e74c3c;"><em><span style="font-size:16px;">Xin quý khách vui lòng không nhầm lẫn việc bảo hành với bảo hiểm hay bảo trì.&nbsp;</span></em></span></strong></div>
-                                </div>
-                            </div>
-                            <div id="tab-3" class="tab-content">
-                                <div id="sapo-product-reviews" class="sapo-product-reviews" data-id="36568086">
-                                    <div id="sapo-product-reviews-noitem" style="display: none;">
-                                        <div class="content">
-                                            <p data-content-text="language.suggest_noitem"></p>
-                                            <div class="product-reviews-summary-actions">
-                                                <button type="button" class="btn-new-review" onclick="BPR.newReview(this); return false;" data-content-str="language.newreview"></button>
-                                            </div>
-                                            <div id="noitem-bpr-form_" data-id="formId" class="noitem-bpr-form" style="display:none;">
-                                                <div class="sapo-product-reviews-form"></div>
-                                            </div>
-                                        </div>
-                                    </div>
+    </div>
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </section>
-    <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/bpr-products-module.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
+    <script>
+        function updateQuantity(productId, change) {
+            const cartId = document.querySelector('table').dataset.cartId;
+            
+            fetch(`/carts`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({
+                    product_id: productId,
+                    cart_id: cartId,
+                    quantity: parseInt(change)
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    location.reload();
+                } else {
+                    alert(data.message || 'Cart update failed');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error updating cart. Please try again later.');
+            });
+        }
 
+        function removeItem(productId) {
+            const cartId = document.querySelector('table').dataset.cartId;
+            if (confirm('Are you sure you want to delete this product?')) {
+                fetch(`/carts`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                        product_id: productId,
+                        cart_id: cartId
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error updating cart. Please try again later.');
+                });
+            }
+        }
+    </script>
+
+    <!-- Keep footer section -->
     <div class="footer-policy">
         <div class="container">
             <div class="row">
@@ -789,86 +690,28 @@
         </div>
     </footer>
 
-
-    <!-- Bizweb javascript -->
+    <!-- Keep scripts -->
     <script src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/option-selectors.js?1730193558341" type="text/javascript"></script>
-
     <script src="//bizweb.dktcdn.net/assets/themes_support/api.jquery.js" type="text/javascript"></script>
-
     <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/lightbox.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
     <script src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/jquery.elevatezoom308.min.js?1730193558341" type="text/javascript"></script>
     <script src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/jquery.prettyphoto.min005e.js?1730193558341" type="text/javascript"></script>
     <script src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/jquery.prettyphoto.init.min367a.js?1730193558341" type="text/javascript"></script>
 
     <script>
-        $(document).ready(function(){
-            // Show tab 1 by default
-            $('#tab-1').addClass('current');
-            $('.tabs-title li:first').addClass('current');
-            
-            // Handle tab clicks
-            $('.tabs-title li').click(function(){
-                var tab_id = $(this).attr('data-tab');
-                
-                // Remove current class from all tabs and contents
-                $('.tabs-title li').removeClass('current');
-                $('.tab-content').removeClass('current');
-                
-                // Add current class to clicked tab and corresponding content
-                $(this).addClass('current');
-                $("#"+tab_id).addClass('current');
-            });
-        });
+        // Keep only the sticky navigation script
         window.addEventListener('scroll', function() {
             var navigation = document.querySelector('.main-navigation');
             var headerHeight = document.querySelector('.header-main').offsetHeight;
             
             if (window.pageYOffset >= headerHeight) {
                 navigation.classList.add('sticky-nav');
-                // Add padding to body to prevent content jump
                 document.body.style.paddingTop = navigation.offsetHeight + 'px';
             } else {
                 navigation.classList.remove('sticky-nav');
                 document.body.style.paddingTop = 0;
             }
         });
-
-
-        function addToCart(userId, productId, quantity) {
-            const url = '/users/cart';
-            
-            const data = {
-                user_id: userId,
-                product_id: productId,
-                quantity: quantity
-            };
-
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    alert(data.message);
-                } else {
-                    alert(data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error adding to cart. Please try again later.');
-            });
-        }
     </script>
 
 </body>

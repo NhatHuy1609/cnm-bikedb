@@ -70,8 +70,12 @@ class StripeWebhookController extends Controller
                         'quantity' => $item->quantity,
                         'price' => $item->product->price
                     ]);
+
+                    $product = $item->product;
+                    $product->quantity = max(0, $product->quantity - $item->quantity);
+                    $product->save();
                 }
-                Log::error('Order items created', ['order_id' => $order->id]);
+                Log::error('Order items created and product quantities updated', ['order_id' => $order->id]);
 
                 $cart->cartItems()->delete();
                 $cart->delete();

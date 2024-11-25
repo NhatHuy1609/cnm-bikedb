@@ -15,7 +15,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Bootstrap 3.3.7 JavaScript -->
@@ -27,7 +27,7 @@
     <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/base.scss.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
     <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/ant-sport.scss.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
     <style>
-        .carousel-inner > .item > img {
+        .carousel-inner>.item>img {
             width: 100%;
             height: auto;
         }
@@ -102,7 +102,7 @@
             right: 0;
             z-index: 1000;
             background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
 
@@ -113,6 +113,7 @@
     </style>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
+
 <body>
     <!-- Keep header section -->
     <header class="header">
@@ -121,20 +122,20 @@
                 <div class="row">
                     <div class="col-md-3 col-100-h">
                         <button type="button" class="trigger-mobile navbar-toggle collapsed visible-sm visible-xs">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
                         <div class="logo">
-                            <a href="/" class="logo-wrapper ">					
-							<img src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/logo.png?1730193558341" alt="logo DngBike.com" />	
-						</a>
+                            <a href="/" class="logo-wrapper ">
+                                <img src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/logo.png?1730193558341" alt="logo DngBike.com" />
+                            </a>
                         </div>
                         <div class="mobile-cart visible-sm visible-xs">
                             <a href="/cart" title="Cart">
-							<i class="ion ion-md-basket"></i>
-							<span class="cnt crl-bg count_item_pr">1</span>
-						</a>
+                                <i class="ion ion-md-basket"></i>
+                                <span class="cnt crl-bg count_item_pr">1</span>
+                            </a>
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -143,10 +144,10 @@
                                 <form class="input-group search-bar search_form" action="/search" method="get" role="search">
                                     <input type="search" name="query" value="" placeholder="Tìm kiếm sản phẩm... " class="input-group-field st-default-search-input search-text" autocomplete="off">
                                     <span class="input-group-btn">
-			<button class="btn icon-fallback-text">
-				<i class="fa fa-search"></i>
-			</button>
-		</span>
+                                        <button class="btn icon-fallback-text">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
                                 </form>
                             </div>
                         </div>
@@ -156,16 +157,16 @@
                             <ul class="clearfix">
                                 <li>
                                     <a href="/cart" class="header-cart">
-									<i class="ion ion-md-basket"></i> Giỏ hàng <span class="cart-wishlist-number cartCount">{{ count($cart['cart_items']) }}</span>
-								</a>
+                                        <i class="ion ion-md-basket"></i> Giỏ hàng <span class="cart-wishlist-number cartCount">{{ count($cart['cart_items']) }}</span>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
                         <div class="account-sign">
                             <a href="/account" class="account-header">
-							<i class="ion ion-ios-contact"></i>
-							<div class="a-text">Đăng nhập<span>Tài khoản và đơn hàng</span></div>
-						</a>
+                                <i class="ion ion-ios-contact"></i>
+                                <div class="a-text">Đăng nhập<span>Tài khoản và đơn hàng</span></div>
+                            </a>
                             <ul>
 
                                 <li><a href="/account/login">Đăng nhập</a></li>
@@ -406,8 +407,8 @@
                                                     <li class="level1 parent item">
                                                         <h2 class="h4">
                                                             <a href="/gioi-thieu-cong-ty-tnhh-dngbike">
-							<span>VỀ CHÚNG TÔI</span>
-						</a>
+                                                                <span>VỀ CHÚNG TÔI</span>
+                                                            </a>
                                                         </h2>
                                                         <ul class="level1">
                                                             <li class="level2"> <a href="/gioi-thieu-cong-ty-tnhh-dngbike"><span>Giới thiệu công ty DNGBIKE</span></a> </li>
@@ -425,8 +426,8 @@
                                                     <li class="level1 parent item">
                                                         <h2 class="h4">
                                                             <a href="/blog-xe-dap">
-							<span>CHÍNH SÁCH</span>
-						</a>
+                                                                <span>CHÍNH SÁCH</span>
+                                                            </a>
                                                         </h2>
                                                         <ul class="level1">
                                                             <li class="level2"> <a href="/bao-hanh"><span>Bảo hành bảo dưỡng</span></a> </li>
@@ -474,34 +475,39 @@
                         </thead>
                         <tbody>
                             @foreach($cart['cart_items'] as $item)
-                                <tr>
-                                    <td>
+                            <tr>
+                                <td>
                                     <img src="{{ $item['product']['first_image'] }}" alt="product image" style="width: 100px; height: auto;">
-                                    </td>
-                                    <td>{{ $item['product']['name'] }}</td>
-                                    <td>${{ number_format($item['product']['price'], 2) }}</td>
-                                    <td>
-                                        <input type="number" 
-                                               class="form-control" 
-                                               style="width: 80px;" 
-                                               value="{{ $item['quantity'] }}" 
-                                               min="1"
-                                               onchange="updateQuantity('{{ $item['product_id'] }}', this.value)">
-                                    </td>
-                                    <td>${{ number_format($item['product']['price'] * $item['quantity'], 2) }}</td>
-                                    <td>
-                                        <button class="btn btn-danger btn-sm" onclick="removeItem('{{ $item['product_id'] }}')">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                                </td>
+                                <td>{{ $item['product']['name'] }}</td>
+                                <td>${{ number_format($item['product']['price'], 2) }}</td>
+                                <td>
+                                    <input type="number"
+                                        class="form-control"
+                                        style="width: 80px;"
+                                        value="{{ $item['quantity'] }}"
+                                        min="1"
+                                        onchange="updateQuantity('{{ $item['product_id'] }}', this.value)">
+                                </td>
+                                <td>${{ number_format($item['product']['price'] * $item['quantity'], 2) }}</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm" onclick="removeItem('{{ $item['product_id'] }}')">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
                 <div class="text-right">
                     <a href="/" class="btn btn-default">Tiếp tục mua hàng</a>
-                    <a href="/checkout" class="btn btn-primary">Thanh toán</a>
+                    <form action="{{ route('checkout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-primary">
+                            Thanh toán
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -510,50 +516,17 @@
     <script>
         function updateQuantity(productId, change) {
             const cartId = document.querySelector('table').dataset.cartId;
-            
-            fetch(`/carts`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify({
-                    product_id: productId,
-                    cart_id: cartId,
-                    quantity: parseInt(change)
-                })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    location.reload();
-                } else {
-                    alert(data.message || 'Cart update failed');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error updating cart. Please try again later.');
-            });
-        }
 
-        function removeItem(productId) {
-            const cartId = document.querySelector('table').dataset.cartId;
-            if (confirm('Are you sure you want to delete this product?')) {
-                fetch(`/carts`, {
-                    method: 'DELETE',
+            fetch(`/carts`, {
+                    method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                     },
                     body: JSON.stringify({
                         product_id: productId,
-                        cart_id: cartId
+                        cart_id: cartId,
+                        quantity: parseInt(change)
                     })
                 })
                 .then(response => {
@@ -565,12 +538,45 @@
                 .then(data => {
                     if (data.success) {
                         location.reload();
+                    } else {
+                        alert(data.message || 'Cart update failed');
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
                     alert('Error updating cart. Please try again later.');
                 });
+        }
+
+        function removeItem(productId) {
+            const cartId = document.querySelector('table').dataset.cartId;
+            if (confirm('Are you sure you want to delete this product?')) {
+                fetch(`/carts`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        },
+                        body: JSON.stringify({
+                            product_id: productId,
+                            cart_id: cartId
+                        })
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            location.reload();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error updating cart. Please try again later.');
+                    });
             }
         }
     </script>
@@ -703,7 +709,7 @@
         window.addEventListener('scroll', function() {
             var navigation = document.querySelector('.main-navigation');
             var headerHeight = document.querySelector('.header-main').offsetHeight;
-            
+
             if (window.pageYOffset >= headerHeight) {
                 navigation.classList.add('sticky-nav');
                 document.body.style.paddingTop = navigation.offsetHeight + 'px';

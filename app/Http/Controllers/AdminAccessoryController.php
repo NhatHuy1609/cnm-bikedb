@@ -2,19 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use App\Models\Order;
-use App\Models\Rating;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Product;
 
-class ProductController extends Controller
+class AdminAccessoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $accessories = Product::whereHas('category', function ($query) {
+            $query->where('id', 4)
+                ->orWhere('parent_category_id', 4);
+        })
+        ->with(['category', 'productImages', 'discount'])
+        ->select(['id', 'name', 'price', 'quantity', 'category_id', 'updated_at'])
+        ->latest()
+        ->paginate(10);
+
+        return view('admin.accessories.index', compact('accessories'));
     }
 
     /**
@@ -36,27 +44,9 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show(string $id)
     {
-        $product->load('productImages');
-
-        // Kiểm tra xem người dùng đã mua sản phẩm hay chưa
-        $userId = 1; // hardcode user id
-        $hasPurchased = Order::where('user_id', $userId)
-            ->where('status', 'paid')
-            ->whereHas('orderItems', function ($query) use ($product) {
-                $query->where('product_id', $product->id);
-            })
-            ->exists();
-
-        // Lấy các đánh giá cho sản phẩm
-        $ratings = Rating::where('product_id', $product->id)->get();
-
-        return view('products.show', [
-            'product' => $product,
-            'hasPurchased' => $hasPurchased,
-            'ratings' => $ratings,
-        ]);
+        //
     }
 
     /**

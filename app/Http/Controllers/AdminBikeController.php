@@ -2,17 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rating;
+use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
-class RatingController extends Controller
+class AdminBikeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $bikes = Product::whereHas('category', function ($query) {
+            $query->where('id', 1)
+                ->orWhere('parent_category_id', 1);
+        })
+        ->with(['category', 'productImages', 'discount'])
+        ->select(['id', 'name', 'price', 'quantity', 'category_id', 'updated_at'])
+        ->latest()
+        ->paginate(10);
+
+        return view('admin.bikes.index', compact('bikes'));
     }
 
     /**
@@ -28,20 +35,7 @@ class RatingController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'rating' => 'required|integer|min:1|max:5',
-            'comment' => 'required|string',
-        ]);
-
-        Rating::create([
-            'user_id' => 1, // hardcode user_id
-            'product_id' => $request->input('product_id'), // lấy product_id từ request
-            'comment' => $request->input('comment'),
-            'rating_point' => $request->input('rating'),
-            'rating_date' => now(), // hoặc bạn có thể sử dụng một định dạng khác
-        ]);
-
-        return redirect()->back()->with('success', 'Đánh giá của bạn đã được gửi thành công!');
+        //
     }
 
     /**

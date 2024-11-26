@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Discount extends Model
 {
-    use HasFactory;
+    // use HasFactory;
 
     protected $fillable = [
         'percentage',

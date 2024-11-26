@@ -19,7 +19,8 @@ class Product extends Model
         'price',
         'description',
         'category_id',
-        'quantity'
+        'quantity',
+        'brand_id'
     ];
 
     public function category(): BelongsTo
@@ -35,5 +36,10 @@ class Product extends Model
     public function discount(): HasOne
     {
         return $this->hasOne(Discount::class);
+    }
+
+    public function brand(): BelongsTo
+    {
+        return $this->belongsTo(Brand::class);
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminBikeController;
 use App\Http\Controllers\AdminAccessoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\RatingController;
 
 
@@ -13,9 +14,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/general', [GeneralController::class, 'index'])->name('general.index');
 
-
-Route::get('/products/{product}', [ProductController::class, 'show']);
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');;
 Route::get('/users/{user}/cart', [CartController::class, 'show'])->name('users.cart.show');
 Route::put('/carts', [CartController::class, 'update']);
 Route::delete('/carts', [CartController::class, 'destroy']);

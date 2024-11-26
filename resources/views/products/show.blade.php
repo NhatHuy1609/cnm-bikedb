@@ -219,9 +219,14 @@
         }
 
         .review-form {
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
+            display: none;
+            width: 100%;
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-sizing: border-box;
         }
 
         .rating-input {
@@ -307,7 +312,7 @@
         .d-flex {
             display: flex;
             flex-wrap: wrap;
-            /* Cho phép các phần tử xuống dòng nếu không đủ chỗ */
+            /* Cho phép các phần tử xuống dòng nếu không đủ ch */
         }
 
         .form-group input {
@@ -566,7 +571,7 @@
                                             <ul class="dropdown-menu">
 
                                                 <li class="nav-item-lv3">
-                                                    <a class="nav-link" href="/phu-kien-khuyen-mai">PHỤ KIỆN KHUYẾN MÃI</a>
+                                                    <a class="nav-link" href="/phu-kien-khuyen-mai">PHỤ KIỆN KHUYẾN MI</a>
                                                 </li>
 
                                             </ul>
@@ -849,7 +854,7 @@
                                                 <p style="text-align: justify;"><span style="font-size:16px;">- Sản phẩm bảo hành&nbsp;trong thời gian bảo hành phải còn nguyên vẹn,&nbsp;không có dấu hiệu cạy, mở, hay tháo rời,&nbsp;chưa qua sửa chữa<br />
                                                         - Lỗi&nbsp;được đội ngũ kỹ thuật của&nbsp;DNGBIKE&nbsp;xác đnh là&nbsp;do lỗi kỹ thuật sản phẩm&nbsp;hoặc do lỗi của nhà sản xuất.</span></p>
                                                 <h4 style="text-align: justify;"><strong><span style="font-size:16px;">1.3. Thủ tục bảo hành</span></strong></h4>
-                                                <p style="text-align: justify;"><span style="font-size:16px;">- Đối với s���n phẩm là&nbsp;xe đạp: Khch hàng mang sản phẩm cần bảo hành kèm&nbsp;theo sổ bảo hành chính hãng do công ty phát hành&nbsp;khi bán hàng, nếu khách hàng không có sổ bảo hành do công ty DNGBIKE phát hành thì khách hàng cần&nbsp;xuất trình được thông tin sản phẩm và thông tin&nbsp;người mua hàng trùng khớp với thông tin lưu trữ&nbsp;trên hệ thống lưu trữ của công ty.</span></p>
+                                                <p style="text-align: justify;"><span style="font-size:16px;">- Đối với sn phẩm là&nbsp;xe đạp: Khch hàng mang sản phẩm cần bảo hành kèm&nbsp;theo sổ bảo hành chính hãng do công ty phát hành&nbsp;khi bán hàng, nếu khách hàng không có s bảo hành do công ty DNGBIKE phát hành thì khách hàng cần&nbsp;xuất trình được thông tin sản phẩm và thông tin&nbsp;người mua hàng trùng khớp với thông tin lưu trữ&nbsp;trên hệ thống lưu trữ của công ty.</span></p>
                                                 <p style="text-align: justify;"><span style="font-size:16px;">-&nbsp;Đối với sn phẩm là&nbsp;phụ tùng phụ kiện: Khách hàng mang sản phẩm cần bảo hành kèm&nbsp;theo hóa đơn mua hàng, nếu khách hàng không có hóa đơn mua hàng&nbsp;thì khách hàng cần&nbsp;xuất trình được thông tin sản phẩm và thông tin&nbsp;người mua hàng trùng khớp với thông tin lưu trữ&nbsp;trên hệ thống lưu trữ của công ty.</span></p>
                                                 <h4 style="text-align: justify;"><strong><span style="font-size:16px;">1.4. Các trường hợp không được bảo hành miễn phí</span></strong></h4>
                                                 <div style="text-align: justify;"><span style="font-size:16px;">- Lỗi được xác định là&nbsp;do từ phía&nbsp;khách hàng: Sản phẩm&nbsp;hư hỏng do tai nạn, va chạm, bóp méo, biến dạng,&nbsp;trầy sước sơn, rỉ két,&nbsp;do tháo lắp không đúng cách,&nbsp;không đọc kỹ hướng dẫn sử dụng trước khi dùng,&nbsp;tự ý tháo lắp và thay đổi&nbsp;các thnh phần đã được nhà sản xuất cài đặt sẵn</span></div>
@@ -877,7 +882,11 @@
                                                                 <div class="total-ratings">(1 đánh giá)</div>
 
                                                                 <!-- Nút gửi đánh giá của bạn -->
+                                                                @if($hasPurchased)
                                                                 <button class="btn-submit-review" style="margin-top: 10px;" onclick="toggleReviewForm()">Gửi đánh giá của bạn</button>
+                                                                @else
+                                                                <p>Bạn không có quyền đánh giá sản phẩm này.</p>
+                                                                @endif
                                                             </div>
 
                                                             <div class="ratings-breakdown">
@@ -893,8 +902,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <!-- Form đánh giá ẩn -->
-                                                        <div id="review-form" class="review-form" style="display: none; border: 2px solid #4CAF50; padding: 20px; border-radius: 8px;">
+                                                        <div id="review-form" class="review-form" style="display: none;">
                                                             <h3>VIẾT ĐÁNH GIÁ CỦA BẠN</h3>
                                                             <form action="#" method="POST" enctype="multipart/form-data">
                                                                 @csrf
@@ -907,15 +915,23 @@
                                                                         @endfor
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-group d-flex align-items-center">
-                                                                    <input type="text" class="form-control" placeholder="Nhập họ tên của bạn" name="name" required style="flex: 1; margin-right: 10px;">
-                                                                    <input type="email" class="form-control" placeholder="Nhập email của bạn" name="email" required style="flex: 1; margin-right: 10px;">
-                                                                    <input type="tel" class="form-control" placeholder="Nhập số điện thoại của bạn" name="phone" required style="flex: 1;">
+                                                                <div class="form-group d-flex">
+                                                                    <div class="mr-2" style="flex: 1; margin-right: 10px;">
+                                                                        <label for="name">Họ tên *</label>
+                                                                        <input type="text" class="form-control" id="name" name="name" required>
+                                                                    </div>
+                                                                    <div class="mr-2" style="flex: 1; margin-right: 10px;">
+                                                                        <label for="email">Email *</label>
+                                                                        <input type="email" class="form-control" id="email" name="email" required>
+                                                                    </div>
+                                                                    <div style="flex: 1;">
+                                                                        <label for="phone">Số điện thoại *</label>
+                                                                        <input type="tel" class="form-control" id="phone" name="phone" required>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <textarea class="form-control" placeholder="Nội dung đánh giá" name="comment" required></textarea>
                                                                 </div>
-
                                                                 <button type="submit" class="btn-submit-review">GỬI ĐÁNH GIÁ</button>
                                                             </form>
                                                         </div>
@@ -1158,7 +1174,7 @@
 
         function scrollToReviews() {
             // Chọn tab đánh giá
-            $('.tabs-title li').removeClass('current'); // Bỏ chọn tất cả các tab
+            $('.tabs-title li').removeClass('current'); // B chọn tất cả các tab
             $('.tab-content').removeClass('current'); // Bỏ chọn tất cả các nội dung tab
 
             // Chọn tab đánh giá

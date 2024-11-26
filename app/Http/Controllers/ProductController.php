@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -37,9 +38,22 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $product->load('productImages');
-        return view('products.show',['product'=> $product]);
+
+        // Kiểm tra xem người dùng đã mua sản phẩm hay chưa
+        $userId = 1; // hardcode user id
+        $hasPurchased = Order::where('user_id', $userId)
+            ->where('status', 'paid')
+            ->whereHas('orderItems', function ($query) use ($product) {
+                $query->where('product_id', $product->id);
+            })
+            ->exists();
+
+        return view('products.show', [
+            'product' => $product,
+            'hasPurchased' => $hasPurchased,
+        ]);
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      */

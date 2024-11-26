@@ -4,14 +4,15 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\GeneralController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/general', [GeneralController::class, 'index'])->name('general.index');
 
-
-Route::get('/products/{product}', [ProductController::class, 'show']);
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');;
 Route::get('/users/{user}/cart', [CartController::class, 'show'])->name('users.cart.show');
 Route::put('/carts', [CartController::class, 'update']);
 Route::delete('/carts', [CartController::class, 'destroy']);

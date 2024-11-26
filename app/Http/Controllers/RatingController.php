@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rating;
 use Illuminate\Http\Request;
 
 class RatingController extends Controller
@@ -27,7 +28,20 @@ class RatingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'rating' => 'required|integer|min:1|max:5',
+            'comment' => 'required|string',
+        ]);
+
+        Rating::create([
+            'user_id' => 1, // hardcode user_id
+            'product_id' => $request->input('product_id'), // lấy product_id từ request
+            'comment' => $request->input('comment'),
+            'rating_point' => $request->input('rating'),
+            'rating_date' => now(), // hoặc bạn có thể sử dụng một định dạng khác
+        ]);
+
+        return redirect()->back()->with('success', 'Đánh giá của bạn đã được gửi thành công!');
     }
 
     /**

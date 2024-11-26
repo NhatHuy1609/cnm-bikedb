@@ -17,8 +17,6 @@ Route::put('/carts', [CartController::class, 'update']);
 Route::delete('/carts', [CartController::class, 'destroy']);
 Route::post('/users/cart', [CartController::class, 'store']);
 
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-
 Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
 Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');

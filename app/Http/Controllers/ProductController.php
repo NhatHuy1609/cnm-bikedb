@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Order;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -48,9 +49,13 @@ class ProductController extends Controller
             })
             ->exists();
 
+        // Lấy các đánh giá cho sản phẩm
+        $ratings = Rating::where('product_id', $product->id)->get();
+
         return view('products.show', [
             'product' => $product,
             'hasPurchased' => $hasPurchased,
+            'ratings' => $ratings,
         ]);
     }
 

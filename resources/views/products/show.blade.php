@@ -634,7 +634,7 @@
                                                     <li class="level1 parent item">
                                                         <h2 class="h4">
                                                             <a href="/blog-xe-dap">
-                                                                <span>CHÍNH SÁCH</span>
+                                                                <span>CHNH SÁCH</span>
                                                             </a>
                                                         </h2>
                                                         <ul class="level1">
@@ -872,14 +872,24 @@
                                                         <h2 class="text-center">ĐÁNH GIÁ SẢN PHẨM</h2>
                                                         <div class="ratings-overview">
                                                             <div class="ratings-score">
-                                                                <span class="average-score">5/5</span>
-                                                                <span class="score-max">/5</span>
+                                                                @php
+                                                                $totalScore = 0;
+                                                                $totalRatings = $ratings->count();
+
+                                                                foreach ($ratings as $rating) {
+                                                                $totalScore += $rating->rating_point; // Cộng dồn điểm đánh giá
+                                                                }
+
+                                                                $averageScore = $totalRatings > 0 ? round($totalScore / $totalRatings, 1) : 0; // Tính điểm trung bình
+                                                                @endphp
+
+                                                                <span class="average-score">{{ $averageScore }}/5</span>
                                                                 <div class="star-rating">
                                                                     @for($i = 1; $i <= 5; $i++)
-                                                                        <i class="fa fa-star{{ $i <= 5 ? '' : '-o' }}"></i>
+                                                                        <i class="fa fa-star{{ $i <= $averageScore ? '' : '-o' }}"></i>
                                                                         @endfor
                                                                 </div>
-                                                                <div class="total-ratings">(1 đánh giá)</div>
+                                                                <div class="total-ratings">({{ $totalRatings }} đánh giá)</div>
 
                                                                 <!-- Nút gửi đánh giá của bạn -->
                                                                 @if($hasPurchased)
@@ -890,13 +900,20 @@
                                                             </div>
 
                                                             <div class="ratings-breakdown">
+                                                                @php
+                                                                $ratingCounts = [0, 0, 0, 0, 0]; // Mảng để đếm số lượng đánh giá cho mỗi sao
+                                                                foreach ($ratings as $rating) {
+                                                                $ratingCounts[$rating->rating_point - 1]++; // Tăng số lượng cho mức sao tương ứng
+                                                                }
+                                                                @endphp
+
                                                                 @for($i = 5; $i >= 1; $i--)
                                                                 <div class="rating-bar">
                                                                     <div class="rating-label">{{ $i }} sao</div>
                                                                     <div class="progress">
-                                                                        <div class="progress-bar" style="width: {{ $i == 5 ? 50 : ($i == 4 ? 50 : 0) }}%"></div>
+                                                                        <div class="progress-bar" style="width: {{ $ratings->count() > 0 ? ($ratingCounts[$i - 1] / $ratings->count() * 100) : 0 }}%"></div>
                                                                     </div>
-                                                                    <div class="rating-count">{{ $i == 5 ? 1 : ($i == 4 ? 1 : 0) }}</div>
+                                                                    <div class="rating-count">{{ $ratingCounts[$i - 1] }}</div>
                                                                 </div>
                                                                 @endfor
                                                             </div>
@@ -904,8 +921,9 @@
 
                                                         <div id="review-form" class="review-form" style="display: none;">
                                                             <h3>VIẾT ĐÁNH GIÁ CỦA BẠN</h3>
-                                                            <form action="#" method="POST" enctype="multipart/form-data">
+                                                            <form action="{{ route('ratings.store') }}" method="POST" enctype="multipart/form-data">
                                                                 @csrf
+                                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
                                                                 <div class="form-group d-flex align-items-center">
                                                                     <label style="margin-right: 10px;margin-top: 10px;">Đánh giá của bạn *</label>
                                                                     <div class="rating-input d-flex align-items-center">
@@ -913,20 +931,6 @@
                                                                         <input type="radio" id="star{{ $i }}" name="rating" value="{{ $i }}" required>
                                                                         <label for="star{{ $i }}"><i class="fa fa-star"></i></label>
                                                                         @endfor
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group d-flex">
-                                                                    <div class="mr-2" style="flex: 1; margin-right: 10px;">
-                                                                        <label for="name">Họ tên *</label>
-                                                                        <input type="text" class="form-control" id="name" name="name" required>
-                                                                    </div>
-                                                                    <div class="mr-2" style="flex: 1; margin-right: 10px;">
-                                                                        <label for="email">Email *</label>
-                                                                        <input type="email" class="form-control" id="email" name="email" required>
-                                                                    </div>
-                                                                    <div style="flex: 1;">
-                                                                        <label for="phone">Số điện thoại *</label>
-                                                                        <input type="tel" class="form-control" id="phone" name="phone" required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -938,34 +942,22 @@
 
                                                         <div class="reviews-list">
                                                             <h3>KHÁCH HÀNG NHẬN XÉT</h3>
+                                                            @foreach($ratings as $rating)
                                                             <div class="review-item">
                                                                 <div class="review-header">
-                                                                    <span class="reviewer-name">Mai Hong Quang</span>
+                                                                    <span class="reviewer-name">{{ $rating->user->name }}</span>
                                                                     <div class="review-rating">
                                                                         @for($i = 1; $i <= 5; $i++)
-                                                                            <i class="fa fa-star{{ $i <= 5 ? '' : '-o' }}"></i>
+                                                                            <i class="fa fa-star{{ $i <= $rating->rating_point ? '' : '-o' }}"></i>
                                                                             @endfor
                                                                     </div>
-                                                                    <span class="review-date">22/11/2024</span>
+                                                                    <span class="review-date">{{ \Carbon\Carbon::parse($rating->rating_date)->format('d/m/Y') }}</span>
                                                                 </div>
                                                                 <div class="review-content">
-                                                                    Sản phẩm oke nha
+                                                                    {{ $rating->comment }}
                                                                 </div>
                                                             </div>
-                                                            <div class="review-item">
-                                                                <div class="review-header">
-                                                                    <span class="reviewer-name">Nguyen Van A</span>
-                                                                    <div class="review-rating">
-                                                                        @for($i = 1; $i <= 5; $i++)
-                                                                            <i class="fa fa-star{{ $i <= 4 ? '' : '-o' }}"></i>
-                                                                            @endfor
-                                                                    </div>
-                                                                    <span class="review-date">21/11/2024</span>
-                                                                </div>
-                                                                <div class="review-content">
-                                                                    Chất lượng tốt, giao hàng nhanh.
-                                                                </div>
-                                                            </div>
+                                                            @endforeach
                                                         </div>
                                                     </div>
                                                 </div>

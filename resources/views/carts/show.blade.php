@@ -157,7 +157,7 @@
                             <ul class="clearfix">
                                 <li>
                                     <a href="/cart" class="header-cart">
-                                        <i class="ion ion-md-basket"></i> Giỏ hàng <span class="cart-wishlist-number cartCount">{{ count($cart['cart_items']) }}</span>
+                                        <i class="ion ion-md-basket"></i> Giỏ hàng <span class="cart-wishlist-number cartCount">{{ count($cart['cart_items'] ?? []) > 0 ? count($cart['cart_items']) : 0 }}</span>
                                     </a>
                                 </li>
                             </ul>
@@ -355,7 +355,7 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item ">
-                                    <a href="/phu-kien-xe-dap" class="nav-link">PHỤ KIỆN <i class="fa fa-angle-right" data-toggle="dropdown"></i></a>
+                                    <a href="/phu-kien-xe-dap" class="nav-link">PH KIỆN <i class="fa fa-angle-right" data-toggle="dropdown"></i></a>
                                     <ul class="dropdown-menu">
                                         <li class="dropdown-submenu nav-item-lv2">
                                             <a class="nav-link" href="/pk-khuyen-mai">PHỤ KIỆN KHUYẾN MÃI - GIẢM ĐẾN 50% <i class="fa fa-angle-right"></i></a>
@@ -462,7 +462,7 @@
             <div class="col-md-12">
                 <h2>Giỏ hàng của bạn</h2>
                 <div class="table-responsive">
-                    <table class="table table-striped" data-cart-id="{{ $cart['id'] }}">
+                    <table class="table table-striped" data-cart-id="{{ $cart['id'] ?? '' }}">
                         <thead>
                             <tr>
                                 <th>Hình ảnh</th>
@@ -474,40 +474,43 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($cart['cart_items'] as $item)
-                            <tr>
-                                <td>
-                                    <img src="{{ $item['product']['first_image'] }}" alt="product image" style="width: 100px; height: auto;">
-                                </td>
-                                <td>{{ $item['product']['name'] }}</td>
-                                <td>${{ number_format($item['product']['price'], 2) }}</td>
-                                <td>
-                                    <input type="number"
-                                        class="form-control"
-                                        style="width: 80px;"
-                                        value="{{ $item['quantity'] }}"
-                                        min="1"
-                                        onchange="updateQuantity('{{ $item['product_id'] }}', this.value)">
-                                </td>
-                                <td>${{ number_format($item['product']['price'] * $item['quantity'], 2) }}</td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm" onclick="removeItem('{{ $item['product_id'] }}')">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            @endforeach
+                            @if(empty($cart['cart_items']))
+                                <tr>
+                                    <td colspan="6" class="text-center">
+                                        <span style="font-size: 20px; font-weight: bold;">Chưa có sản phẩm trong giỏ hàng</span>
+                                    </td>
+                                </tr>
+                            @else
+                                @foreach($cart['cart_items'] as $item)
+                                    <tr>
+                                        <td>
+                                            <img src="{{ $item['product']['first_image'] }}" alt="product image" style="width: 100px; height: auto;">
+                                        </td>
+                                        <td>{{ $item['product']['name'] }}</td>
+                                        <td>${{ number_format($item['product']['price'], 2) }}</td>
+                                        <td>
+                                            <input type="number" 
+                                                   class="form-control" 
+                                                   style="width: 80px;" 
+                                                   value="{{ $item['quantity'] }}" 
+                                                   min="1"
+                                                   onchange="updateQuantity('{{ $item['product_id'] }}', this.value)">
+                                        </td>
+                                        <td>${{ number_format($item['product']['price'] * $item['quantity'], 2) }}</td>
+                                        <td>
+                                            <button class="btn btn-danger btn-sm" onclick="removeItem('{{ $item['product_id'] }}')">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
                 <div class="text-right">
                     <a href="/" class="btn btn-default">Tiếp tục mua hàng</a>
-                    <form action="{{ route('checkout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-primary">
-                            Thanh toán
-                        </button>
-                    </form>
+                    <a href="/checkout" class="btn btn-primary">Thanh toán</a>
                 </div>
             </div>
         </div>

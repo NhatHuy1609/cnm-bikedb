@@ -1,19 +1,19 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Create Bike')
+@section('title', 'Create Accessory')
 
 @section('content')
 <div class="w-full mt-8">
     {{-- Main Form Container --}}
-    <form method="POST" action="{{ route('admin.bikes.store') }}" enctype="multipart/form-data" class="p-10 bg-white rounded shadow-xl max-w-3xl mx-auto">
+    <form method="POST" action="{{ route('admin.accessories.store') }}" enctype="multipart/form-data" class="p-10 bg-white rounded shadow-xl max-w-3xl mx-auto">
         @csrf
-        <p class="text-lg text-gray-800 font-medium pb-4">Add new bike</p>
+        <p class="text-lg text-gray-800 font-medium pb-4">Add new accessory</p>
         
         {{-- Basic Information Section --}}
-        {{-- Bike Name Field --}}
+        {{-- Accessory Name Field --}}
         <div class="mt-2">
             <label class="block text-sm text-gray-600" for="name">Name</label>
-            <input class="w-full px-5 py-2 text-gray-700 bg-gray-100 rounded" id="name" name="name" type="text" required placeholder="Bike name" value="{{ old('name') }}">
+            <input class="w-full px-5 py-2 text-gray-700 bg-gray-100 rounded" id="name" name="name" type="text" required placeholder="Accessory name" value="{{ old('name') }}">
         </div>
 
         {{-- Price and Quantity Row --}}
@@ -82,13 +82,12 @@
         {{-- Description Field --}}
         <div class="mt-2">
             <label class="block text-sm text-gray-600" for="description">Description</label>
-            <textarea class="w-full px-5 py-2 text-gray-700 bg-gray-100 rounded" id="description" name="description" rows="3" placeholder="Bike description">{{ old('description') }}</textarea>
+            <textarea class="w-full px-5 py-2 text-gray-700 bg-gray-100 rounded" id="description" name="description" rows="3" placeholder="Accessory description">{{ old('description') }}</textarea>
         </div>
 
         {{-- Image Upload Section --}}
         <div class="mt-6">
             <label class="block text-sm text-gray-600">Product Images</label>
-            
             <div id="image-container" class="mt-2">
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="image-preview-container">
                     {{-- Image Preview Grid --}}
@@ -116,7 +115,7 @@
 
         {{-- Form Actions --}}
         <div class="mt-6 flex justify-between">
-            <a href="{{ route('admin.bikes.index') }}" class="px-4 py-2 bg-gray-100 text-gray-600 hover:bg-gray-200 rounded flex items-center gap-2">
+            <a href="{{ route('admin.accessories.index') }}" class="px-4 py-2 bg-gray-100 text-gray-600 hover:bg-gray-200 rounded flex items-center gap-2">
                 <i class="fa-solid fa-chevron-left"></i>
                 Back
             </a>

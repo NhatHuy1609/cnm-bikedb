@@ -3,7 +3,7 @@
 @section('title', 'Manage Bikes')
 
 @section('content')
-<div class="w-full mt-12">
+<div class="w-full mt-8">
     <div class="flex justify-between items-center pb-6">
         <div class="flex-1"></div>
         <a href="{{ route('admin.bikes.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
@@ -22,6 +22,9 @@
                     </th>
                     <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Product
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Brand
                     </th>
                     <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Category
@@ -59,6 +62,15 @@
                                 </p>
                             </div>
                         </div>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <p class="text-gray-900 whitespace-no-wrap">
+                            @if($bike->brand)
+                                {{ ucfirst($bike->brand->name) }}
+                            @else
+                                <span class="text-muted-background italic">N/A</span>
+                            @endif
+                        </p>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                         <p class="text-gray-900 whitespace-no-wrap">{{ $bike->category->name }}</p>

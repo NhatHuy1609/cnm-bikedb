@@ -14,20 +14,17 @@ class AdminBikeController extends Controller
             $query->where('id', 1)
                 ->orWhere('parent_category_id', 1);
         })
-        ->with(['category', 'productImages', 'discount'])
-        ->select(['id', 'name', 'price', 'quantity', 'category_id', 'updated_at'])
+        ->with(['category', 'productImages', 'brand', 'discount'])
+        ->select(['id', 'name', 'price', 'quantity', 'category_id', 'brand_id', 'updated_at'])
         ->latest()
         ->paginate(10);
 
         return view('admin.bikes.index', compact('bikes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.bikes.create');
     }
 
     /**

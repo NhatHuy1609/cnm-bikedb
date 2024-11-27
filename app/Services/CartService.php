@@ -71,7 +71,7 @@ class CartService
             $cart = Cart::where('user_id', $params['user_id'])->first();
 
             if (!$cart) {
-                throw new Exception('Cart not found for the user.');
+                $cart = Cart::create(['user_id' => $params['user_id']]);
             }
 
             $cartItem = $this->cartItems

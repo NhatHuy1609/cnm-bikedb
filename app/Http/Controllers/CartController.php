@@ -50,14 +50,13 @@ class CartController extends Controller
     {
         $params = $request->validated();
         $data = $this->cartService->store($params);
-        if($data)
-        {
+        if ($data) {
             return response()->json([
                 'success' => true,
                 'message' => 'Product added to cart successfully.',
                 'data' => $data
             ]);
-        }else{
+        } else {
             return response()->json([
                 'success' => false,
                 'message' => 'Product addition to cart failed.'
@@ -71,7 +70,7 @@ class CartController extends Controller
     public function show(User $user)
     {
         $data = $this->userService->getUserCart($user->id);
-        return view('carts.show',['cart' => $data]);
+        return view('carts.show', ['cart' => $data]);
     }
 
     /**
@@ -90,15 +89,14 @@ class CartController extends Controller
 
         $params = $request->validated();
         $data = $this->cartService->updateQuantity($params);
-        
-        if($data)
-        {
+
+        if ($data) {
             return response()->json([
                 'success' => true,
                 'message' => 'Cart update successful.',
                 'data' => $data
             ]);
-        }else{
+        } else {
             return response()->json([
                 'success' => false,
                 'message' => 'Cart update failed.'
@@ -113,12 +111,12 @@ class CartController extends Controller
     {
         $params = $request->validated();
         $result = $this->cartService->destroy($params);
-        if ($result){
+        if ($result) {
             return response()->json([
                 'success' => true,
                 'message' => 'Product deletion successful.',
             ]);
-        }else{
+        } else {
             return response()->json([
                 'success' => false,
                 'message' => 'Product deletion failed.'

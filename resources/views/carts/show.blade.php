@@ -475,42 +475,45 @@
                         </thead>
                         <tbody>
                             @if(empty($cart['cart_items']))
-                                <tr>
-                                    <td colspan="6" class="text-center">
-                                        <span style="font-size: 20px; font-weight: bold;">Chưa có sản phẩm trong giỏ hàng</span>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td colspan="6" class="text-center">
+                                    <span style="font-size: 20px; font-weight: bold;">Chưa có sản phẩm trong giỏ hàng</span>
+                                </td>
+                            </tr>
                             @else
-                                @foreach($cart['cart_items'] as $item)
-                                    <tr>
-                                        <td>
-                                            <img src="{{ $item['product']['first_image'] }}" alt="product image" style="width: 100px; height: auto;">
-                                        </td>
-                                        <td>{{ $item['product']['name'] }}</td>
-                                        <td>${{ number_format($item['product']['price'], 2) }}</td>
-                                        <td>
-                                            <input type="number" 
-                                                   class="form-control" 
-                                                   style="width: 80px;" 
-                                                   value="{{ $item['quantity'] }}" 
-                                                   min="1"
-                                                   onchange="updateQuantity('{{ $item['product_id'] }}', this.value)">
-                                        </td>
-                                        <td>${{ number_format($item['product']['price'] * $item['quantity'], 2) }}</td>
-                                        <td>
-                                            <button class="btn btn-danger btn-sm" onclick="removeItem('{{ $item['product_id'] }}')">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                            @foreach($cart['cart_items'] as $item)
+                            <tr>
+                                <td>
+                                    <img src="{{ $item['product']['first_image'] }}" alt="product image" style="width: 100px; height: auto;">
+                                </td>
+                                <td>{{ $item['product']['name'] }}</td>
+                                <td>${{ number_format($item['product']['price'], 2) }}</td>
+                                <td>
+                                    <input type="number"
+                                        class="form-control"
+                                        style="width: 80px;"
+                                        value="{{ $item['quantity'] }}"
+                                        min="1"
+                                        onchange="updateQuantity('{{ $item['product_id'] }}', this.value)">
+                                </td>
+                                <td>${{ number_format($item['product']['price'] * $item['quantity'], 2) }}</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm" onclick="removeItem('{{ $item['product_id'] }}')">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            @endforeach
                             @endif
                         </tbody>
                     </table>
                 </div>
                 <div class="text-right">
                     <a href="/" class="btn btn-default">Tiếp tục mua hàng</a>
-                    <a href="/checkout" class="btn btn-primary">Thanh toán</a>
+                    <form action="{{ route('checkout') }}" method="POST" style="display:inline;">
+                        @csrf
+                        <button type="submit" class="btn btn-primary">Thanh toán</button>
+                    </form>
                 </div>
             </div>
         </div>

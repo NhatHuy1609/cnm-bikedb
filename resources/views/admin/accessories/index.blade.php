@@ -11,6 +11,18 @@
         </a>
     </div>
 
+    @if(session('success'))
+<div id="flash-message" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative transition-opacity duration-500" role="alert">
+    <span class="block sm:inline">{{ session('success') }}</span>
+    <span id="close-flash" class="absolute top-0 bottom-0 right-0 px-4 py-3 cursor-pointer">
+        <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <title>Close</title>
+            <path d="M14.348 5.652a1 1 0 00-1.414 0L10 8.586 7.066 5.652a1 1 0 10-1.414 1.414L8.586 10l-2.934 2.934a1 1 0 101.414 1.414L10 11.414l2.934 2.934a1 1 0 001.414-1.414L11.414 10l2.934-2.934a1 1 0 000-1.414z"/>
+        </svg>
+    </span>
+</div>
+@endif
+
     <div class="bg-white overflow-auto">
         <table class="min-w-full">
             <thead>
@@ -20,6 +32,9 @@
                     </th>
                     <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Product
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Brand
                     </th>
                     <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Category
@@ -57,6 +72,15 @@
                                 </p>
                             </div>
                         </div>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <p class="text-gray-900 whitespace-no-wrap">
+                            @if($accessory->brand)
+                                {{ ucfirst($accessory->brand->name) }}
+                            @else
+                                <span class="text-muted-background italic">N/A</span>
+                            @endif
+                        </p>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                         <p class="text-gray-900 whitespace-no-wrap">{{ $accessory->category->name }}</p>
@@ -125,3 +149,32 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const flashMessage = document.getElementById('flash-message');
+    const closeFlash = document.getElementById('close-flash');
+
+    if (flashMessage) {
+        // Auto-close after 3 seconds
+        setTimeout(() => {
+            flashMessage.style.opacity = '0';
+            setTimeout(() => {
+                flashMessage.remove();
+            }, 500); // Allow time for fade-out transition
+        }, 3000);
+
+        // Manual close on click
+        if (closeFlash) {
+            closeFlash.addEventListener('click', function() {
+                flashMessage.style.opacity = '0';
+                setTimeout(() => {
+                    flashMessage.remove();
+                }, 500); // Allow time for fade-out transition
+            });
+        }
+    }
+});
+</script>
+@endpush

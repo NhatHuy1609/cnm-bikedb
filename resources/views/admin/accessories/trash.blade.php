@@ -1,17 +1,18 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Manage Accessories')
+@section('title', 'Deleted Accessories')
 
 @section('content')
-<div class="w-full mt-12">
-    <div class="flex gap-4 items-center pb-4">
-        <h2 class="text-lg font-semibold">All Accessories</h2>
-        <a href="{{ route('admin.accessories.trash') }}" 
+<div class="w-full mt-8">
+    <div class="flex flex-col gap-2 items-start pb-4">
+        <a href="{{ route('admin.accessories.index') }}" 
            class="text-sm text-blue-500 hover:text-blue-800">
-            <i class="fas fa-trash mr-2"></i>View Deleted Accessories
+            <i class="fas fa-chevron-left mr-2"></i>Back
         </a>
+        <h2 class="text-lg font-semibold">Deleted Accessories</h2>
     </div>
-    <div class="flex justify-between items-center pb-4">
+
+    <div class="flex items-center pb-4">
         <form action="{{ route('admin.accessories.index') }}" method="GET" class="flex items-center gap-2">
             <div class="relative">
                 <input type="text" 
@@ -57,37 +58,16 @@
                     </div>
 
                     <!-- Category Filter -->
-                    <div class="mb-4" id="category-container">
+                    <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
-                        
-                        <div class="space-y-2">
-                            <!-- Main Category Dropdown -->
-                            <div class="flex items-center gap-2">
-                                <select class="w-full p-2 h-10 rounded-md border border-gray-300 category-select" 
-                                        data-level="1" 
-                                        name="category_level_1">
-                                    <option value="">All Categories</option>
-                                    @foreach($categories as $category)
-                                        <option value="{{ $category->id }}" 
-                                                {{ request('category') == $category->id ? 'selected' : '' }}
-                                                data-has-children="{{ $category->subCategories->isNotEmpty() ? 'true' : 'false' }}">
-                                            {{ $category->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <!-- Loading Indicator -->
-                            <div id="category-loading" class="hidden">
-                                <div class="flex items-center gap-2 text-gray-500">
-                                    <i class="fas fa-circle-notch fa-spin"></i>
-                                    <span class="text-sm">Loading subcategories...</span>
-                                </div>
-                            </div>
-
-                            <!-- Final Selected Category Input -->
-                            <input type="hidden" name="category" id="final_category_id" value="{{ request('category') }}">
-                        </div>
+                        <select name="category" class="w-full p-2 h-10 rounded-md border border-gray-300">
+                            <option value="">All Categories</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <!-- Price Range -->
@@ -144,10 +124,6 @@
                 </div>
             </div>
         </form>
-        <a href="{{ route('admin.accessories.create') }}" 
-           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            <i class="fas fa-plus mr-2"></i>Add New Accessory
-        </a>
     </div>
 
     @if(session('success'))
@@ -189,7 +165,7 @@
                         Quantity
                     </th>
                     <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                        Last Updated
+                        Deleted At
                     </th>
                     <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Actions
@@ -211,9 +187,7 @@
                             </div>
                             <div class="ml-3">
                                 <p class="text-gray-900 whitespace-no-wrap font-semibold">
-                                    <a href="{{ route('admin.accessories.show', $accessory) }}" class="hover:text-blue-600 hover:underline">
-                                        {{ $accessory->name }}
-                                    </a>
+                                    {{ $accessory->name }}
                                 </p>
                             </div>
                         </div>
@@ -254,26 +228,31 @@
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                         <p class="text-gray-900 whitespace-no-wrap">
-                            {{ $accessory->updated_at->format('M d, Y') }}
+                            {{ $accessory->deleted_at->format('M d, Y') }}
                         </p>
                         <p class="text-gray-600 text-xs">
-                            {{ $accessory->updated_at->format('h:i A') }}
+                            {{ $accessory->deleted_at->format('h:i A') }}
                         </p>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
                         <div class="flex space-x-3 justify-center">
-                            <a href="{{ route('admin.accessories.edit', $accessory) }}" 
-                               class="text-blue-600 hover:text-blue-900"
-                               title="Edit">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <form action="{{ route('admin.accessories.destroy', $accessory) }}" method="POST" class="inline">
+                            <form action="{{ route('admin.accessories.restore', $accessory) }}" method="POST" class="inline">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" 
+                                        class="text-indigo-600 hover:text-indigo-900"
+                                        onclick="return confirm('Are you sure you want to restore this accessory?')"
+                                        title="Restore">
+                                    <i class="fas fa-undo"></i>
+                                </button>
+                            </form>
+                            <form action="{{ route('admin.accessories.force-delete', $accessory) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" 
                                         class="text-red-600 hover:text-red-900" 
-                                        onclick="return confirm('Are you sure you want to delete this accessory?')"
-                                        title="Delete">
+                                        onclick="return confirm('Are you sure you want to permanently delete this accessory? This action cannot be undone.')"
+                                        title="Delete Permanently">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
@@ -282,8 +261,8 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="7" class="px-5 py-5 bg-white text-sm text-center">
-                        No accessories found.
+                    <td colspan="8" class="px-5 py-5 bg-white text-sm text-center">
+                        No deleted accessories found.
                     </td>
                 </tr>
                 @endforelse
@@ -292,7 +271,7 @@
     </div>
 
     <div class="mt-4">
-        {{ $accessories->links() }}
+        {{ $accessories->links('pagination::tailwind') }}
     </div>
 </div>
 @endsection
@@ -313,111 +292,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
 
         // Manual close on click
-        if (closeFlash) {
-            closeFlash.addEventListener('click', function() {
-                flashMessage.style.opacity = '0';
-                setTimeout(() => {
-                    flashMessage.remove();
-                }, 500); // Allow time for fade-out transition
-            });
-        }
-    }
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    const categoryContainer = document.getElementById('category-container');
-    const finalCategoryInput = document.getElementById('final_category_id');
-    const loadingIndicator = document.getElementById('category-loading');
-
-    // Handle category selection
-    categoryContainer.addEventListener('change', async function(e) {
-        if (!e.target.classList.contains('category-select')) return;
-
-        const select = e.target;
-        const level = parseInt(select.dataset.level);
-        const selectedOption = select.options[select.selectedIndex];
-        const hasChildren = selectedOption.dataset.hasChildren === 'true';
-        const selectedId = select.value;
-
-        // Always update the final category ID with the current selection
-        finalCategoryInput.value = selectedId;
-
-        // Remove all subsequent dropdowns
-        removeSubsequentDropdowns(level);
-
-        if (hasChildren && selectedId) {
-            try {
-                loadingIndicator.classList.remove('hidden');
-                select.disabled = true;
-
-                const response = await fetch(`/api/categories/${selectedId}/children`);
-                const children = await response.json();
-
-                if (children.length > 0) {
-                    createCategoryDropdown(level + 1, children);
-                }
-            } catch (error) {
-                console.error('Error fetching subcategories:', error);
-            } finally {
-                loadingIndicator.classList.add('hidden');
-                select.disabled = false;
-            }
-        }
-    });
-
-    function createCategoryDropdown(level, categories) {
-        const div = document.createElement('div');
-        div.className = 'flex items-center gap-2';
-        
-        const icon = document.createElement('i');
-        icon.className = 'fas fa-chevron-right text-gray-400 text-xs';
-        div.appendChild(icon);
-        
-        const select = document.createElement('select');
-        select.className = 'w-full p-2 h-10 rounded-md border border-gray-300 category-select';
-        select.dataset.level = level;
-        select.name = `category_level_${level}`;
-        select.style.opacity = '0';
-
-        const defaultOption = document.createElement('option');
-        defaultOption.value = '';
-        defaultOption.textContent = 'All Subcategories';
-        select.appendChild(defaultOption);
-
-        categories.forEach(category => {
-            const option = document.createElement('option');
-            option.value = category.id;
-            option.textContent = category.name;
-            option.dataset.hasChildren = category.has_children;
-            select.appendChild(option);
+        closeFlash.addEventListener('click', function() {
+            flashMessage.style.opacity = '0';
+            setTimeout(() => {
+                flashMessage.remove();
+            }, 500); // Allow time for fade-out transition
         });
-
-        div.appendChild(select);
-        categoryContainer.querySelector('.space-y-2').appendChild(div);
-
-        requestAnimationFrame(() => {
-            select.style.opacity = '1';
-        });
-    }
-
-    function removeSubsequentDropdowns(level) {
-        const dropdowns = categoryContainer.querySelectorAll('.category-select');
-        dropdowns.forEach(dropdown => {
-            if (parseInt(dropdown.dataset.level) > level) {
-                const container = dropdown.closest('.flex.items-center');
-                container.style.opacity = '0';
-                setTimeout(() => {
-                    container.remove();
-                }, 200);
-            }
-        });
-    }
-
-    // Initialize subcategories if category is already selected
-    if (finalCategoryInput.value) {
-        const initialSelect = document.querySelector('.category-select[data-level="1"]');
-        const event = new Event('change');
-        initialSelect.dispatchEvent(event);
     }
 });
 </script>

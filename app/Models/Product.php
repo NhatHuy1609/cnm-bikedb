@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Product extends Model
 {
@@ -17,7 +18,9 @@ class Product extends Model
         'name',
         'price',
         'description',
-        'category_id'
+        'category_id',
+        'quantity',
+        'brand_id'
     ];
 
     public function category(): BelongsTo
@@ -33,5 +36,10 @@ class Product extends Model
     public function discount(): HasOne
     {
         return $this->hasOne(Discount::class);
+    }
+
+    public function brand(): BelongsTo
+    {
+        return $this->belongsTo(Brand::class);
     }
 }

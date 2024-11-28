@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>
+        Xe đạp đua YOUMA ONEBIKE - Xe đạp học sinh giá rẻ
+    </title>
+
+    <!-- Bootstrap 3.3.7 CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/ionicons@4.1.1/dist/css/ionicons.min.css">
+
+    <!-- Build Main CSS -->
+    <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/base.scss.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
+    <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/ant-sport.scss.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
+</head>
+<body>
+    <!-- Main content -->
+    <header class="header">
+        <div class="container">
+            <div class="header-main">
+                <div class="row">
+                    <div class="col-md-3 col-100-h">
+                        <button type="button" class="trigger-mobile navbar-toggle collapsed visible-sm visible-xs">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+                        <div class="logo">
+                            <a href="/" class="logo-wrapper ">					
+							<img src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/logo.png?1730193558341" alt="logo DngBike.com" />	
+						</a>
+                        </div>
+                        <div class="mobile-cart visible-sm visible-xs">
+                            <a href="/cart" title="Cart">
+							<i class="ion ion-md-basket"></i>
+							<span class="cnt crl-bg count_item_pr">1</span>
+						</a>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="search-header">
+                            <div class="header_search search_form">
+                                <form class="input-group search-bar search_form" action="/search" method="get" role="search">
+                                    <input type="search" name="query" value="" placeholder="Tìm kiếm sản phẩm... " class="input-group-field st-default-search-input search-text" autocomplete="off">
+                                    <span class="input-group-btn">
+			<button class="btn icon-fallback-text">
+				<i class="fa fa-search"></i>
+			</button>
+		</span>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 hidden-sm hidden-xs">
+                        <div class="index-cart cart-wishlist">
+                            <ul class="clearfix">
+                                <li>
+                                    <a href="/cart" class="header-cart">
+									<i class="ion ion-md-basket"></i> Giỏ hàng <span class="cart-wishlist-number cartCount">1</span>
+								</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="account-sign">
+                            <a href="/account" class="account-header">
+							<i class="ion ion-ios-contact"></i>
+							<div class="a-text">Đăng nhập<span>Tài khoản và đơn hàng</span></div>
+						</a>
+                            <ul>
+
+                                <li><a href="/account/login">Đăng nhập</a></li>
+                                <li><a href="/account/register">Đăng ký</a></li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-navigation">
+            <nav class="hidden-sm hidden-xs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul id="nav" class="nav">
+                                <li class="nav-item ">
+                                    <a href="/xe-dap-all-onebike" class="nav-link">THƯƠNG HIỆU <i class="fa fa-angle-right" data-toggle="dropdown"></i></a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item-lv2">
+                                            <a class="nav-link" href="/xe-dap-trek">XE ĐẠP TREK - USA</a>
+                                        </li>
+                                        <li class="nav-item-lv2">
+                                            <a class="nav-link" href="/xe-dap-giant">XE ĐẠP GIANT - TAIWAN</a>
+                                        </li>
+                                        <li class="nav-item-lv2">
+                                            <a class="nav-link" href="/xe-dap-liv-nu">XE ĐẠP LIV - TAIWAN</a>
+                                        </li>
+                                        <li class="nav-item-lv2">
+                                            <a class="nav-link" href="/xe-dap-twitter-1">XE ĐẠP TWITTER</a>
+                                        </li>
+                                        <li class="nav-item-lv2">
+                                            <a class="nav-link" href="/xe-dap-the-thao-khac">XE ĐẠP HÃNG KHÁC</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item ">
+                                    <a href="/xe-dap-all-onebike" class="nav-link">XE ĐẠP <i class="fa fa-angle-right" data-toggle="dropdown"></i></a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item-lv2">
+                                            <a class="nav-link" href="/xe-dap-khuyen-mai">XE ĐẠP KHUYẾN MÃI GIẢM ĐẾN 30%</a>
+                                        </li>
+                                        <li class="nav-item-lv2">
+                                            <a class="nav-link" href="/xe-dap-dua-road-1">XE ĐẠP ĐUA - ROAD</a>
+                                        </li>
+                                        <li class="nav-item-lv2">
+                                            <a class="nav-link" href="/xe-dap-dia-hinh-mtb-1">XE ĐẠP ĐỊA HÌNH - MTB</a>
+                                        </li>
+                                        <li class="nav-item-lv2">
+                                            <a class="nav-link" href="/xe-dap-duong-pho-1">XE ĐẠP ĐƯỜNG PHỐ</a>
+                                        </li>
+                                        <li class="nav-item-lv2">
+                                            <a class="nav-link" href="/xe-dap-duong-truong-touring">XE ĐẠP ĐƯỜNG TRƯỜNG</a>
+                                        </li>
+                                        <li class="nav-item-lv2">
+                                            <a class="nav-link" href="/xe-dap-the-thao-nu">XE ĐẠP NỮ</a>
+                                        </li>
+                                        <li class="nav-item-lv2">
+                                            <a class="nav-link" href="/xe-dap-hoc-sinh-1">XE ĐẠP HỌC SINH</a>
+                                        </li>
+                                        <li class="nav-item-lv2">
+                                            <a class="nav-link" href="/xe-dap-tro-luc-dien">XE ĐẠP TRỢ LỰC ĐIỆN</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item ">
+                                    <a href="/xe-dap-dien" class="nav-link">XE ĐIỆN <i class="fa fa-angle-right" data-toggle="dropdown"></i></a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item-lv2">
+                                            <a class="nav-link" href="/xe-dap-dien">XE ĐẠP ĐIỆN - XE MÁY ĐIỆN</a>
+                                        </li>
+                                        <li class="nav-item-lv2">
+                                            <a class="nav-link" href="/">PHỤ TÙNG XE ĐIỆN</a>
+                                        </li>
+                                        <li class="nav-item-lv2">
+                                            <a class="nav-link" href="/">PHỤ KIỆN XE ĐIỆN</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item ">
+                                    <a href="/phu-tung-xe-dap" class="nav-link">PHỤ TÙNG <i class="fa fa-angle-right" data-toggle="dropdown"></i></a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-submenu nav-item-lv2">
+                                            <a class="nav-link" href="/khung-phuoc-chen-co">KHUNG - PHUỘC - CHÉN CỔ <i class="fa fa-angle-right"></i></a>
+                                            <ul class="dropdown-menu">
+                                                <li class="nav-item-lv3">
+                                                    <a class="nav-link" href="/khung-suon-xe-dap">KHUNG SƯỜN</a>
+                                                </li>
+                                                <li class="nav-item-lv3">
+                                                    <a class="nav-link" href="/phuoc-xe-dap-1">PHUỘC</a>
+                                                </li>
+
+                                                <li class="nav-item-lv3">
+                                                    <a class="nav-link" href="/chen-co-xe-dap-1">CHÉN CỔ</a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu nav-item-lv2">
+                                            <a class="nav-link" href="/ghi-dong-po-tang">GHI ĐÔNG - PÔ TĂNG <i class="fa fa-angle-right"></i></a>
+
+                                            <ul class="dropdown-menu">
+
+                                                <li class="nav-item-lv3">
+                                                    <a class="nav-link" href="/ghi-dong-xe-dap-1">GHI ĐÔNG</a>
+                                                </li>
+
+                                                <li class="nav-item-lv3">
+                                                    <a class="nav-link" href="/po-tang-xe-dap-1">PÔ TĂNG</a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu nav-item-lv2">
+                                            <a class="nav-link" href="/tay-de-tay-phanh">TAY ĐỀ & TAY PHANH <i class="fa fa-angle-right"></i></a>
+
+                                            <ul class="dropdown-menu">
+
+                                                <li class="nav-item-lv3">
+                                                    <a class="nav-link" href="/tay-de-xe-dap-1">TAY ĐỀ</a>
+                                                </li>
+
+                                                <li class="nav-item-lv3">
+                                                    <a class="nav-link" href="/tay-phanh-xe-dap">TAY PHANH</a>
+                                                </li>
+
+                                                <li class="nav-item-lv3">
+                                                    <a class="nav-link" href="/day-de-day-phanh-xe-dap">DÂY ĐỀ & DÂY PHANH</a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="dropdown-submenu nav-item-lv2">
+                                            <a class="nav-link" href="/bo-phanh-gon-phanh">BỘ PHANH & GÔN PHANH <i class="fa fa-angle-right"></i></a>
+
+                                            <ul class="dropdown-menu">
+
+                                                <li class="nav-item-lv3">
+                                                    <a class="nav-link" href="/bo-phanh-xe-dap">BỘ PHANH</a>
+                                                </li>
+
+                                                <li class="nav-item-lv3">
+                                                    <a class="nav-link" href="/ma-phanh-xe-dap">MÁ PHANH</a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="dropdown-submenu nav-item-lv2">
+                                            <a class="nav-link" href="/truc-dui-dia">GIÒ DĨA & TRỤC GIỮA <i class="fa fa-angle-right"></i></a>
+
+                                            <ul class="dropdown-menu">
+
+                                                <li class="nav-item-lv3">
+                                                    <a class="nav-link" href="/gio-dia-xe-dap">GIÒ DĨA XE ĐẠP</a>
+                                                </li>
+
+                                                <li class="nav-item-lv3">
+                                                    <a class="nav-link" href="/truc-giua-xe-dap">TRỤC GIỮA XE ĐẠP</a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu nav-item-lv2">
+                                            <a class="nav-link" href="/can-giay-xe-dap">PEDAL & CAN XE ĐẠP <i class="fa fa-angle-right"></i></a>
+
+                                            <ul class="dropdown-menu">
+
+                                                <li class="nav-item-lv3">
+                                                    <a class="nav-link" href="/pedal-xe-dap">PEDAL</a>
+                                                </li>
+
+                                                <li class="nav-item-lv3">
+                                                    <a class="nav-link" href="/can-giay-xe-dap">CAN GIÀY</a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item ">
+                                    <a href="/phu-kien-xe-dap" class="nav-link">PHỤ KIỆN <i class="fa fa-angle-right" data-toggle="dropdown"></i></a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-submenu nav-item-lv2">
+                                            <a class="nav-link" href="/pk-khuyen-mai">PHỤ KIỆN KHUYẾN MÃI - GIẢM ĐẾN 50% <i class="fa fa-angle-right"></i></a>
+
+                                            <ul class="dropdown-menu">
+
+                                                <li class="nav-item-lv3">
+                                                    <a class="nav-link" href="/phu-kien-khuyen-mai">PHỤ KIỆN KHUYẾN MÃI</a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu nav-item-lv2">
+                                            <a class="nav-link" href="/gong-binh-nuoc-xe-dap-2">GỌNG & BÌNH NƯỚC <i class="fa fa-angle-right"></i></a>
+
+                                            <ul class="dropdown-menu">
+
+                                                <li class="nav-item-lv3">
+                                                    <a class="nav-link" href="/gong-binh-nuoc-xe-dap-1">GỌNG BÌNH NƯỚC</a>
+                                                </li>
+
+                                                <li class="nav-item-lv3">
+                                                    <a class="nav-link" href="/binh-nuoc-xe-dap-1">BÌNH NƯỚC</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu nav-item-lv2">
+                                            <a class="nav-link" href="/phu-kien-fixed-gear">PHỤ KIỆN FIXED GEAR <i class="fa fa-angle-right"></i></a>
+
+                                            <ul class="dropdown-menu">
+
+                                                <li class="nav-item-lv3">
+                                                    <a class="nav-link" href="/phu-kien-fixed-gear">PHỤ KIỆN FIXED GEAR</a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item  has-mega">
+                                    <a href="/" class="nav-link">GIỚI THIỆU <i class="fa fa-angle-right" data-toggle="dropdown"></i></a>
+
+                                    <div class="mega-content">
+                                        <div class="level0-wrapper2">
+                                            <div class="nav-block nav-block-center">
+                                                <ul class="level0">
+
+
+                                                    <li class="level1 parent item">
+                                                        <h2 class="h4">
+                                                            <a href="/gioi-thieu-cong-ty-tnhh-dngbike">
+							<span>VỀ CHÚNG TÔI</span>
+						</a>
+                                                        </h2>
+                                                        <ul class="level1">
+                                                            <li class="level2"> <a href="/gioi-thieu-cong-ty-tnhh-dngbike"><span>Giới thiệu công ty DNGBIKE</span></a> </li>
+                                                            <li class="level2"> <a href="/gioi-thieu-ve-team-dngbike"><span>Hoạt động Team DNGBIKE</span></a> </li>
+                                                            <li class="level2"> <a href="/doi-tac"><span>Đối tác thương hiệu</span></a> </li>
+                                                            <li class="level2"> <a href="/tuyen-dung"><span>Tuyển dụng nhân sự</span></a> </li>
+                                                            <li class="level2"> <a href="/danh-gia-cua-khach-hang-ve-dngbike"><span>Đánh giá của khách hàng</span></a> </li>
+                                                            <li class="level2"> <a href="/xe-dap-the-thao-dngbike"><span>Tìm cửa hàng</span></a> </li>
+                                                            <li class="level2"> <a href="/gioi-thieu-ve-team-dngbike"><span>Tin tức & các hoạt động</span></a> </li>
+                                                            <li class="level2 seemore">
+                                                                <a href="/gioi-thieu-cong-ty-tnhh-dngbike"><span>Xem tất cả</span></a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="level1 parent item">
+                                                        <h2 class="h4">
+                                                            <a href="/blog-xe-dap">
+							<span>CHÍNH SÁCH</span>
+						</a>
+                                                        </h2>
+                                                        <ul class="level1">
+                                                            <li class="level2"> <a href="/bao-hanh"><span>Bảo hành bảo dưỡng</span></a> </li>
+                                                            <li class="level2"> <a href="/quy-dinh-doi-tra"><span>Đổi trả hàng hóa</span></a> </li>
+                                                            <li class="level2"> <a href="/tra-gop-lai-suat-0"><span>Mua hàng trả góp</span></a> </li>
+                                                            <li class="level2"> <a href="/dieu-khoan-va-bao-mat"><span>Chính sách bảo mật thông tin</span></a> </li>
+                                                            <li class="level2"> <a href="/chinh-sach-giao-nhan-xe-dap"><span>Giao hàng lắp đặt</span></a> </li>
+                                                            <li class="level2"> <a href="/the-thanh-vien"><span>Thành viên thân thiết</span></a> </li>
+                                                            <li class="level2"> <a href="/mua-xe-dap-ngay-nhan-qua-lien-tay"><span>Đại lý phân phối</span></a> </li>
+                                                            <li class="level2"> <a href="/mua-xe-dap-ngay-nhan-qua-lien-tay"><span>Hợp tác bán hàng CTV & AFF</span></a> </li>
+                                                            <li class="level2 seemore">
+                                                                <a href="/blog-xe-dap"><span>Xem tất cả</span></a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="level1 parent item">
+                                                        <h2 class="h4">
+                                                            <a href="/tuyen-dung">
+							<span>TUYỂN DỤNG</span>
+						</a>
+                                                        </h2>
+                                                        <ul class="level1">
+                                                            <li class="level2"> <a href="https://dngbike.com/quy-trinh-tuyen-dung-cua-dngbike"><span>Quy trình tuyển dụng</span></a> </li>
+                                                            <li class="level2"> <a href="/tuyen-dung"><span>Vị trí tuyển dụng</span></a> </li>
+                                                            <li class="level2"> <a href="https://docs.google.com/forms/d/1PLCJ07DEhZDEIDTWmZ_L9CFVdXurmvvmmNnvTiG-eEk/viewform?edit_requested=true"><span>Ứng tuyển ngay</span></a> </li>
+                                                            <li class="level2"> <a href="https://dngbike.com/gioi-thieu-ve-cong-ty-dngbike"><span>Tại sao bạn nên chọn DNGBIKE</span></a> </li>
+                                                            <li class="level2 seemore">
+                                                                <a href="/tuyen-dung"><span>Xem tất cả</span></a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <section class="bread-crumb margin-bottom-10">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="breadcrumb" ">					
+					<li class="home ">
+						<a  href="/ " title="Trang chủ "><span >Trang chủ</span></a>						
+						<span><i class="fa fa-angle-right "></i></span>
+					</li>
+					<li>
+						<a  href="/xe-dap-dua-road-1 " title="XE ĐẠP ĐUA - ROAD "><span >XE ĐẠP ĐUA - ROAD</span></a>						
+						<span><i class="fa fa-angle-right "></i></span>
+					</li>
+					<li ><strong><span >Xe đạp đua YOUMA</span></strong><li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="product " itemscope itemtype="http://schema.org/Product ">	
+	<meta itemprop="url " content="//dngbike.com/xe-dap-dua-youma-3-7 ">
+	<meta itemprop="name " content="Xe đạp đua YOUMA ">
+	<meta itemprop="image " content="http://bizweb.dktcdn.net/thumb/grande/100/066/626/products/454765469-904379598401480-3703988106812938323-n.jpg?v=1727082566923 ">
+	<meta itemprop="description " content=" CAM KẾT GIÁ RẺ NHẤT THỊ TRƯỜNG ** Ở đâu giá rẻ, liên hệ Onebike.vn để được giảm rẻ hơn! ** Tặng bộ phụ kiện trị giá 100.000đ khi checkin ** Bảo hành chính hãng - 1 Đổi 1 trong vòng 30 ngày ** Xe chính hãng -
+                        Dịch vụ tốt - Chốt Onebike.vn / Dngbike.com ">
+	<meta itemprop="brand " content="XE ĐẠP KHÁC ">
+	<meta itemprop="model " content=" ">
+	<meta itemprop="sku " content="PVN11899 ">
+	<div itemprop="review " itemscope itemtype="https://schema.org/Review " class="hidden ">
+		<span itemprop="itemReviewed " itemscope itemtype="https://schema.org/Thing ">
+			<span itemprop="name ">Xe đạp đua YOUMA</span>
+		</span>
+		<span itemprop="author " itemscope itemtype="https://schema.org/Person ">
+			<span itemprop="name ">DngBike.com</span>
+		</span>
+		<div itemprop="reviewRating " itemscope itemtype="https://schema.org/Rating " class="hidden ">
+
+			<span itemprop="ratingValue ">10</span> out of
+			<span itemprop="bestRating ">10</span>
+		</div>
+		<span itemprop="publisher " itemscope itemtype="https://schema.org/Organization ">
+			<meta itemprop="name " content="DngBike.com ">
+		</span>
+	</div>
+	<div class="container ">
+		<div class="row ">
+			<div class="col-lg-12 details-product ">
+				<div class="row product-bottom ">
+					<div class="col-lg-12 ">
+						<div class="border-bg clearfix padding-bottom-10 padding-top-10 ">
+							<div class="col-xs-12 col-sm-6 col-lg-5 col-md-6 ">
+								<div class="relative product-image-block ">
+									<div class="large-image ">
+										<a href="//bizweb.dktcdn.net/thumb/1024x1024/100/066/626/products/454765469-904379598401480-3703988106812938323-n.jpg?v=1727082566923 " data-rel="prettyPhoto[product-gallery] ">
+											<img id="zoom_01 " src="//bizweb.dktcdn.net/thumb/large/100/066/626/products/454765469-904379598401480-3703988106812938323-n.jpg?v=1727082566923 " alt="Xe đạp đua YOUMA " class="img-responsive center-block bk-product-image ">
+										</a>							
+										<div class="hidden ">
+											
+											<div class="item ">
+												<a href="https://bizweb.dktcdn.net/100/066/626/products/454765469-904379598401480-3703988106812938323-n.jpg?v=1727082566923 " data-image="https://bizweb.dktcdn.net/100/066/626/products/454765469-904379598401480-3703988106812938323-n.jpg?v=1727082566923
+                        " data-zoom-image="https://bizweb.dktcdn.net/100/066/626/products/454765469-904379598401480-3703988106812938323-n.jpg?v=1727082566923 " data-rel="prettyPhoto[product-gallery] ">										
+												</a>
+											</div>	
+											
+											<div class="item ">
+												<a href="https://bizweb.dktcdn.net/100/066/626/products/455014183-904379401734833-1171866083329399450-n.jpg?v=1727082566923 " data-image="https://bizweb.dktcdn.net/100/066/626/products/455014183-904379401734833-1171866083329399450-n.jpg?v=1727082566923
+                        " data-zoom-image="https://bizweb.dktcdn.net/100/066/626/products/455014183-904379401734833-1171866083329399450-n.jpg?v=1727082566923 " data-rel="prettyPhoto[product-gallery] ">										
+												</a>
+											</div>	
+											
+											<div class="item ">
+												<a href="https://bizweb.dktcdn.net/100/066/626/products/455080213-904379431734830-8903333118768087447-n.jpg?v=1727082566923 " data-image="https://bizweb.dktcdn.net/100/066/626/products/455080213-904379431734830-8903333118768087447-n.jpg?v=1727082566923
+                        " data-zoom-image="https://bizweb.dktcdn.net/100/066/626/products/455080213-904379431734830-8903333118768087447-n.jpg?v=1727082566923 " data-rel="prettyPhoto[product-gallery] ">										
+												</a>
+											</div>	
+											
+											<div class="item ">
+												<a href="https://bizweb.dktcdn.net/100/066/626/products/455120860-904379448401495-432070873980732670-n.jpg?v=1727082566923 " data-image="https://bizweb.dktcdn.net/100/066/626/products/455120860-904379448401495-432070873980732670-n.jpg?v=1727082566923
+                        " data-zoom-image="https://bizweb.dktcdn.net/100/066/626/products/455120860-904379448401495-432070873980732670-n.jpg?v=1727082566923 " data-rel="prettyPhoto[product-gallery] ">										
+												</a>
+											</div>	
+											
+											<div class="item ">
+												<a href="https://bizweb.dktcdn.net/100/066/626/products/455172955-904379368401503-1575917817541655739-n.jpg?v=1727082566923 " data-image="https://bizweb.dktcdn.net/100/066/626/products/455172955-904379368401503-1575917817541655739-n.jpg?v=1727082566923
+                        " data-zoom-image="https://bizweb.dktcdn.net/100/066/626/products/455172955-904379368401503-1575917817541655739-n.jpg?v=1727082566923 " data-rel="prettyPhoto[product-gallery] ">										
+												</a>
+											</div>	
+											
+										</div>
+									</div>	
+									<div id="gallery_01 " class="owl-carousel owl-theme thumbnail-product margin-top-15 " data-md-items="4 " data-sm-items="4 " data-xs-items="4 " data-xss-items="3 " data-margin="10 " data-nav="true ">
+										<div class="item ">
+											<a class="thumb-link " href="javascript:void(0); " data-image="https://bizweb.dktcdn.net/100/066/626/products/454765469-904379598401480-3703988106812938323-n.jpg?v=1727082566923 " data-zoom-image="//bizweb.dktcdn.net/thumb/1024x1024/100/066/626/products/454765469-904379598401480-3703988106812938323-n.jpg?v=1727082566923 ">
+												<img  src="//bizweb.dktcdn.net/thumb/medium/100/066/626/products/454765469-904379598401480-3703988106812938323-n.jpg?v=1727082566923 " alt="Xe đạp đua YOUMA ">
+											</a>
+										</div>
+										<div class="item ">
+											<a class="thumb-link " href="javascript:void(0); " data-image="https://bizweb.dktcdn.net/100/066/626/products/455014183-904379401734833-1171866083329399450-n.jpg?v=1727082566923 " data-zoom-image="//bizweb.dktcdn.net/thumb/1024x1024/100/066/626/products/455014183-904379401734833-1171866083329399450-n.jpg?v=1727082566923 ">
+												<img  src="//bizweb.dktcdn.net/thumb/medium/100/066/626/products/455014183-904379401734833-1171866083329399450-n.jpg?v=1727082566923 " alt="Xe đạp đua YOUMA ">
+											</a>
+										</div>
+										<div class="item ">
+											<a class="thumb-link " href="javascript:void(0); " data-image="https://bizweb.dktcdn.net/100/066/626/products/455080213-904379431734830-8903333118768087447-n.jpg?v=1727082566923 " data-zoom-image="//bizweb.dktcdn.net/thumb/1024x1024/100/066/626/products/455080213-904379431734830-8903333118768087447-n.jpg?v=1727082566923 ">
+												<img  src="//bizweb.dktcdn.net/thumb/medium/100/066/626/products/455080213-904379431734830-8903333118768087447-n.jpg?v=1727082566923 " alt="Xe đạp đua YOUMA ">
+											</a>
+										</div>
+										<div class="item ">
+											<a class="thumb-link " href="javascript:void(0); " data-image="https://bizweb.dktcdn.net/100/066/626/products/455120860-904379448401495-432070873980732670-n.jpg?v=1727082566923 " data-zoom-image="//bizweb.dktcdn.net/thumb/1024x1024/100/066/626/products/455120860-904379448401495-432070873980732670-n.jpg?v=1727082566923 ">
+												<img  src="//bizweb.dktcdn.net/thumb/medium/100/066/626/products/455120860-904379448401495-432070873980732670-n.jpg?v=1727082566923 " alt="Xe đạp đua YOUMA ">
+											</a>
+										</div>
+										<div class="item ">
+											<a class="thumb-link " href="javascript:void(0); " data-image="https://bizweb.dktcdn.net/100/066/626/products/455172955-904379368401503-1575917817541655739-n.jpg?v=1727082566923 " data-zoom-image="//bizweb.dktcdn.net/thumb/1024x1024/100/066/626/products/455172955-904379368401503-1575917817541655739-n.jpg?v=1727082566923 ">
+												<img  src="//bizweb.dktcdn.net/thumb/medium/100/066/626/products/455172955-904379368401503-1575917817541655739-n.jpg?v=1727082566923 " alt="Xe đạp đua YOUMA ">
+											</a>
+										</div>
+									</div>
+								</div>
+								<div class="social-sharing margin-top-20 ">
+									<!-- Go to www.addthis.com/dashboard to customize your tools -->
+									<script type="text/javascript " src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a099baca270babc "></script>
+									<!-- Go to www.addthis.com/dashboard to customize your tools -->
+									<div class="addthis_inline_share_toolbox_uu9r "></div>
+								</div>
+								
+							</div>
+							<div class="col-xs-12 col-sm-6 col-lg-7 col-md-6 details-pro ">
+								<h1 class="title-head bk-product-name ">Xe đạp đua YOUMA</h1>
+								<div class="panel-product-line panel-product-rating clearfix ">
+									<div class="sapo-product-reviews-badge sapo-product-reviews-badge-detail " data-id="36568086 "></div>
+									<div class="iddanhgia " onclick="scrollToxx(); ">
+										<span>Viết đánh giá</span>
+									</div>
+								</div>
+								<div class="divider-full-1 "></div>
+								<div class="inventory_quantity d-inline-block ">
+									<span class="stock-brand-title "><strong>Tình trạng:</strong></span>
+									<span class="a-stock a-stock-out ">Liên hệ mua hàng</span>
+								</div>
+								<div class="price-box " itemprop="offers " itemscope itemtype="http://schema.org/Offer ">
+									<link itemprop="availability " href="http://schema.org/InStock ">
+									<meta itemprop="priceCurrency " content="VND ">
+									<meta itemprop="price " content="2490000 ">
+									<meta itemprop="url " content="https://dngbike.com/xe-dap-dua-youma-3-7 ">
+									<meta itemprop="priceValidUntil " content="2099-01-01 ">
+									<span class="special-price ">
+										<span class="price product-price bk-product-price ">Giá: 2.490.000₫</span>
+									</span> <!-- Giá Khuyến mại -->
+									<span class="old-price "><del class="price product-price-old "></del>
+									</span> <!-- Giá gốca -->
+								</div>
+								<div class="product-summary product_description margin-bottom-15 ">
+									<div class="rte description ">
+										<p>
+<style type="text/css ">
+</style>
+<span style="color:#e74c3c; "><strong>CAM KẾT GIÁ RẺ NHẤT THỊ TRƯỜNG</strong></span><br />
+** Ở đâu giá rẻ, liên hệ Onebike.vn để được giảm rẻ hơn!<br />
+** Tặng bộ phụ kiện trị giá 100.000đ khi checkin<br />
+** Bảo hành chính hãng - 1 Đổi 1 trong vòng 30 ngày<br />
+** Xe chính hãng - Dịch vụ tốt - Chốt Onebike.vn / <a href="http://dngbike.com/ " target="_blank ">Dngbike.com</a></p>
+										
+									</div>
+								</div>
+								
+								<div class="form-product ">
+									<form enctype="multipart/form-data " id="add-to-cart-form " action="/cart/add " method="post " class="form-inline ">
+										
+										<div class="select-swatch ">
+<div id="variant-swatch-0 " class="swatch clearfix " data-option="option1 " data-option-index="0 ">
+	<div class="header ">Màu sắc</div>
+	<div class="select-swap ">  
+		
+		<div data-value="Đen " class="n-sd swatch-element color den ">
+			<input class="variant-0 " id="swatch-0-den " type="radio " name="option1 " value="Đen " checked />
+			<label class="den has-thumb " for="swatch-0-den " style="background: url(//bizweb.dktcdn.net/thumb/small/100/066/626/products/454765469-904379598401480-3703988106812938323-n.jpg?v=1727082566923) center no-repeat;background-size: contain " >
+				
+				<img class="crossed-out " src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/soldout.png?1730193558341 " alt="Đen " />
+				<img class="img-check " src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/select-pro.png?1730193558341 " alt="Đen " />
+			</label>
+			
+		</div>
+		<div data-value="V&#224;ng " class="n-sd swatch-element color vang ">
+			<input class="variant-0 " id="swatch-0-vang " type="radio " name="option1 " value="V&#224;ng " />
+			<label class="vang has-thumb " for="swatch-0-vang " style="background: url(//bizweb.dktcdn.net/thumb/small/100/066/626/products/455080213-904379431734830-8903333118768087447-n.jpg?v=1727082566923) center no-repeat;background-size: contain " >
+				
+				<img class="crossed-out " src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/soldout.png?1730193558341 " alt="Vàng " />
+				<img class="img-check " src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/select-pro.png?1730193558341 " alt="Vàng " />
+			</label>
+			
+		</div>
+		<div data-value="Bianchi " class="n-sd swatch-element color bianchi ">
+			<input class="variant-0 " id="swatch-0-bianchi " type="radio " name="option1 " value="Bianchi " />
+			<label class="bianchi has-thumb " for="swatch-0-bianchi " style="background: url(//bizweb.dktcdn.net/thumb/small/100/066/626/products/455172955-904379368401503-1575917817541655739-n.jpg?v=1727082566923) center no-repeat;background-size: contain " >
+				
+				<img class="crossed-out " src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/soldout.png?1730193558341 " alt="Bianchi " />
+				<img class="img-check " src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/select-pro.png?1730193558341 " alt="Bianchi " />
+			</label>
+			
+		</div>
+		<div data-value="Trắng " class="n-sd swatch-element color trang ">
+			<input class="variant-0 " id="swatch-0-trang " type="radio " name="option1 " value="Trắng " />
+			<label class="trang has-thumb " for="swatch-0-trang " style="background: url(//bizweb.dktcdn.net/thumb/small/100/066/626/products/455014183-904379401734833-1171866083329399450-n.jpg?v=1727082566923) center no-repeat;background-size: contain " >
+				
+				<img class="crossed-out " src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/soldout.png?1730193558341 " alt="Trắng " />
+				<img class="img-check " src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/select-pro.png?1730193558341 " alt="Trắng " />
+			</label>
+			
+		</div>
+		<div data-value="Bạc " class="n-sd swatch-element color bac ">
+			<input class="variant-0 " id="swatch-0-bac " type="radio " name="option1 " value="Bạc " />
+			<label class="bac has-thumb " for="swatch-0-bac " style="background: url(//bizweb.dktcdn.net/thumb/small/100/066/626/products/455014183-904379401734833-1171866083329399450-n.jpg?v=1727082566923) center no-repeat;background-size: contain " >
+				
+				<img class="crossed-out " src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/soldout.png?1730193558341 " alt="Bạc " />
+				<img class="img-check " src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/select-pro.png?1730193558341 " alt="Bạc " />
+			</label>
+			
+		</div>
+		<div data-value="Xanh dương " class="n-sd swatch-element color xanh-duong ">
+			<input class="variant-0 " id="swatch-0-xanh-duong " type="radio " name="option1 " value="Xanh dương " />
+			<label class="xanh-duong has-thumb " for="swatch-0-xanh-duong " style="background: url(//bizweb.dktcdn.net/thumb/small/100/066/626/products/455120860-904379448401495-432070873980732670-n.jpg?v=1727082566923) center no-repeat;background-size: contain " >
+				
+				<img class="crossed-out " src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/soldout.png?1730193558341 " alt="Xanh dương " />
+				<img class="img-check " src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/select-pro.png?1730193558341 " alt="Xanh dương " />
+			</label>
+		</div>
+	</div>
+</div>
+										</div>
+										<div class="form-group ">
+											<div class="custom custom-btn-number form-control ">									
+												<label>Số lượng</label>
+												<button onclick="var result=document.getElementById( 'qty'); var qty=result.value; if( !isNaN(qty) & qty> 1 ) result.value--;return false;" class="btn-minus btn-cts" type="button">–</button>
+                        <input type="text" class="qty bk-product-qty input-text" id="qty" name="quantity" size="4" value="1" />
+                        <button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN(qty)) result.value++;return false;" class="btn-plus btn-cts" type="button">+</button>
+                </div>
+                <div class="clearfix margin-bottom-20"></div>
+                <div class="clearfix">
+                    <button type="submit" data-role='addtocart' class="btn btn-lg btn-gray btn-cart add_to_cart btn_buy add_to_cart">
+													<span class="txt-main">MUA NGAY</span>
+													<span class="txt-sub">Giao hàng tận nơi</span>
+												</button>
+                    <button class="btn btn_traGop btn-tra-gop-click s-flag" type="button" data-toggle="modal" data-target="#myModal">
+													<span class="txt-main">
+														TƯ VẤN SẢN PHẨM
+													</span>
+													<span class="txt-sub">Gọi ngay</span>
+												</button>
+
+
+                </div>
+            </div>
+            <div class="ab-available-notice-button ab-hide" data-ab-product-id="36568086">
+                <button class="ab-notice-btn" title="" type="button" onclick="ABAvailableNotice.noticeButtonClick()">
+		BÁO KHI CÓ HÀNG
+	</button>
+            </div>
+            </form>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="row margin-top-20">
+            <div class="col-md-9">
+                <div class="border-bg clearfix">
+                    <div class="col-xs-12 col-lg-12">
+                        <!-- Nav tabs -->
+                        <div class="product-tab e-tabs padding-bottom-10">
+                            <ul class="tabs tabs-title clearfix">
+                                <li class="tab-link" data-tab="tab-1">
+                                    <h3><span>Mô tả sản phẩm</span></h3>
+                                </li>
+                                <li class="tab-link" data-tab="tab-2">
+                                    <h3><span>Bảo hành Đổi trả</span></h3>
+                                </li>
+                                <li class="tab-link" data-tab="tab-3">
+                                    <h3><span>Đánh giá</span></h3>
+                                </li>
+                            </ul>
+                            <div id="tab-1" class="tab-content">
+                                <div class="rte">
+
+                                    <p>Bạn đam mê thể thao, bạn đang tìm kiếm một con xe đạp đua vừa để rèn luyện sức khỏe, vừa đáp ứng được nhu cầu đi lại hàng ngày với mức giá dễ dàng tiếp cận?<br><strong>Xe đạp đua Youma 21s</strong> có lẽ chính là một
+                                        trong những lựa chọn thích hợp dành cho bạn bởi:&nbsp;</p>
+                                    <h2>Thiết kế hiện đại, diện mạo thể thao&nbsp;</h2>
+                                    <p><strong>Xe đạp đua Youma 21s</strong> là lựa chọn hoàn hảo với mức giá cạnh tranh phù hợp ngay cả cho những người mới bắt đầu đam mê với môn thể thao phải chạy bằng tim và trí óc này. Với các phiên bản màu đa dạng từ
+                                        Đen, Vàng, Bianchi, Trắng, Bạc cho đến Xanh dương, bạn có thể thoải mái lựa chọn màu sắc thể hiện được sở thích và cá tính của bản thân. &nbsp;</p>
+                                    <h2>Khung sườn thép carbon bền bỉ</h2>
+                                    <p><strong>Xe đạp đua Youma 21s</strong> sở hữu bộ khung thép được chế tác từ loại thép carbon bền đẹp. Kết hợp với lớp sơn tĩnh điện, chống rỉ sét, trầy xước toàn bộ khung xe, bền màu lâu hơn, dễ dàng vệ sinh khi bị bám
+                                        bẩn và &nbsp;đảm bảo độ bền cho xe.&nbsp;</p>
+                                    <h2>Yên xe êm ái, có thể điều chỉnh phù hợp với chiều cao</h2>
+                                    <p>Trên mỗi cung đường, sự thoải mái là yếu tố tiên quyết cho hành trình thêm trọn vẹn. Hiểu được điều đó,<strong> Xe đạp đua Youma 21s</strong> có yên xe được thiết kế chất liệu da mềm mại, lớp đệm ngồi dày vừa phải đảm
+                                        bảo sự êm ái và hỗ trợ tối ưu cho người lái.<br>Yên xe có thể điều chỉnh độ cao linh hoạt, phù hợp với mọi vóc dáng, giúp bạn dễ dàng tìm được tư thế ngồi thoải mái nhất, giảm thiểu nguy cơ mỏi nhức và chấn thương,
+                                        tăng cường hiệu quả vận động.</p>
+                                    <h2>Ghi đông tay cong thể thao&nbsp;</h2>
+                                    <p><strong>Xe đạp đua Youma 21s</strong> có thiết kế khí động học với ghi đông tay cong hợp kim nhôm, có độ bền cao, chịu lực tốt và chống gỉ sét. Với nhiều kích cỡ, ghi đông <strong>xe đạp đua Youma 21s</strong> giúp
+                                        dễ dàng lựa chọn tư thế lái xe phù hợp, giảm thiểu áp lực lên cổ tay, vai và lưng, mang lại sự thoải mái tối đa khi đạp xe đường dài.</p>
+                                    <h2>An toàn xử lý với phanh đĩa cơ chính xác</h2>
+                                    <p><strong>Xe đạp đua Youma 21s</strong> được trang bị hệ thống phanh đĩa cơ trước sau phổ biến giúp bạn dễ dàng sửa chữa, thay thế. Đi cùng với đó là tay thắng có khả năng phản hồi ổn định, mang đến khả năng kiểm soát
+                                        chính xác lực phanh, đảm bảo sự an toàn của người lái khi di chuyển với tốc độ cao.<br>&nbsp;&nbsp; &nbsp;</p>
+                                    <h2>Chinh phục các cung đường nhờ lốp xe 700x28c&nbsp;</h2>
+                                    <p>Lốp xe 700x28c bám đường tốt đảm bảo sự ổn định và an toàn khi di chuyển, từ đường nhựa phẳng mịn đến đường sỏi đá gồ ghề, mang đến trải nghiệm lái xe thoải mái.<br>Vành xe nhôm hai lớp nhẹ và chắc chắn, giúp tăng độ
+                                        bền bỉ cho xe, đồng thời tăng hiệu suất vận hành. Bên cạnh đó, chống gỉ sét, chống ăn mòn, đảm bảo độ bền đẹp.&nbsp;</p>
+                                    <p>So với các dòng xe đạp đua khác trên thị trường, <strong>xe đạp đua Youma 21s</strong> sở hữu mức giá vô cùng hợp lý, phù hợp với túi tiền của đại đa số người tiêu dùng. Đây là một lựa chọn tiết kiệm cho những ai muốn
+                                        bắt đầu tập luyện xe đạp đua mà không cần đầu tư quá nhiều chi phí.</p>
+                                    <p><span style="color:#2ecc71;"><strong>ONEBIKE</strong></span> tự hào là đơn vị tiên phong trong việc cung cấp dịch vụ bảo hành xe chuyên nghiệp, tận tâm. Chúng tôi hiểu rằng, chiếc xe không chỉ là phương tiện di chuyển
+                                        mà còn là người bạn đồng hành tin cậy. Chính vì vậy, <span style="color:#2ecc71;"><strong>ONEBIKE</strong></span> cam kết sẽ mang đến cho khách hàng chế độ bảo hành tốt nhất, đảm bảo quý khách hoàn toàn yên tâm
+                                        khi sử dụng sản phẩm của chúng tôi. Với đội ngũ kỹ thuật viên giàu kinh nghiệm, linh kiện chính hãng và quy trình bảo hành nhanh chóng, <span style="color:#2ecc71;"><strong>ONEBIKE</strong> </span>luôn sẵn sàng
+                                        hỗ trợ khách hàng mọi lúc, mọi nơi.</p>
+                                    <p><span style="color:#2ecc71;"><strong>ONEBIKE</strong></span> - Your bike, Our expertise!</p>
+                                    <p>Đến <strong><span style="color:#2ecc71;">ONEBIKE</span> </strong>ngay để trải nghiệm <strong>xe đạp đua Youma 21s</strong>. Bạn có thể đến tại cửa hàng hay đặt mua nhanh sản phẩm thông qua các kênh online của Công ty
+                                        (Website, Facebook, Zalo,..) hoặc GỌI NGAY<strong><span style="color:#e74c3c;"> 0916 790 059 - 0912 190 059</span></strong> để nhận tư vấn hoặc đặt hàng ngay bây giờ nhé!</p>
+                                    <p><br></p>
+                                </div>
+                            </div>
+                            <div id="tab-2" class="tab-content">
+                                <h2 style="text-align: center;"><strong><span style="font-size:20px;">CHÍNH SÁCH BẢO HÀNH&nbsp;TẠI DNGBIKE</span></strong></h2>
+                                <h3><span style="font-size:18px;"><strong>I.&nbsp;NỘI DUNG&nbsp;BẢO HÀNH</strong></span></h3>
+                                <h4 style="text-align: justify;"><span style="font-size:16px;"><strong>1.1. Thời gian&nbsp;bảo hành</strong></span></h4>
+                                <p style="text-align: justify;"><span style="font-size:16px;">- Thời gian bảo hành tùy thuộc vào chế độ bảo hành của từng&nbsp;loại xe và từng nhà sản xuất. Cửa hàng sẽ áp dụng theo quy định của nhà sản xuất.</span></p>
+                                <h4 style="text-align: justify;"><span style="font-size:16px;"><strong>1.2. Điều kiện&nbsp;bảo hành</strong></span></h4>
+                                <p style="text-align: justify;"><span style="font-size:16px;">- Sản phẩm bảo hành&nbsp;trong thời gian bảo hành phải còn nguyên vẹn,&nbsp;không có dấu hiệu cạy, mở, hay tháo rời,&nbsp;chưa qua sửa chữa<br />
+- Lỗi&nbsp;được đội ngũ kỹ thuật của&nbsp;DNGBIKE&nbsp;xác định là&nbsp;do lỗi kỹ thuật sản phẩm&nbsp;hoặc do lỗi của nhà sản xuất.</span></p>
+                                <h4 style="text-align: justify;"><strong><span style="font-size:16px;">1.3. Thủ tục bảo hành</span></strong></h4>
+                                <p style="text-align: justify;"><span style="font-size:16px;">- Đối với sản phẩm là&nbsp;xe đạp: Khách hàng mang sản phẩm cần bảo hành kèm&nbsp;theo sổ bảo hành chính hãng do công ty phát hành&nbsp;khi bán hàng, nếu khách hàng không có sổ bảo hành do công ty DNGBIKE phát hành thì khách hàng cần&nbsp;xuất trình được thông tin sản phẩm và thông tin&nbsp;người mua hàng trùng khớp với thông tin lưu trữ&nbsp;trên hệ thống lưu trữ của công ty.</span></p>
+                                <p style="text-align: justify;"><span style="font-size:16px;">-&nbsp;Đối với sản phẩm là&nbsp;phụ tùng phụ kiện: Khách hàng mang sản phẩm cần bảo hành kèm&nbsp;theo hóa đơn mua hàng, nếu khách hàng không có hóa đơn mua hàng&nbsp;thì khách hàng cần&nbsp;xuất trình được thông tin sản phẩm và thông tin&nbsp;người mua hàng trùng khớp với thông tin lưu trữ&nbsp;trên hệ thống lưu trữ của công ty.</span></p>
+                                <h4 style="text-align: justify;"><strong><span style="font-size:16px;">1.4. Các trường hợp không được bảo hành miễn phí</span></strong></h4>
+                                <div style="text-align: justify;"><span style="font-size:16px;">- Lỗi được xác định là&nbsp;do từ phía&nbsp;khách hàng: Sản phẩm&nbsp;hư hỏng do tai nạn, va chạm, bóp méo, biến dạng,&nbsp;trầy sước sơn, rỉ két,&nbsp;do tháo lắp không đúng cách,&nbsp;không đọc kỹ hướng dẫn sử dụng trước khi dùng,&nbsp;tự ý tháo lắp và thay đổi&nbsp;các thành phần đã được nhà sản xuất cài đặt sẵn</span></div>
+                                <div style="text-align: justify;"><span style="font-size:16px;">- Hư hỏng do thiên tai, hỏa hoạn&nbsp;hoặc do vận chuyển không đúng quy cách.&nbsp;</span></div>
+                                <div style="text-align: justify;"><span style="font-size:16px;">- Trường hợp xe xuống cấp do thiếu bảo trì tốt.&nbsp;&nbsp;</span></div>
+                                <div>
+                                    <div style="text-align: justify;"><span style="font-size:16px;">- Sử dụng xe không đúng cách, không đúng mục đích...</span></div>
+                                    <div style="text-align: justify;"><span style="font-size:16px;">-&nbsp;Vui lòng không tự ý tháo ráp, sửa chửa trước khi đem đến bảo hành.&nbsp;&nbsp;</span></div>
+                                    <div style="text-align: center;"><strong><span style="color:#e74c3c;"><em><span style="font-size:16px;">Xin quý khách vui lòng không nhầm lẫn việc bảo hành với bảo hiểm hay bảo trì.&nbsp;</span></em></span></strong></div>
+                                </div>
+                            </div>
+                            <div id="tab-3" class="tab-content">
+                                <div id="sapo-product-reviews" class="sapo-product-reviews" data-id="36568086">
+                                    <div id="sapo-product-reviews-noitem" style="display: none;">
+                                        <div class="content">
+                                            <p data-content-text="language.suggest_noitem"></p>
+                                            <div class="product-reviews-summary-actions">
+                                                <button type="button" class="btn-new-review" onclick="BPR.newReview(this); return false;" data-content-str="language.newreview"></button>
+                                            </div>
+                                            <div id="noitem-bpr-form_" data-id="formId" class="noitem-bpr-form" style="display:none;">
+                                                <div class="sapo-product-reviews-form"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/bpr-products-module.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
+
+    <div class="footer-policy">
+        <div class="container">
+            <div class="row">
+                <div class="tt-services-listing clearfix">
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <a href="https://dngbike.com/huong-dan-mua-hang" class="tt-services-block">
+                            <div class="tt-col-icon">
+                                <img src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/rolling.svg?1730193558341" data-lazyload="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/fot_policy_image_1.png?1730193558341" alt="Miễn phí vận chuyển" class="img-responsive" />
+                            </div>
+                            <div class="tt-col-description">
+                                <h4 class="tt-title">Miễn phí vận chuyển</h4>
+                                <p>Với đơn hàng trên 2 triệu áp dụng Phụ tùng/Phụ kiện</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <a href="/lien-he" class="tt-services-block">
+                            <div class="tt-col-icon">
+                                <img src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/rolling.svg?1730193558341" data-lazyload="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/fot_policy_image_2.png?1730193558341" alt="Hỗ trợ 24/7" class="img-responsive" />
+                            </div>
+                            <div class="tt-col-description">
+                                <h4 class="tt-title">Hỗ trợ 24/7</h4>
+                                <p>Hỗ trợ 24h/ngày và 7 ngày/tuần</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <a href="https://dngbike.com/quy-dinh-doi-tra" class="tt-services-block">
+                            <div class="tt-col-icon">
+                                <img src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/rolling.svg?1730193558341" data-lazyload="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/fot_policy_image_3.png?1730193558341" alt="03 ngày đổi trả" class="img-responsive" />
+                            </div>
+                            <div class="tt-col-description">
+                                <h4 class="tt-title">03 ngày đổi trả</h4>
+                                <p>Đổi trả hàng trong vòng 03 ngày</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="site-footer">
+            <div class="container">
+                <div class="footer-inner padding-top-30 padding-bottom-20">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+
+                            <div class="footer-widget no-border">
+                                <h3><span>CÔNG TY TNHH DNG BIKE</span></h3>
+                                <ul class="list-menu ul-footer-contact">
+                                    <li><i class="fa fa-map-marker" aria-hidden="true"></i> Số 42 Đặng Thai Mai, Thạc Gián, Thanh Khê, Đà Nẵng </li>
+                                    <li><i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:0912190059">0912190059</a> - <a href="tel:0916790059">0916790059</a></li>
+                                    <li><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:CSKH@dngbike.com">CSKH@dngbike.com</a></li>
+                                    <p style="color: #333333;">
+                                        Giấy chứng nhận ĐKKD số 0401989856 do Sở KH&ĐT thành phố Đà Nẵng cấp ngày 15/7/2019
+                                    </p>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                            <div class="footer-widget">
+                                <h3><span>Hệ thống chi nhánh</span></h3>
+
+                                <b>CN1: GIANT BIKE STORE</b> <br> Số 42 Đặng Thai Mai, P. Thạc Gián, Q. Thanh Khê, Tp. Đà Nẵng <br> Tel: 0916790059 <br>
+                                <b>CN2: TREK BIKE STORE </b><br> Số 644-646, Phạm Hùng, Hòa Phước, Hòa Xuân, Tp. Đà Nẵng <br> Tel: 0888430880
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                            <div class="footer-widget">
+                                <h3><span>VỀ CHÚNG TÔI</span></h3>
+                                <ul class="list-menu">
+                                    <li><a href="/gioi-thieu-cong-ty-tnhh-dngbike">Giới thiệu công ty DNGBIKE</a></li>
+                                    <li><a href="/gioi-thieu-ve-team-dngbike">Hoạt động Team DNGBIKE</a></li>
+                                    <li><a href="/doi-tac">Đối tác thương hiệu</a></li>
+                                    <li><a href="/tuyen-dung">Tuyển dụng nhân sự</a></li>
+                                    <li><a href="/danh-gia-cua-khach-hang-ve-dngbike">Đánh giá của khách hàng</a></li>
+                                    <li><a href="/xe-dap-the-thao-dngbike">Tìm cửa hàng</a></li>
+                                    <li><a href="/gioi-thieu-ve-team-dngbike">Tin tức & các hoạt động</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                            <div class="footer-widget">
+                                <h3><span>TUYỂN DỤNG</span></h3>
+                                <ul class="list-menu">
+                                    <li><a href="https://dngbike.com/quy-trinh-tuyen-dung-cua-dngbike">Quy trình tuyển dụng</a></li>
+                                    <li><a href="/tuyen-dung">Vị trí tuyển dụng</a></li>
+                                    <li><a href="https://docs.google.com/forms/d/1PLCJ07DEhZDEIDTWmZ_L9CFVdXurmvvmmNnvTiG-eEk/viewform?edit_requested=true">Ứng tuyển ngay</a></li>
+                                    <li><a href="https://dngbike.com/gioi-thieu-ve-cong-ty-dngbike">Tại sao bạn nên chọn DNGBIKE</a></li>
+                                </ul>
+                            </div>
+                            <a href="http://online.gov.vn/Home/WebDetails/78698" target="blank"><img src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/bct.png?1730193558341" style="max-width:70%"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright clearfix">
+            <div class="container">
+                <div class="inner clearfix">
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <span>© Bản quyền thuộc về <b>DNGBIKE</b> <span class="s480-f hidden">| Cung cấp bởi <a href="https://www.sapo.vn/?utm_campaign=cpn:site_khach_hang-plm:footer&utm_source=site_khach_hang&utm_medium=referral&utm_content=fm:text_link-km:-sz:&utm_term=&campaign=site_khach_hang" title="Sapo" target="_blank" rel="nofollow">Sapo</a></span></span>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Bizweb javascript -->
+    <script src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/option-selectors.js?1730193558341" type="text/javascript"></script>
+
+    <script src="//bizweb.dktcdn.net/assets/themes_support/api.jquery.js" type="text/javascript"></script>
+
+    <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/lightbox.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
+    <script src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/jquery.elevatezoom308.min.js?1730193558341" type="text/javascript"></script>
+    <script src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/jquery.prettyphoto.min005e.js?1730193558341" type="text/javascript"></script>
+    <script src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/jquery.prettyphoto.init.min367a.js?1730193558341" type="text/javascript"></script>
+
+</body>
+
+</html>

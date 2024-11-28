@@ -1,79 +1,106 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Admin</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100">
-    <div class="min-h-screen flex items-center justify-center">
-        <div class="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-md">
-            <div>
-                <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                    Add New Admin
-                </h2>
+@extends('admin.layouts.app')
+
+@section('title', 'Add New Admin')
+
+@section('content')
+<div class="container mx-auto px-6 py-8">
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-10">
+        <h2 class="text-2xl font-bold text-gray-800">Add New Admin</h2>
+        <a href="{{ route('admin.dashboard') }}" 
+           class="px-5 py-2.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-200">
+            Back to List
+        </a>
+    </div>
+
+    <!-- Form Container -->
+    <div class="max-w-2xl mx-auto">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100">
+            <div class="p-10">
+                <form action="{{ route('admin.store') }}" method="POST">
+                    @csrf
+                    
+                    <div class="space-y-8">
+                        <!-- Full Name -->
+                        <div class="space-y-2">
+                            <label for="name" class="block text-sm font-medium text-gray-700">
+                                Full Name <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" name="name" id="name" 
+                                class="block w-full px-4 py-3 text-gray-900 placeholder-gray-500 
+                                       border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-100 
+                                       focus:border-blue-400 transition duration-200
+                                       @error('name') border-red-300 ring-red-100 @enderror"
+                                value="{{ old('name') }}"
+                                placeholder="Enter full name"
+                                required>
+                            @error('name')
+                                <p class="text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <!-- Email -->
+                        <div class="space-y-2">
+                            <label for="email" class="block text-sm font-medium text-gray-700">
+                                Email Address <span class="text-red-500">*</span>
+                            </label>
+                            <input type="email" name="email" id="email"
+                                class="block w-full px-4 py-3 text-gray-900 placeholder-gray-500 
+                                       border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-100 
+                                       focus:border-blue-400 transition duration-200
+                                       @error('email') border-red-300 ring-red-100 @enderror"
+                                value="{{ old('email') }}"
+                                placeholder="Enter email address"
+                                required>
+                            @error('email')
+                                <p class="text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <!-- Password -->
+                        <div class="space-y-2">
+                            <label for="password" class="block text-sm font-medium text-gray-700">
+                                Password <span class="text-red-500">*</span>
+                            </label>
+                            <input type="password" name="password" id="password"
+                                class="block w-full px-4 py-3 text-gray-900 placeholder-gray-500 
+                                       border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-100 
+                                       focus:border-blue-400 transition duration-200
+                                       @error('password') border-red-300 ring-red-100 @enderror"
+                                placeholder="Enter password"
+                                required>
+                            @error('password')
+                                <p class="text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div class="space-y-2">
+                            <label for="password_confirmation" class="block text-sm font-medium text-gray-700">
+                                Confirm Password <span class="text-red-500">*</span>
+                            </label>
+                            <input type="password" name="password_confirmation" id="password_confirmation"
+                                class="block w-full px-4 py-3 text-gray-900 placeholder-gray-500 
+                                       border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-100 
+                                       focus:border-blue-400 transition duration-200"
+                                placeholder="Confirm password"
+                                required>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button - Updated to match login button style -->
+                    <div class="mt-10">
+                        <button type="submit" 
+                            class="btn btn-primary btn-block" 
+                            style="margin-top: 15px; height: 42px; font-size: 15px; font-weight: 500; width: 100%; 
+                                   background-color: #2563eb; color: white; border: none; 
+                                   border-radius: 6px; cursor: pointer;">
+                            Create Admin Account
+                        </button>
+                    </div>
+                </form>
             </div>
-
-            <form class="mt-8 space-y-6" action="{{ route('admin.store') }}" method="POST">
-                @csrf
-                <div class="space-y-4">
-                    <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
-                        <input id="name" name="name" type="text" required
-                            class="mt-1 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 
-                            focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
-                            @error('name') border-red-500 @enderror" 
-                            value="{{ old('name') }}">
-                        @error('name')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
-                        <input id="email" name="email" type="email" required
-                            class="mt-1 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 
-                            focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
-                            @error('email') border-red-500 @enderror"
-                            value="{{ old('email') }}">
-                        @error('email')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                        <input id="password" name="password" type="password" required
-                            class="mt-1 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 
-                            focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
-                            @error('password') border-red-500 @enderror">
-                        @error('password')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div>
-                        <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm Password</label>
-                        <input id="password_confirmation" name="password_confirmation" type="password" required
-                            class="mt-1 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 
-                            focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                    </div>
-                </div>
-
-                <div class="flex items-center justify-between">
-                    <a href="{{ route('admin.dashboard') }}" 
-                        class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                        Back to Dashboard
-                    </a>
-                    <button type="submit"
-                        class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 
-                               focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Add Admin
-                    </button>
-                </div>
-            </form>
         </div>
     </div>
-</body>
-</html> 
+</div>
+@endsection 

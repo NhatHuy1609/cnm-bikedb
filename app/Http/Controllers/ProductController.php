@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\Models\Order;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -33,9 +36,27 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Product $product)
     {
-        //
+        $product->load('productImages');
+
+        // Kiểm tra xem người dùng đã mua sản phẩm hay chưa
+        $userId = 1; // hardcode user id
+        $hasPurchased = Order::where('user_id', $userId)
+            ->where('status', 'paid')
+            ->whereHas('orderItems', function ($query) use ($product) {
+                $query->where('product_id', $product->id);
+            })
+            ->exists();
+
+        // Lấy các đánh giá cho sản phẩm
+        $ratings = Rating::where('product_id', $product->id)->get();
+
+        return view('products.show', [
+            'product' => $product,
+            'hasPurchased' => $hasPurchased,
+            'ratings' => $ratings,
+        ]);
     }
 
     /**

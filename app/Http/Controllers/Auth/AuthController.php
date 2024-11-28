@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Password as PasswordBroker;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -55,7 +56,7 @@ class AuthController extends Controller
         }
 
         return back()
-            ->withErrors(['email' => trans('auth.failed')])
+            ->withErrors(['error' => 'Không tìm thấy tài khoản.'])
             ->withInput($request->only('email'));
     }
 
@@ -66,43 +67,42 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+        DB::beginTransaction();
         try {
             $validatedData = $request->validate(
                 Validation::validateRegisterCredentials($request->all()),
                 Validation::messages(),
                 Validation::attributes()
             );
-            
-            DB::beginTransaction();
 
             $user = User::create([
                 'name' => $validatedData['name'],
                 'email' => $validatedData['email'],
                 'password' => Hash::make($validatedData['password']),
+                'role_id' => 2 // Normal user role
             ]);
 
-            try {
-                $user->sendEmailVerificationNotification();
-                
-                DB::commit();
-                
-                Auth::login($user);
-                
-                return redirect()->route('verification.notice')
-                    ->with('success', 'Registration successful! Please check your email for verification link.');
-                    
-            } catch (Exception $e) {
-                DB::rollBack();
-                return back()
-                    ->withErrors(['email' => 'Unable to send verification email. Please try again later.'])
-                    ->withInput($request->only(['name', 'email']));
-            }
+            event(new Registered($user));
+            
+            Auth::login($user);
+            
+            DB::commit();
+            
+            return redirect()->route('verification.notice');
 
-        } catch (Exception $e) {
+        } catch (ValidationException $e) {
             DB::rollBack();
             return back()
-                ->withErrors(['error' => 'An error occurred during registration. Please try again.'])
-                ->withInput($request->only(['name', 'email']));
+                ->withErrors($e->errors())  // Trả về các lỗi validation
+                ->withInput($request->except('password'));
+            
+        } catch (Exception $e) {
+            DB::rollBack();
+            // Log lỗi nếu cần
+            
+            return back()
+                ->withErrors(['error' => 'Đã có lỗi xảy ra trong quá trình đăng ký. Vui lòng thử lại sau.'])
+                ->withInput($request->except('password'));
         }
     }
 

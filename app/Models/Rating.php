@@ -13,6 +13,9 @@ class Rating extends Model
     protected $fillable = [
         'user_id',
         'product_id',
+        'comment',
+        'rating_date',
+        'rating_point',
     ];
 
     public function user(): BelongsTo

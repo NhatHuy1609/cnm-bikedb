@@ -1,106 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100">
-    <div class="min-h-screen flex items-center justify-center">
-        <div class="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-md">
-            <div>
-                <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                    Sign in to your account
+@extends('layouts.auth')
+
+@section('title', 'Đăng nhập')
+
+@section('content')
+<div class="container" style="margin: 40px auto;">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="login-form-box" style="background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <h2 class="text-center" style="font-size: 24px; margin-bottom: 30px; color: #333;">
+                    Đăng nhập tài khoản
                 </h2>
-            </div>
-            <form class="mt-8 space-y-6" action="{{ route('login.post') }}" method="POST" autocomplete="off">
-                @csrf
-                <div class="space-y-4">
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
+
+                <form action="{{ route('login.post') }}" method="POST" autocomplete="off">
+                    @csrf
+                    <div class="form-group">
+                        <label for="email" style="font-weight: 500; color: #555;">Email</label>
                         <input id="email" name="email" type="email" required 
-                            class="mt-1 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 
-                            focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
-                            @error('email') border-red-500 @enderror" 
+                            class="form-control @error('email') is-invalid @enderror" 
                             value="{{ old('email') }}"
-                            autocomplete="off">
+                            style="height: 42px; border-radius: 4px;"
+                            placeholder="Nhập email của bạn">
                         @error('email')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <span class="help-block text-danger">{{ $message }}</span>
                         @enderror
                     </div>
 
-                    <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <div class="form-group">
+                        <label for="password" style="font-weight: 500; color: #555;">Mật khẩu</label>
                         <input id="password" name="password" type="password" required 
-                            class="mt-1 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 
-                            focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
-                            @error('password') border-red-500 @enderror"
-                            autocomplete="new-password">
+                            class="form-control @error('password') is-invalid @enderror"
+                            style="height: 42px; border-radius: 4px;"
+                            placeholder="Nhập mật khẩu">
                         @error('password')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <span class="help-block text-danger">{{ $message }}</span>
                         @enderror
                     </div>
-                </div>
 
-                @if (session('error'))
-                    <div class="rounded-md bg-red-50 p-4">
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-                                </svg>
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-sm font-medium text-red-800">{{ session('error') }}</p>
-                            </div>
+                    @if (session('error'))
+                        <div class="text-danger" style="margin: 10px 0; font-size: 14px;">
+                            <i class="fa fa-exclamation-circle" style="margin-right: 5px;"></i>
+                            {{ session('error') }}
                         </div>
-                    </div>
-                @endif
+                    @endif
 
-                <div class="flex items-center justify-end">
-                    <div class="text-sm">
-                        <a href="{{ route('password.request') }}" class="font-medium text-indigo-600 hover:text-indigo-500">
-                            Forgot your password?
+                    <div class="form-group text-right">
+                        <a href="{{ route('password.request') }}" class="forgot-password" style="color: #2F80ED; font-size: 14px;">
+                            Quên mật khẩu?
                         </a>
                     </div>
-                </div>
 
-                <div>
-                    <button type="submit" 
-                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Sign in
-                    </button>
-                </div>
-
-                <div class="text-sm text-center">
-                    <a href="{{ route('register') }}" class="font-medium text-indigo-600 hover:text-indigo-500">
-                        Don't have an account? Register
-                    </a>
-                </div>
-            </form>
-
-            <div class="mt-6">
-                <div class="relative">
-                    <div class="absolute inset-0 flex items-center">
-                        <div class="w-full border-t border-gray-300"></div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block" style="height: 42px; font-size: 15px; font-weight: 500;">
+                            Đăng nhập
+                        </button>
                     </div>
-                    <div class="relative flex justify-center text-sm">
-                        <span class="px-2 bg-white text-gray-500">Or continue with</span>
-                    </div>
-                </div>
 
-                <div class="mt-6">
-                    <a href="{{ route('google.login') }}" 
-                        class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z"/>
-                        </svg>
-                        <span class="ml-2">Continue with Google</span>
-                    </a>
-                </div>
+                    <div class="text-center" style="margin: 20px 0;">
+                        <span style="color: #666; position: relative; padding: 0 10px; background: #fff;">
+                            Hoặc đăng nhập bằng
+                        </span>
+                    </div>
+
+                    <div class="form-group">
+                        <a href="{{ route('google.login') }}" class="btn btn-default btn-block" style="height: 42px; border: 1px solid #ddd;">
+                            <img src="https://www.google.com/favicon.ico" alt="Google" style="width: 18px; height: 18px; margin-right: 8px; vertical-align: middle;">
+                            <span style="vertical-align: middle; color: #555;">Tiếp tục với Google</span>
+                        </a>
+                    </div>
+
+                    <div class="text-center" style="margin-top: 20px;">
+                        <span style="color: #666;">Chưa có tài khoản? </span>
+                        <a href="{{ route('register') }}" style="color: #2F80ED; font-weight: 500;">
+                            Đăng ký ngay
+                        </a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</body>
-</html>
+</div>
+@endsection

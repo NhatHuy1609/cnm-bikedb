@@ -5,10 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\Rating;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+
+    protected $productService;
+
+    public function __construct(ProductService $productService)
+    {
+        $this->productService = $productService;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -42,21 +51,10 @@ class ProductController extends Controller
 
         // Kiểm tra xem người dùng đã mua sản phẩm hay chưa
         $userId = 1; // hardcode user id
-        $hasPurchased = Order::where('user_id', $userId)
-            ->where('status', 'paid')
-            ->whereHas('orderItems', function ($query) use ($product) {
-                $query->where('product_id', $product->id);
-            })
-            ->exists();
 
-        // Lấy các đánh giá cho sản phẩm
-        $ratings = Rating::where('product_id', $product->id)->get();
+        $data = $this->productService->show($product, $userId);
 
-        return view('products.show', [
-            'product' => $product,
-            'hasPurchased' => $hasPurchased,
-            'ratings' => $ratings,
-        ]);
+        return view('products.show', $data);
     }
 
     /**

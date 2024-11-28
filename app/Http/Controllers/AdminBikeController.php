@@ -82,7 +82,20 @@ class AdminBikeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $bike = Product::with('productImages', 'category')->findOrFail($id);
+        $brands = Brand::all();
+        
+        // Get bike categories (Level 1)
+        $subCategories = Category::where('parent_category_id', 1)
+            ->get()
+            ->map(function($category) {
+                return [
+                    'id' => $category->id,
+                    'name' => $category->name
+                ];
+            });
+
+        return view('admin.bikes.edit', compact('bike', 'brands', 'subCategories'));
     }
 
     /**
@@ -90,7 +103,28 @@ class AdminBikeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validate
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0',
+            'quantity' => 'nullable|integer|min:0',
+            'description' => 'nullable|string',
+            'category_id' => 'required|exists:categories,id',
+            'brand_id' => 'required|exists:brands,id',
+        ]);
+
+        // Update
+        $bike = Product::findOrFail($id);
+        $bike->update([
+            'name' => $request->name,
+            'price' => $request->price,
+            'quantity' => $request->quantity ?? 0,
+            'description' => $request->description,
+            'category_id' => $request->category_id,
+            'brand_id' => $request->brand_id,
+        ]);
+
+        return redirect()->route('admin.bikes.index')->with('success', 'Bike updated successfully');
     }
 
     /**

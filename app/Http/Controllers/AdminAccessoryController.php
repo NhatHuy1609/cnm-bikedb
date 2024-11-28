@@ -89,7 +89,7 @@ class AdminAccessoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+
     }
 
     /**
@@ -97,7 +97,31 @@ class AdminAccessoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $accessory = Product::with('productImages', 'category')->findOrFail($id);
+        $brands = Brand::all();
+        
+        // Get parent categories (Level 1)
+        $parentCategories = Category::where('parent_category_id', 4)
+            ->get()
+            ->map(function($category) {
+                return [
+                    'id' => $category->id,
+                    'name' => $category->name,
+                    'has_children' => $category->subCategories()->exists()
+                ];
+            });
+
+        // Get subcategories (Level 2) based on the accessory's parent category
+        $subCategories = Category::where('parent_category_id', $accessory->category->parent_category_id)
+            ->get()
+            ->map(function($category) {
+                return [
+                    'id' => $category->id,
+                    'name' => $category->name
+                ];
+            });
+
+        return view('admin.accessories.edit', compact('accessory', 'brands', 'parentCategories', 'subCategories'));
     }
 
     /**
@@ -105,7 +129,28 @@ class AdminAccessoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validate
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0',
+            'quantity' => 'nullable|integer|min:0',
+            'description' => 'nullable|string',
+            'category_id' => 'required|exists:categories,id',
+            'brand_id' => 'required|exists:brands,id',
+        ]);
+
+        // Update
+        $accessory = Product::findOrFail($id);
+        $accessory->update([
+            'name' => $request->name,
+            'price' => $request->price,
+            'quantity' => $request->quantity ?? 0,
+            'description' => $request->description,
+            'category_id' => $request->category_id,
+            'brand_id' => $request->brand_id,
+        ]);
+
+        return redirect()->route('admin.accessories.index')->with('success', 'Accessory updated successfully');
     }
 
     /**

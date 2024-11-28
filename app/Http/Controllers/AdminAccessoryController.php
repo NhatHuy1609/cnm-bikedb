@@ -9,9 +9,18 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Cloudinary\Cloudinary;
+use App\Models\ProductImage;
 
 class AdminAccessoryController extends Controller
 {
+    protected $cloudinary;
+
+    public function __construct(Cloudinary $cloudinary)
+    {
+        $this->cloudinary = $cloudinary;
+    }
+
     public function index(Request $request)
     {
         $brands = Brand::all();
@@ -93,17 +102,51 @@ class AdminAccessoryController extends Controller
             'brand_id' => 'required|exists:brands,id',
         ]);
 
-        // Create the product
-        Product::create([
-            'name' => $request->name,
-            'price' => $request->price,
-            'quantity' => $request->quantity ?? 0,
-            'description' => $request->description,
-            'category_id' => $request->category_id,
-            'brand_id' => $request->brand_id,
-        ]);
+        DB::beginTransaction();
+        try {
+            // Create the product
+            $accessory = Product::create([
+                'name' => $request->name,
+                'price' => $request->price,
+                'quantity' => $request->quantity ?? 0,
+                'description' => $request->description,
+                'category_id' => $request->category_id,
+                'brand_id' => $request->brand_id,
+            ]);
 
-        return redirect()->route('admin.accessories.index')->with('success', 'Accessory created successfully');
+            // Handle image uploads
+            if ($request->hasFile('images')) {
+                $files = $request->file('images');
+                foreach ($files as $file) {
+                    if ($file->isValid()) {
+                        $result = $this->cloudinary->uploadApi()->upload(
+                            $file->getRealPath(),
+                            [
+                                'folder' => 'cmn-bike-store',
+                                'resource_type' => 'image'
+                            ]
+                        );
+
+                        ProductImage::create([
+                            'product_id' => $accessory->id,
+                            'link' => $result['secure_url'],
+                        ]);
+                    }
+                }
+            }
+
+            DB::commit();
+            return redirect()->route('admin.accessories.index')
+                ->with('success', 'Accessory created successfully');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Failed to create accessory: ' . $e->getMessage());
+            Log::error($e->getTraceAsString());
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Failed to create accessory: ' . $e->getMessage());
+        }
     }
 
     public function show(string $id)
@@ -155,18 +198,78 @@ class AdminAccessoryController extends Controller
             'brand_id' => 'required|exists:brands,id',
         ]);
 
-        // Update
-        $accessory = Product::findOrFail($id);
-        $accessory->update([
-            'name' => $request->name,
-            'price' => $request->price,
-            'quantity' => $request->quantity ?? 0,
-            'description' => $request->description,
-            'category_id' => $request->category_id,
-            'brand_id' => $request->brand_id,
-        ]);
+        DB::beginTransaction();
+        try {
+            // Update basic accessory information
+            $accessory = Product::findOrFail($id);
+            $accessory->update([
+                'name' => $request->name,
+                'price' => $request->price,
+                'quantity' => $request->quantity ?? 0,
+                'description' => $request->description,
+                'category_id' => $request->category_id,
+                'brand_id' => $request->brand_id,
+            ]);
 
-        return redirect()->route('admin.accessories.index')->with('success', 'Accessory updated successfully');
+            // Handle deleted images
+            if ($request->filled('deleted_images')) {
+                $deletedImageIds = explode(',', $request->deleted_images);
+                $imagesToDelete = ProductImage::where('product_id', $accessory->id)
+                    ->whereIn('id', $deletedImageIds)
+                    ->get();
+
+                foreach ($imagesToDelete as $image) {
+                    // Delete from Cloudinary
+                    $publicId = $this->getPublicIdFromUrl($image->link);
+                    if ($publicId) {
+                        try {
+                            $this->cloudinary->uploadApi()->destroy($publicId);
+                        } catch (\Exception $e) {
+                            Log::warning("Failed to delete image from Cloudinary: {$e->getMessage()}");
+                        }
+                    }
+                }
+
+                // Delete from database
+                ProductImage::whereIn('id', $deletedImageIds)
+                    ->where('product_id', $accessory->id)
+                    ->delete();
+            }
+
+            // Handle new images
+            if ($request->hasFile('images')) {
+                $files = $request->file('images');
+                foreach ($files as $file) {
+                    if ($file->isValid()) {
+                        $result = $this->cloudinary->uploadApi()->upload(
+                            $file->getRealPath(),
+                            [
+                                'folder' => 'cmn-bike-store',
+                                'resource_type' => 'image'
+                            ]
+                        );
+
+                        ProductImage::create([
+                            'product_id' => $accessory->id,
+                            'link' => $result['secure_url'],
+                        ]);
+                    }
+                }
+            }
+
+            DB::commit();
+            return redirect()->route('admin.accessories.index')
+                ->with('success', 'Accessory updated successfully');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Failed to update accessory: ' . $e->getMessage());
+            Log::error($e->getTraceAsString());
+            
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Failed to update accessory: ' . $e->getMessage());
+        }
     }
 
     public function destroy(string $id)
@@ -175,12 +278,25 @@ class AdminAccessoryController extends Controller
         try {
             $accessory = Product::findOrFail($id);
             
-            // Delete related records first
+            // Delete images from Cloudinary
+            foreach ($accessory->productImages as $image) {
+                // Extract public_id from the URL
+                $publicId = $this->getPublicIdFromUrl($image->link);
+                if ($publicId) {
+                    try {
+                        $this->cloudinary->uploadApi()->destroy($publicId);
+                    } catch (\Exception $e) {
+                        Log::warning("Failed to delete image from Cloudinary: {$e->getMessage()}");
+                    }
+                }
+            }
+            
+            // Delete related records
             $accessory->productImages()->delete();
             $accessory->discount()->delete();
             $accessory->ratings()->delete();
             
-            // Finally delete the bike
+            // Finally delete the accessory
             $accessory->delete();
             
             DB::commit();
@@ -195,6 +311,17 @@ class AdminAccessoryController extends Controller
             return redirect()->route('admin.accessories.index')
                 ->with('error', 'Failed to delete accessory: ' . $e->getMessage());
         }
+    }
+
+    // Add this helper method to the class
+    private function getPublicIdFromUrl($url)
+    {
+        // Extract the public ID from Cloudinary URL
+        // Example URL: https://res.cloudinary.com/your-cloud-name/image/upload/v1234567890/cmn-bike-store/abcdef123456.jpg
+        if (preg_match('/cmn-bike-store\/([^.]+)/', $url, $matches)) {
+            return 'cmn-bike-store/' . $matches[1];
+        }
+        return null;
     }
 
     public function trash(Request $request)

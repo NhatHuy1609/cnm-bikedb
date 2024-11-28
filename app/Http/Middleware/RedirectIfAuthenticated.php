@@ -17,13 +17,24 @@ class RedirectIfAuthenticated
      * @param  string|null  ...$guards
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, ...$guards)
+    public function handle(Request $request, Closure $next, string ...$guards)
     {
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+
+                if (Auth::user()->email_verified_at) {
+                    return redirect()->route('dashboard');
+                }
+                
+
+                if ($request->is('email/verify') && $request->is('login')) {
+                    Auth::logout();
+                    return redirect()->route('login');
+                }
+ 
+                return $next($request);
             }
         }
 

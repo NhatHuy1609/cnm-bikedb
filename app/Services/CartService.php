@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Cart;
 use App\Models\CartItem;
+use App\Models\Product;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
@@ -28,10 +29,17 @@ class CartService
                 throw new Exception('Could not find product');
             }
 
-            if ($params['quantity'] > $cartItem->product->quantity) {
-                throw new Exception("Quantity requested exceeds quantity in stock");
+            $totalQuantityInCart = $this->cartItems
+                ->where('cart_id', $params['cart_id'])
+                ->where('product_id', $params['product_id'])
+                ->sum('quantity');
+
+            $totalQuantityInCart += $params['quantity'];
+
+            if ($totalQuantityInCart > $cartItem->product->quantity) {
+                throw new Exception("Total quantity requested exceeds quantity in stock");
             }
-    
+
             $this->cartItems
                 ->where('cart_id', $params['cart_id'])
                 ->where('product_id', $params['product_id'])
@@ -79,14 +87,20 @@ class CartService
                 ->where('product_id', $params['product_id'])
                 ->first();
 
+            $totalQuantityInCart = $cartItem ? $cartItem->quantity : 0;
+            $totalQuantityInCart += $params['quantity'];
+
+            $product = Product::find($params['product_id']);
+            if (!$product) {
+                throw new Exception("Product not found");
+            }
+
+            if ($totalQuantityInCart > $product->quantity) {
+                throw new Exception("Quantity requested exceeds quantity in stock");
+            }
+            
             if ($cartItem) {
-                $newQuantity = $cartItem->quantity + $params['quantity'];
-    
-                if ($newQuantity > $cartItem->product->quantity) {
-                    throw new Exception("Quantity requested exceeds quantity in stock");
-                }
-    
-                $cartItem->quantity = $newQuantity;
+                $cartItem->quantity = $totalQuantityInCart;
                 $cartItem->save();
                 return $cartItem;
             }

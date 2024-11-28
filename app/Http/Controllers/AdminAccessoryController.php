@@ -89,7 +89,10 @@ class AdminAccessoryController extends Controller
      */
     public function show(string $id)
     {
-
+        $accessory = Product::with(['productImages', 'category', 'brand', 'discount'])
+            ->findOrFail($id);
+        
+        return view('admin.accessories.show', compact('accessory'));
     }
 
     /**

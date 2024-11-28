@@ -74,7 +74,10 @@ class AdminBikeController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $bike = Product::with(['productImages', 'category', 'brand', 'discount'])
+            ->findOrFail($id);
+        
+        return view('admin.bikes.show', compact('bike'));
     }
 
     /**

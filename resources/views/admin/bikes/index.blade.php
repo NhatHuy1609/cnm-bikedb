@@ -68,7 +68,9 @@
                             </div>
                             <div class="ml-3">
                                 <p class="text-gray-900 whitespace-no-wrap font-semibold">
-                                    {{ $bike->name }}
+                                    <a href="{{ route('admin.bikes.show', $bike) }}" class="hover:text-blue-600 hover:underline">
+                                        {{ $bike->name }}
+                                    </a>
                                 </p>
                             </div>
                         </div>
@@ -87,13 +89,15 @@
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">
                         <p class="text-gray-900 whitespace-no-wrap font-medium">
-                            ${{ number_format($bike->price, 2) }}
+                            @if($bike->discount)
+                                ${{ number_format($bike->price * (1 - $bike->discount->percentage / 100), 2) }}
+                                <p class="text-green-600 whitespace-no-wrap text-xs">
+                                    {{ $bike->discount->percentage }}% OFF
+                                </p>
+                            @else
+                                ${{ number_format($bike->price, 2) }}
+                            @endif
                         </p>
-                        @if($bike->discount)
-                        <p class="text-green-600 whitespace-no-wrap text-xs">
-                            {{ $bike->discount->percentage }}% OFF
-                        </p>
-                        @endif
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
                         <div class="flex flex-col items-center">

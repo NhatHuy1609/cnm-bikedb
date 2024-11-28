@@ -68,7 +68,7 @@
                     {{-- Existing Images --}}
                     @foreach($bike->productImages as $image)
                     <div class="relative group" data-image-id="{{ $image->id }}">
-                        <img src="{{ asset($image->image_path) }}" class="w-full h-32 object-cover rounded-lg">
+                        <img src="{{ asset($image->link) }}" class="w-full h-32 object-cover rounded-lg">
                         <div class="absolute inset-0 bg-black bg-opacity-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                             <button type="button" class="text-white hover:text-red-500 transition-colors" onclick="deleteImage(this)">
                                 <i class="fas fa-trash"></i>

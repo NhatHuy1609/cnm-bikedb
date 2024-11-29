@@ -21,8 +21,6 @@
 
     <link rel="stylesheet" href="https://unpkg.com/ionicons@4.1.1/dist/css/ionicons.min.css">
 
-    <!-- @vite('resources/css/app.css') -->
-
     <!-- Build Main CSS -->
     <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/base.scss.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
     <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/ant-sport.scss.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
@@ -470,7 +468,7 @@
                                                 <div class="clearfix">
                                                     <button
                                                         class="btn btn-lg btn-gray btn-cart"
-                                                        onclick="addToCart('{{ 1 }}', '{{ $product->id }}', document.getElementById('qty').value)">
+                                                        onclick="addToCart('{{ $product->id }}', document.getElementById('qty').value)">
                                                         <span class="txt-main">THÊM VÀO GIỎ HÀNG</span>
                                                         <span class="txt-sub">Giao hàng tận nơi</span>
                                                     </button>
@@ -687,41 +685,43 @@
             }
         });
 
+        // Get the user ID from the authenticated user
+        const userId = {{ Auth::id() }};
 
-        function addToCart(userId, productId, quantity) {
+        function addToCart(productId, quantity) {
             const url = '/users/cart';
 
             const data = {
-                user_id: userId,
+                user_id: userId, // Use the userId variable here
                 product_id: productId,
                 quantity: quantity
             };
 
             fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    },
-                    body: JSON.stringify(data)
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.success) {
-                        alert(data.message);
-                    } else {
-                        alert(data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Error adding to cart. Please try again later.');
-                });
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error adding to cart. Please try again later.');
+            });
         }
 
         function scrollToReviews() {

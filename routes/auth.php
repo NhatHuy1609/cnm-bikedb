@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
         ->middleware('auth')
         ->name('verification.check');
 
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    // Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::delete('/account/delete', [AuthController::class, 'deleteUnverifiedAccount'])
         ->name('account.delete');

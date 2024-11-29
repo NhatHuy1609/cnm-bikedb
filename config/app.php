@@ -174,5 +174,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\ResponseServiceProvider::class,
         App\Providers\CloudinaryServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
+        Livewire\LivewireServiceProvider::class,
     ],
 ];

@@ -429,13 +429,13 @@
                                         <meta itemprop="price" content="2490000">
                                         <meta itemprop="url" content="https://dngbike.com/xe-dap-dua-youma-3-7">
                                         <meta itemprop="priceValidUntil" content="2099-01-01">
-                                        
+
                                         @if($product->promotionalPrice > 0)
-                                            <div class="special-price">
-                                                <span class="price product-price bk-product-price">Giá khuyến mãi: {{ $product->promotionalPrice }}₫</span>
-                                            </div>
+                                        <div class="special-price">
+                                            <span class="price product-price bk-product-price">Giá khuyến mãi: {{ $product->promotionalPrice }}₫</span>
+                                        </div>
                                         @endif
-                                        
+
                                         <div class="old-price {{ $product->promotionalPrice > 0 ? 'line-through' : '' }}">
                                             <span>Giá: {{ $product->price }}₫</span>
                                         </div>
@@ -688,6 +688,8 @@
         // Get the user ID from the authenticated user
         const userId = {{ Auth::id() }};
 
+        console.log(userId)
+
         function addToCart(productId, quantity) {
             const url = '/users/cart';
 
@@ -698,30 +700,30 @@
             };
 
             fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    alert(data.message);
-                } else {
-                    alert(data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error adding to cart. Please try again later.');
-            });
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        alert(data.message);
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error adding to cart. Please try again later.');
+                });
         }
 
         function scrollToReviews() {

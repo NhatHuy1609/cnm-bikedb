@@ -9,6 +9,7 @@ use Stripe\Stripe;
 use Stripe\Checkout\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
@@ -16,7 +17,7 @@ class CheckoutController extends Controller
     {
         Stripe::setApiKey(config('services.stripe.secret'));
 
-        $cart = Cart::with(['cartItems.product'])->where('user_id', 1)->first();
+        $cart = Cart::with(['cartItems.product'])->where('user_id', Auth::user()->id)->first();
 
         if (!$cart) {
             return redirect()->back()->with('error', 'Giỏ hàng trống');
@@ -25,7 +26,7 @@ class CheckoutController extends Controller
         $metadata = [
             'shipping_address' => '123 Đường ABC, Quận 1, TP.HCM',
             'phone' => '0123456789',
-            'user_id' => 1,
+            'user_id' => Auth::user()->id,
         ];
 
         $lineItems = [];

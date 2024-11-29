@@ -9,6 +9,7 @@ use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Stripe\Stripe;
+use Illuminate\Support\Facades\Auth;
 
 class StripeWebhookController extends Controller
 {
@@ -52,7 +53,7 @@ class StripeWebhookController extends Controller
 
         try {
             $order = Order::create([
-                'user_id' => 1,
+                'user_id' => $metadata->user_id,
                 'order_date' => now(),
                 'address' => $metadata->shipping_address,
                 'phone' => $metadata->phone,
@@ -60,7 +61,7 @@ class StripeWebhookController extends Controller
             ]);
             Log::emergency('Order created', ['order_id' => $order->id]);
 
-            $cart = Cart::with(['cartItems.product'])->where('user_id', 1)->first();
+            $cart = Cart::with(['cartItems.product'])->where('user_id', $metadata->user_id)->first();
 
             if ($cart) {
                 foreach ($cart->cartItems as $item) {

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Rating;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class RatingController extends Controller
 {
@@ -34,7 +36,7 @@ class RatingController extends Controller
         ]);
 
         Rating::create([
-            'user_id' => 1, // hardcode user_id
+            'user_id' => Auth::user()->id,
             'product_id' => $request->input('product_id'), // lấy product_id từ request
             'comment' => $request->input('comment'),
             'rating_point' => $request->input('rating'),

@@ -8,7 +8,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\Auth\AuthController;
 
+
+require __DIR__.'/auth.php';
 
 Route::get('/', function () {
     return view('welcome');

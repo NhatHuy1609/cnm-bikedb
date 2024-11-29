@@ -13,5 +13,10 @@
             <i class="fas fa-cog mr-3"></i>
             Accessories
         </a>
+        <a href="{{ route('admin.dashboard') }}" 
+           class="flex items-center {{ request()->routeIs('admin.dashboard') ? 'active-nav-link' : 'opacity-75 hover:opacity-100' }} text-white py-4 pl-6 nav-item">
+            <i class="fas fa-cog mr-3"></i>
+            User
+        </a>
     </nav>
 </aside>

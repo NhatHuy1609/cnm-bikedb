@@ -35,6 +35,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
     ];
 
+    public function conversations()
+    {
+        
+        return $this->hasMany(Conversation::class,'sender_id')->orWhere('receiver_id',$this->id)->whereNotDeleted();
+    }
+
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);

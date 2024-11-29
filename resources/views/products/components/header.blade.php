@@ -38,7 +38,7 @@
                         <div class="index-cart cart-wishlist">
                             <ul class="clearfix">
                                 <li>
-                                    <a href="{{ route('users.cart.show', 1) }}" class="header-cart">
+                                    <a href="{{ route('users.cart.show', Auth::id()) }}" class="header-cart">
                                         <i class="ion ion-md-basket"></i> Giỏ hàng
                                     </a>
                                 </li>

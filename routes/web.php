@@ -9,7 +9,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\Auth\AuthController;
-
+use App\Http\Middleware\CheckLogin;
 
 require __DIR__.'/auth.php';
 
@@ -20,10 +20,6 @@ Route::get('/', function () {
 Route::get('/general', [GeneralController::class, 'index'])->name('general.index');
 
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');;
-Route::get('/users/{user}/cart', [CartController::class, 'show'])->name('users.cart.show');
-Route::put('/carts', [CartController::class, 'update']);
-Route::delete('/carts', [CartController::class, 'destroy']);
-Route::post('/users/cart', [CartController::class, 'store']);
 
 Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
@@ -57,4 +53,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('accessories/{product}', [AdminAccessoryController::class, 'destroy'])->name('accessories.destroy');
     Route::patch('accessories/{product}/restore', [AdminAccessoryController::class, 'restore'])->name('accessories.restore');
     Route::delete('accessories/{product}/force-delete', [AdminAccessoryController::class, 'forceDelete'])->name('accessories.force-delete');
+});
+
+
+Route::middleware(CheckLogin::class)->group(function() {
+    Route::get('/users/{user}/cart', [CartController::class, 'show'])->name('users.cart.show');
+    Route::put('/carts', [CartController::class, 'update']);
+    Route::delete('/carts', [CartController::class, 'destroy']);
+    Route::post('/users/cart', [CartController::class, 'store']);
 });

@@ -25,24 +25,35 @@ class UserService
                 }])
                 ->first();
             
+            if (!$data) {
+                return null; // Return null if no cart found
+            }
+    
             $formattedData = [
                 'id' => $data->id,
                 'user_id' => $data->user_id,
                 'cart_items' => []
             ];
-
+    
             foreach ($data->cartItems as $item) {
+                $product = $item->product;
+    
+                $discountedPrice = $product->price;
+                if ($product->discount && $product->discount->percentage > 0) {
+                    $discountedPrice = $product->price - ($product->price * ($product->discount->percentage / 100));
+                }
+    
                 $formattedData['cart_items'][] = [
                     'product_id' => $item->product_id,
                     'quantity' => $item->quantity,
                     'product' => [
-                        'name' => $item->product->name,
-                        'price' => $item->product->price,
-                        'first_image' => $item->product->productImages->first()->link ?? null
+                        'name' => $product->name,
+                        'price' => $discountedPrice,
+                        'first_image' => $product->productImages->first()->link ?? null
                     ]
                 ];
             }
-
+    
             return $formattedData;
         } catch (Exception $e) {
             Log::error($e->getMessage());

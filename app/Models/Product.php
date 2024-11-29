@@ -38,6 +38,11 @@ class Product extends Model
         return $this->hasOne(Discount::class);
     }
 
+    public function ratings(): HasMany
+    {
+        return $this->hasMany(Rating::class);
+    }
+
     public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);

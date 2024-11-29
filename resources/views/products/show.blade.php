@@ -21,6 +21,8 @@
 
     <link rel="stylesheet" href="https://unpkg.com/ionicons@4.1.1/dist/css/ionicons.min.css">
 
+    <!-- @vite('resources/css/app.css') -->
+
     <!-- Build Main CSS -->
     <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/base.scss.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
     <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/ant-sport.scss.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
@@ -219,10 +221,13 @@
         }
 
         .old-price {
-            font-size: 18px;
-            text-decoration: line-through;
+            font-size: 20px;
             border-bottom: 1px dashed #ccc;
             padding-bottom: 5px;
+        }
+
+        .line-through {
+            text-decoration: line-through;
         }
 
         .review-form {
@@ -402,13 +407,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="social-sharing margin-top-20 ">
-                                        <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                                        <script type="text/javascript " src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a099baca270babc "></script>
-                                        <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                                        <div class="addthis_inline_share_toolbox_uu9r "></div>
-                                    </div>
-
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-lg-7 col-md-6 details-pro ">
                                     <h1 class="title-head bk-product-name ">{{ $product->name }}</h1>
@@ -440,9 +438,8 @@
                                             </div>
                                         @endif
                                         
-                                        <div class="old-price">
+                                        <div class="old-price {{ $product->promotionalPrice > 0 ? 'line-through' : '' }}">
                                             <span>Giá: {{ $product->price }}₫</span>
-                                            <del class="price product-price-old"></del>
                                         </div>
                                     </div>
                                     <div class="product-summary product_description margin-bottom-15 ">
@@ -528,7 +525,7 @@
                                                 <h4 style="text-align: justify;"><span style="font-size:16px;"><strong>1.2. Điều kiện&nbsp;bảo hành</strong></span></h4>
                                                 <p style="text-align: justify;"><span style="font-size:16px;">- Sản phẩm bảo hành&nbsp;trong thời gian bảo hành phải còn nguyên vẹn,&nbsp;không có dấu hiệu cạy, mở, hay tháo rời,&nbsp;chưa qua sửa chữa<br />
                                                         - Lỗi&nbsp;được đội ngũ kỹ thuật của&nbsp;DNGBIKE&nbsp;xác đnh là&nbsp;do lỗi kỹ thuật sản phẩm&nbsp;hoặc do lỗi của nhà sản xuất.</span></p>
-                                                <h4 style="text-align: justify;"><strong><span style="font-size:16px;">1.3. Thủ tục bảo hành</span></strong></h4>
+                                                <h4 style="text-align: justify;"><strong><span style="font-size:16px;">1.3. Th tục bảo hành</span></strong></h4>
                                                 <p style="text-align: justify;"><span style="font-size:16px;">- Đối với sn phẩm là&nbsp;xe đạp: Khch hàng mang sản phẩm cần bảo hành kèm&nbsp;theo sổ bảo hành chính hãng do công ty phát hành&nbsp;khi bán hàng, nếu khách hàng không có s bảo hành do công ty DNGBIKE phát hành thì khách hàng cần&nbsp;xuất trình được thông tin sản phẩm và thông tin&nbsp;người mua hàng trùng khớp với thông tin lưu trữ&nbsp;trên hệ thống lưu trữ của công ty.</span></p>
                                                 <p style="text-align: justify;"><span style="font-size:16px;">-&nbsp;Đối với sn phẩm là&nbsp;phụ tùng phụ kiện: Khách hàng mang sản phẩm cần bảo hành kèm&nbsp;theo hóa đơn mua hàng, nếu khách hàng không có hóa đơn mua hàng&nbsp;thì khách hàng cần&nbsp;xuất trình được thông tin sản phẩm và thông tin&nbsp;người mua hàng trùng khớp với thông tin lưu trữ&nbsp;trên hệ thống lưu trữ của công ty.</span></p>
                                                 <h4 style="text-align: justify;"><strong><span style="font-size:16px;">1.4. Các trường hợp không được bảo hành miễn phí</span></strong></h4>

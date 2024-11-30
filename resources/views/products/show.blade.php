@@ -24,7 +24,6 @@
     <!-- Build Main CSS -->
     <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/base.scss.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
     <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/ant-sport.scss.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         .carousel-inner>.item>img {
             width: 100%;
@@ -354,7 +353,6 @@
                     </ul>
                 </div>
             </div>
-            
         </div>
     </section>
 
@@ -431,13 +429,13 @@
                                         <meta itemprop="price" content="2490000">
                                         <meta itemprop="url" content="https://dngbike.com/xe-dap-dua-youma-3-7">
                                         <meta itemprop="priceValidUntil" content="2099-01-01">
-
+                                        
                                         @if($product->promotionalPrice > 0)
-                                        <div class="special-price">
-                                            <span class="price product-price bk-product-price">Giá khuyến mãi: {{ $product->promotionalPrice }}₫</span>
-                                        </div>
+                                            <div class="special-price">
+                                                <span class="price product-price bk-product-price">Giá khuyến mãi: {{ $product->promotionalPrice }}₫</span>
+                                            </div>
                                         @endif
-
+                                        
                                         <div class="old-price {{ $product->promotionalPrice > 0 ? 'line-through' : '' }}">
                                             <span>Giá: {{ $product->price }}₫</span>
                                         </div>
@@ -638,11 +636,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>    
     </section>
     <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/bpr-products-module.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
 
@@ -694,9 +687,7 @@
 
         // Get the user ID from the authenticated user
         const userId = {{ Auth::id() }};
-
         console.log(userId)
-
         function addToCart(productId, quantity) {
             const url = '/users/cart';
 
@@ -707,30 +698,30 @@
             };
 
             fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    },
-                    body: JSON.stringify(data)
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.success) {
-                        alert(data.message);
-                    } else {
-                        alert(data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Error adding to cart. Please try again later.');
-                });
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error adding to cart. Please try again later.');
+            });
         }
 
         function scrollToReviews() {
@@ -758,12 +749,7 @@
             }
         }
     </script>
-        <a href="{{ route('users') }}" 
-            class="fixed bottom-6 right-6 bg-blue-500 hover:bg-blue-600 text-white rounded-full p-4 shadow-lg transition-all duration-300">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-            </svg>  
-        </a>    
+
 </body>
 
 </html>

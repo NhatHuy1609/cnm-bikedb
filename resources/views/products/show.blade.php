@@ -24,7 +24,6 @@
     <!-- Build Main CSS -->
     <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/base.scss.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
     <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/ant-sport.scss.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         .carousel-inner>.item>img {
             width: 100%;
@@ -693,9 +692,7 @@
         });
 
         // Get the user ID from the authenticated user
-        const userId = {{Auth::id()}};
-
-        console.log(userId)
+        const userId = {{ Auth::id() }};
 
         function addToCart(productId, quantity) {
             const url = '/users/cart';

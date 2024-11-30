@@ -7,6 +7,8 @@ use App\Models\Order;
 use App\Models\Rating;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class ProductController extends Controller
 {
@@ -49,10 +51,7 @@ class ProductController extends Controller
     {
         $product->load('productImages');
 
-        // Kiểm tra xem người dùng đã mua sản phẩm hay chưa
-        $userId = 1; // hardcode user id
-
-        $data = $this->productService->show($product, $userId);
+        $data = $this->productService->show($product, Auth::user()->id);
 
         return view('products.show', $data);
     }

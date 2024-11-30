@@ -14,6 +14,7 @@ use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Middleware\CheckLogin;
+use App\Http\Middleware\AdminMiddleware;
 
 
 
@@ -36,8 +37,8 @@ Route::post('/ratings', [RatingController::class, 'store'])->name('ratings.store
 
 
 // Admin Routes
-// Route::prefix('admin')->name('admin.')->middleware('auth', 'admin')->group(function () {
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware('auth', AdminMiddleware::class)->group(function () {
+// Route::prefix('admin')->name('admin.')->group(function () {
     // Bikes management
     Route::get('bikes', [AdminBikeController::class, 'index'])->name('bikes.index');
     Route::get('bikes/trash', [AdminBikeController::class, 'trash'])->name('bikes.trash');

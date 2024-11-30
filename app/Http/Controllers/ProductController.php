@@ -50,8 +50,17 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $product->load('productImages');
+      
+        // Kiểm tra xem người dùng đã mua sản phẩm hay chưa
 
-        $data = $this->productService->show($product, Auth::user()->id);
+        $userId = null;
+
+        if (Auth::check()){
+            $userId = Auth::user()->id;
+        }
+
+        $data = $this->productService->show($product, $userId);
+        // $data = $this->productService->show($product,1)
 
         return view('products.show', $data);
     }

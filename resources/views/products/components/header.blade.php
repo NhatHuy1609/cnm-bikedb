@@ -14,7 +14,7 @@
                             </a>
                         </div>
                         <div class="mobile-cart visible-sm visible-xs">
-                            <a href="{{ route('users.cart.show', 1) }}" title="Cart">
+                            <a href="{{ route('users.cart.show') }}" title="Cart">
                                 <i class="ion ion-md-basket"></i>
                                 <span class="cnt crl-bg count_item_pr">1</span>
                             </a>

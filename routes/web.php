@@ -4,19 +4,12 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminBikeController;
 use App\Http\Controllers\AdminAccessoryController;
-use App\Livewire\Chat\Index;
-use App\Livewire\Chat\Chat;
-use App\Livewire\Users;
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Middleware\CheckLogin;
-use App\Http\Middleware\AdminMiddleware;
-
-
 
 require __DIR__.'/auth.php';
 
@@ -34,11 +27,9 @@ Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('che
 Route::post('/webhook/stripe', [CheckoutController::class, 'handleWebhook'])->name('stripe.webhook');
 Route::post('/ratings', [RatingController::class, 'store'])->name('ratings.store');
 
-
-
 // Admin Routes
-Route::prefix('admin')->name('admin.')->middleware('auth', AdminMiddleware::class)->group(function () {
-// Route::prefix('admin')->name('admin.')->group(function () {
+// Route::prefix('admin')->name('admin.')->middleware('auth', 'admin')->group(function () {
+Route::prefix('admin')->name('admin.')->group(function () {
     // Bikes management
     Route::get('bikes', [AdminBikeController::class, 'index'])->name('bikes.index');
     Route::get('bikes/trash', [AdminBikeController::class, 'trash'])->name('bikes.trash');
@@ -66,13 +57,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth', AdminMiddleware::clas
 
 
 Route::middleware(CheckLogin::class)->group(function() {
-    Route::get('/users/{user}/cart', [CartController::class, 'show'])->name('users.cart.show');
+    Route::get('/users/cart', [CartController::class, 'show'])->name('users.cart.show');
     Route::put('/carts', [CartController::class, 'update']);
     Route::delete('/carts', [CartController::class, 'destroy']);
     Route::post('/users/cart', [CartController::class, 'store']);
-
-    Route::get('/chat',Index::class)->name('chat.index');
-    Route::get('/chat/{query}',Chat::class)->name('chat');
-    Route::get('/users_chat',Users::class)->name('users');
-
 });

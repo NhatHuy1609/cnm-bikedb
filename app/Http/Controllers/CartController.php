@@ -11,6 +11,7 @@ use App\Services\CartService;
 use App\Services\UserService;
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class CartController extends Controller
@@ -67,9 +68,14 @@ class CartController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show()
     {
-        $data = $this->userService->getUserCart($user->id);
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+    
+        $userId = Auth::id();
+        $data = $this->userService->getUserCart($userId);
         return view('carts.show', ['cart' => $data]);
     }
 

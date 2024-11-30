@@ -21,6 +21,11 @@
 
     <link rel="stylesheet" href="https://unpkg.com/ionicons@4.1.1/dist/css/ionicons.min.css">
 
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @vite('resources/css/app.css')
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
     <!-- Build Main CSS -->
     <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/base.scss.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
     <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/ant-sport.scss.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
@@ -482,11 +487,6 @@
 
                                                 </div>
                                             </div>
-                                            <div class="ab-available-notice-button ab-hide" data-ab-product-id="36568086">
-                                                <button class="ab-notice-btn" title="" type="button" onclick="ABAvailableNotice.noticeButtonClick()">
-                                                    BÁO KHI CÓ HÀNG
-                                                </button>
-                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -679,12 +679,11 @@
             });
         });
         window.addEventListener('scroll', function() {
-            var navigation = document.querySelector('.main-navigation');
+            var navigation = document.querySelector('.main-navigation'); 
             var headerHeight = document.querySelector('.header-main').offsetHeight;
 
             if (window.pageYOffset >= headerHeight) {
                 navigation.classList.add('sticky-nav');
-                // Add padding to body to prevent content jump
                 document.body.style.paddingTop = navigation.offsetHeight + 'px';
             } else {
                 navigation.classList.remove('sticky-nav');

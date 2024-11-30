@@ -12,3 +12,35 @@
 .active-nav-link { background: #1947ee; }
 .nav-item:hover { background: #1947ee; }
 .account-link:hover { background: #3d68ff; }
+
+.account-link {
+    @apply text-gray-700 transition-colors duration-200;
+}
+
+.account-link:hover {
+    @apply bg-blue-500;
+}
+
+.modal-enter {
+    @apply transition-opacity duration-300 ease-out;
+}
+
+.modal-enter-start {
+    @apply opacity-0;
+}
+
+.modal-enter-end {
+    @apply opacity-100;
+}
+
+.modal-leave {
+    @apply transition-opacity duration-200 ease-in;
+}
+
+.modal-leave-start {
+    @apply opacity-100;
+}
+
+.modal-leave-end {
+    @apply opacity-0;
+}

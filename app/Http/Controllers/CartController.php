@@ -70,10 +70,6 @@ class CartController extends Controller
      */
     public function show()
     {
-        if (!Auth::check()) {
-            return redirect()->route('login');
-        }
-    
         $userId = Auth::id();
         $data = $this->userService->getUserCart($userId);
         return view('carts.show', ['cart' => $data]);
@@ -92,7 +88,6 @@ class CartController extends Controller
      */
     public function update(CartUpdateRequest $request)
     {
-
         $params = $request->validated();
         $data = $this->cartService->updateQuantity($params);
 

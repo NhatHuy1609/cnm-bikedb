@@ -33,12 +33,12 @@ class ProductService
             $product->promotionalPrice = 0;
         }
     
-        $hasPurchased = Order::where('user_id', $userId)
+        $hasPurchased = $userId ? Order::where('user_id', $userId)
             ->where('status', 'paid')
             ->whereHas('orderItems', function ($query) use ($product) {
                 $query->where('product_id', $product->id);
             })
-            ->exists();
+            ->exists() : false; 
     
         $ratings = Rating::where('product_id', $product->id)->get();
     

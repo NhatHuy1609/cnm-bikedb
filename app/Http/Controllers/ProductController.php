@@ -9,6 +9,7 @@ use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class ProductController extends Controller
 {
 
@@ -49,7 +50,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $product->load('productImages');
-
+      
         // Kiểm tra xem người dùng đã mua sản phẩm hay chưa
 
         $userId = null;
@@ -59,7 +60,7 @@ class ProductController extends Controller
         }
 
         $data = $this->productService->show($product, $userId);
-        // $data = $this->productService->show($product,1);
+        // $data = $this->productService->show($product,1)
 
         return view('products.show', $data);
     }

@@ -16,7 +16,7 @@ class ProductService
     {
         $this->product = $product;
     }
-    
+
     public function getProductsByCategory($categoryId, $perPage = 8)
     {
         return $this->product->where('category_id', $categoryId)->paginate($perPage);

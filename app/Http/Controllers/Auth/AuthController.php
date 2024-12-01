@@ -51,7 +51,7 @@ class AuthController extends Controller
             if ($user->role_id == 1) { 
                 return redirect()->route('admin.dashboard');
             } else {
-                return redirect()->route('dashboard');
+                return redirect()->route('general.index');
             }
         }
 
@@ -128,7 +128,7 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect()->route('login');
     }
 
     public function checkVerificationStatus(Request $request)
@@ -235,7 +235,7 @@ class AuthController extends Controller
             
             return $user->role_id == 1 
                 ? redirect()->route('admin.dashboard')
-                : redirect()->route('dashboard');
+                : redirect()->route('general.index');
             
         } catch (Exception $e) {
             return redirect()->route('login')

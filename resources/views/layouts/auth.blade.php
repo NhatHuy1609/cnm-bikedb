@@ -45,7 +45,7 @@
                 <div class="col-xs-12">
                     <ul class="breadcrumb">
                         <li class="home">
-                            <a href="/" title="Trang chủ"><span>Trang chủ</span></a>
+                            <a href="/general" title="Trang chủ"><span>Trang chủ</span></a>
                             <span><i class="fa fa-angle-right"></i></span>
                         </li>
                         <li><strong><span>@yield('title')</span></strong></li>

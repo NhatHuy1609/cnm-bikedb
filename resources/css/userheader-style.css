@@ -1,0 +1,324 @@
+
+/* Điều chỉnh style cho menu dropdown nếu cần */
+.account-sign ul {
+    position: absolute;
+    top: 100%;
+    right: 0;
+}
+.carousel-inner>.item>img {
+    width: 100%;
+    height: auto;
+}
+
+.carousel-indicators {
+    bottom: 0;
+}
+
+.carousel-control {
+    background: none;
+}
+
+.thumbnail-product .item {
+    cursor: pointer;
+}
+
+.thumbnail-product .item img {
+    max-width: 100%;
+    height: auto;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.current {
+    display: block;
+}
+
+.tabs-title li {
+    cursor: pointer;
+    position: relative;
+    text-decoration: none;
+    border-bottom: none;
+}
+
+.tabs-title li h3 {
+    text-decoration: none;
+    border-bottom: none;
+}
+
+.tabs-title li.current {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: none;
+}
+
+.tabs-title li::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #fff;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.tabs-title li:hover::after {
+    width: 100%;
+}
+
+.tabs-title li.current::after {
+    width: 100%;
+}
+
+.sticky-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.main-navigation {
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.product-reviews-summary {
+    padding: 20px;
+}
+
+.ratings-overview {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.ratings-score {
+    text-align: center;
+}
+
+.average-score {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.score-max {
+    font-size: 24px;
+    color: #666;
+}
+
+.star-rating {
+    color: #ffd700;
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.ratings-breakdown {
+    flex: 1;
+    margin-left: 40px;
+}
+
+.rating-bar {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.rating-label {
+    width: 60px;
+}
+
+.progress {
+    flex: 1;
+    height: 8px;
+    margin: 0 10px;
+    background: #eee;
+    border-radius: 4px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #ffd700;
+    border-radius: 4px;
+}
+
+.rating-count {
+    width: 40px;
+    text-align: right;
+}
+
+.reviews-list {
+    margin: 30px 0;
+}
+
+.review-item {
+    border-bottom: 1px solid #eee;
+    padding: 20px 0;
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.reviewer-name {
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.review-rating {
+    color: #ffd700;
+    margin-right: 15px;
+}
+
+.review-date {
+    color: #666;
+}
+
+.review-images {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.review-images img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.old-price {
+    font-size: 20px;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 5px;
+}
+
+.line-through {
+    text-decoration: line-through;
+}
+
+.review-form {
+    display: none;
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.rating-input {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 5px;
+}
+
+.rating-input input {
+    display: none;
+}
+
+.rating-input label {
+    color: #ddd;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.rating-input input:checked~label,
+.rating-input label:hover,
+.rating-input label:hover~label {
+    color: #ffd700;
+}
+
+.form-group {
+    margin: 15px 0;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.btn-submit-review {
+    background-color: #4CAF50;
+    /* Màu nền */
+    color: white;
+    /* Màu chữ */
+    padding: 10px 20px;
+    /* Khoảng cách */
+    border: none;
+    /* Không viền */
+    border-radius: 5px;
+    /* Bo góc */
+    cursor: pointer;
+    /* Con trỏ chuột */
+}
+
+.btn-submit-review:hover {
+    background: #45a049;
+}
+
+.rating-summary {
+    background-color: #E9F8E5;
+    /* Màu nền */
+    border: 2px solid #4CAF50;
+    /* Border với màu xanh lá cây */
+    border-radius: 8px;
+    /* Bo góc */
+    padding: 20px;
+    /* Khoảng cách bên trong */
+    margin-bottom: 20px;
+    /* Khoảng cách dưới */
+}
+
+.review-form {
+    background: #E9F8E5;
+    /* Đảm bảo form có cùng màu nền */
+    padding: 20px;
+    /* Khoảng cách bên trong */
+    border-radius: 8px;
+    /* Bo góc */
+}
+
+.d-flex {
+    display: flex;
+    flex-wrap: wrap;
+    /* Cho phép các phần tử xuống dòng nếu không đủ ch */
+}
+
+.form-group input {
+    margin-right: 10px;
+    /* Khoảng cách giữa các input */
+}
+
+.col-md-4 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;  /* khoảng cách giữa các phần tử */
+}
+
+.index-cart.cart-wishlist,
+.account-sign {
+    flex-shrink: 0;  /* ngăn các phần tử co lại */
+}
+

@@ -1,5 +1,5 @@
 <header class="header">
-        <div class="container">
+        <div class="container" style="max-width: 1200px;">
             <div class="header-main">
                 <div class="row">
                     <div class="col-md-3 col-100-h">
@@ -75,5 +75,4 @@
                 </div>
             </div>
         </div>
-        @include('products.components.navigator')
-    </header>
+</header>

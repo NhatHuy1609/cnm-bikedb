@@ -45,17 +45,31 @@
                             </ul>
                         </div>
                         <div class="account-sign">
-                            <a href="/account" class="account-header">
-                                <i class="ion ion-ios-contact"></i>
-                                <div class="a-text">Đăng nhập<span>Tài khoản và đơn hàng</span></div>
-                            </a>
-                            <ul>
-
-                                <li><a href="/account/login">Đăng nhập</a></li>
-                                <li><a href="/account/register">Đăng ký</a></li>
-
-
-                            </ul>
+                            @auth
+                                <a href="#" class="account-header">
+                                    <i class="ion ion-ios-contact"></i>
+                                    <div class="a-text">{{ Auth::user()->name }}<span>{{ Auth::user()->email }}</span></div>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <form method="POST" action="{{ route('logout') }}" class="logout-form">
+                                            @csrf
+                                            <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">
+                                                Đăng xuất
+                                            </a>
+                                        </form>
+                                    </li>
+                                </ul>
+                            @else
+                                <a href="/account" class="account-header">
+                                    <i class="ion ion-ios-contact"></i>
+                                    <div class="a-text">Đăng nhập<span>Tài khoản và đơn hàng</span></div>
+                                </a>
+                                <ul>
+                                    <li><a href="/login">Đăng nhập</a></li>
+                                    <li><a href="/register">Đăng ký</a></li>
+                                </ul>
+                            @endauth
                         </div>
                     </div>
                 </div>

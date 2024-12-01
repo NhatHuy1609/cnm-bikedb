@@ -21,6 +21,11 @@
 
     <link rel="stylesheet" href="https://unpkg.com/ionicons@4.1.1/dist/css/ionicons.min.css">
 
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @vite('resources/css/app.css')
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
     <!-- Build Main CSS -->
     <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/base.scss.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
     <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/ant-sport.scss.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
@@ -108,6 +113,7 @@
         .main-navigation {
             width: 100%;
             transition: all 0.3s ease;
+            font-size: 16px
         }
 
         .product-reviews-summary {
@@ -330,6 +336,50 @@
             margin-right: 10px;
             /* Khoảng cách giữa các input */
         }
+
+        /* Styles cho dropdown menu */
+        .account-sign {
+            position: relative;
+        }
+
+        .account-sign ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 10px 0;
+        }
+
+        .account-sign:hover ul {
+            display: block;
+        }
+
+        .account-sign ul li {
+            padding: 8px 15px;
+        }
+
+        .account-sign ul li a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+        }
+
+        .account-sign ul li a:hover {
+            color: #4CAF50;
+        }
+
+        /* Styles cho main navigation dropdown */
+        .main-navigation .group:hover .hidden {
+            display: block !important;
+        }
+
+        .main-navigation .group/subsubitem:hover .hidden {
+            display: block !important;
+        }
     </style>
 </head>
 
@@ -482,11 +532,6 @@
 
                                                 </div>
                                             </div>
-                                            <div class="ab-available-notice-button ab-hide" data-ab-product-id="36568086">
-                                                <button class="ab-notice-btn" title="" type="button" onclick="ABAvailableNotice.noticeButtonClick()">
-                                                    BÁO KHI CÓ HÀNG
-                                                </button>
-                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -526,7 +571,7 @@
                                                 <p style="text-align: justify;"><span style="font-size:16px;">- Sản phẩm bảo hành&nbsp;trong thời gian bảo hành phải còn nguyên vẹn,&nbsp;không có dấu hiệu cạy, mở, hay tháo rời,&nbsp;chưa qua sửa chữa<br />
                                                         - Lỗi&nbsp;được đội ngũ kỹ thuật của&nbsp;DNGBIKE&nbsp;xác đnh là&nbsp;do lỗi kỹ thuật sản phẩm&nbsp;hoặc do lỗi của nhà sản xuất.</span></p>
                                                 <h4 style="text-align: justify;"><strong><span style="font-size:16px;">1.3. Th tục bảo hành</span></strong></h4>
-                                                <p style="text-align: justify;"><span style="font-size:16px;">- Đối với sn phẩm là&nbsp;xe đạp: Khch hàng mang sản phẩm cần bảo hành kèm&nbsp;theo sổ bảo hành chính hãng do công ty phát hành&nbsp;khi bán hàng, nếu khách hàng không có s bảo hành do công ty DNGBIKE phát hành thì khách hàng cần&nbsp;xuất trình được thông tin sản phẩm và thông tin&nbsp;người mua hàng trùng khớp với thông tin lưu trữ&nbsp;trên hệ thống lưu trữ của công ty.</span></p>
+                                                <p style="text-align: justify;"><span style="font-size:16px;">- Đối với sn phẩm là&nbsp;xe đạp: Khch hàng mang sản phẩm cần bảo hành kèm&nbsp;theo sổ bảo hành chính hãng do công ty phát hành&nbsp;khi bán hàng, nếu khách hàng không có s bảo hành do công ty DNGBIKE phát hành thì kh��ch hàng cần&nbsp;xuất trình được thông tin sản phẩm và thông tin&nbsp;người mua hàng trùng khớp với thông tin lưu trữ&nbsp;trên hệ thống lưu trữ của công ty.</span></p>
                                                 <p style="text-align: justify;"><span style="font-size:16px;">-&nbsp;Đối với sn phẩm là&nbsp;phụ tùng phụ kiện: Khách hàng mang sản phẩm cần bảo hành kèm&nbsp;theo hóa đơn mua hàng, nếu khách hàng không có hóa đơn mua hàng&nbsp;thì khách hàng cần&nbsp;xuất trình được thông tin sản phẩm và thông tin&nbsp;người mua hàng trùng khớp với thông tin lưu trữ&nbsp;trên hệ thống lưu trữ của công ty.</span></p>
                                                 <h4 style="text-align: justify;"><strong><span style="font-size:16px;">1.4. Các trường hợp không được bảo hành miễn phí</span></strong></h4>
                                                 <div style="text-align: justify;"><span style="font-size:16px;">- Lỗi được xác định là&nbsp;do từ phía&nbsp;khách hàng: Sản phẩm&nbsp;hư hỏng do tai nạn, va chạm, bóp méo, biến dạng,&nbsp;trầy sước sơn, rỉ két,&nbsp;do tháo lắp không đúng cách,&nbsp;không đọc kỹ hướng dẫn sử dụng trước khi dùng,&nbsp;tự ý tháo lắp và thay đổi&nbsp;các thnh phần đã được nhà sản xuất cài đặt sẵn</span></div>
@@ -679,12 +724,11 @@
             });
         });
         window.addEventListener('scroll', function() {
-            var navigation = document.querySelector('.main-navigation');
+            var navigation = document.querySelector('.main-navigation'); 
             var headerHeight = document.querySelector('.header-main').offsetHeight;
 
             if (window.pageYOffset >= headerHeight) {
                 navigation.classList.add('sticky-nav');
-                // Add padding to body to prevent content jump
                 document.body.style.paddingTop = navigation.offsetHeight + 'px';
             } else {
                 navigation.classList.remove('sticky-nav');

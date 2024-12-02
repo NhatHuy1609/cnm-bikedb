@@ -14,7 +14,7 @@
                             </a>
                         </div>
                         <div class="mobile-cart visible-sm visible-xs">
-                            <a href="{{ route('users.cart.show', 1) }}" title="Cart">
+                            <a href="{{ route('users.cart.show') }}" title="Cart">
                                 <i class="ion ion-md-basket"></i>
                                 <span class="cnt crl-bg count_item_pr">1</span>
                             </a>
@@ -38,7 +38,7 @@
                         <div class="index-cart cart-wishlist">
                             <ul class="clearfix">
                                 <li>
-                                    <a href="{{ route('users.cart.show', Auth::id()) }}" class="header-cart">
+                                    <a href="{{ route('users.cart.show')}}" class="header-cart">
                                         <i class="ion ion-md-basket"></i> Giỏ hàng
                                     </a>
                                 </li>

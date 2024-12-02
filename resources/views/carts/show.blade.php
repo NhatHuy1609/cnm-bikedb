@@ -23,6 +23,10 @@
 
     <link rel="stylesheet" href="https://unpkg.com/ionicons@4.1.1/dist/css/ionicons.min.css">
 
+    @vite('resources/css/app.css')
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
     <!-- Build Main CSS -->
     <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/base.scss.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
     <link href="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/ant-sport.scss.css?1730193558341" rel="stylesheet" type="text/css" media="all" />
@@ -110,6 +114,15 @@
         .main-navigation {
             width: 100%;
             transition: all 0.3s ease;
+        }
+
+                /* Styles cho main navigation dropdown */
+        .main-navigation .group:hover .hidden {
+            display: block !important;
+        }
+
+        .main-navigation .group/subsubitem:hover .hidden {
+            display: block !important;
         }
     </style>
     <meta name="csrf-token" content="{{ csrf_token() }}">

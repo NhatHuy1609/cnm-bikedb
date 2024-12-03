@@ -114,7 +114,7 @@ class AuthController extends Controller
     public function verify(EmailVerificationRequest $request)
     {
         $request->fulfill();
-        return redirect()->route('dashboard');
+        return redirect()->route('general.index');
     }
 
     public function resend(Request $request)

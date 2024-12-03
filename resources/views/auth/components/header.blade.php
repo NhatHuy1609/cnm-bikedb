@@ -14,7 +14,7 @@
                                 <span>{{ Auth::user()->name }}</span>
                             </li>
                             <li>
-                                <form action="{{ route('logout') }}" method="POST" class="inline">
+                                <form action="{{ route('auth.logout') }}" method="POST" class="inline">
                                     @csrf
                                     <button type="submit" class="btn btn-link">Đăng xuất</button>
                                 </form>

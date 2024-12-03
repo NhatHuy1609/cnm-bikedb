@@ -36,8 +36,9 @@ Route::middleware('auth')->group(function () {
         ->middleware('auth')
         ->name('verification.check');
 
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/logout', [AuthController::class, 'logout'])
+        ->name('auth.logout');
+
     Route::delete('/account/delete', [AuthController::class, 'deleteUnverifiedAccount'])
         ->name('account.delete');
 });
@@ -50,6 +51,12 @@ Route::middleware(['auth'])->group(function () {
         }
         return redirect()->route('verification.notice');
     })->name('dashboard');
+
+    Route::get('/profile', [AuthController::class, 'getProfile'])
+        ->name('profile.get');
+
+    Route::put('/profile/update', [AuthController::class, 'updateProfile'])
+        ->name('profile.update');
 });
 
 

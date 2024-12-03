@@ -39,9 +39,12 @@
                     class="block w-full text-left px-4 py-2 account-link hover:text-white">
                 <i class="fas fa-user mr-2"></i> Profile
             </button>
-            <a href="{{ route('logout') }}" class="block w-full text-left px-4 py-2 account-link hover:text-white">
-                <i class="fas fa-sign-out-alt mr-2"></i> Logout
-            </a>
+            <form method="POST" action="{{ route('auth.logout') }}" class="block w-full">
+                @csrf
+                <button type="submit" class="block w-full text-left px-4 py-2 account-link hover:text-white">
+                    <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                </button>
+            </form>
         </div>
 
         <!-- Profile Modal -->
@@ -128,11 +131,12 @@
                 <i class="fas fa-user mr-3"></i>
                 Profile
             </button>
-            <a href="{{ route('logout') }}" 
-               class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item w-full text-left">
-                <i class="fas fa-sign-out-alt mr-3"></i>
-                Logout
-            </a>
+            <form method="POST" action="{{ route('auth.logout') }}" class="block w-full">
+                @csrf
+                <button type="submit" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item w-full text-left">
+                    <i class="fas fa-sign-out-alt mr-3"></i> Logout
+                </button>
+            </form>
         </div>
     </nav>
 </header>

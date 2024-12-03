@@ -17,7 +17,7 @@
                         </div>
                     </div>
                     <div class="flex items-center">
-                        <form action="{{ route('logout') }}" method="POST">
+                        <form method="POST" action="{{ route('auth.logout') }}" class="block w-full">
                             @csrf
                             <button type="submit" class="text-gray-600 hover:text-gray-900">
                                 Logout

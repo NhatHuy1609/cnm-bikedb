@@ -1,4 +1,4 @@
 <header>
     @include('auth.userheader')
-    @include('general.components.navigation')
+    @include('products.components.navigator')
 </header>

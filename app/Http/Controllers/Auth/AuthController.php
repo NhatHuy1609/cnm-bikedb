@@ -261,4 +261,53 @@ class AuthController extends Controller
         
         return back()->with('error', 'Cannot delete verified account.');
     }
+
+    public function getProfile()
+    {
+        $user = Auth::user();
+        return view('auth.profile', compact('user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+        
+        $maxDate = now()->subYears(10)->format('Y-m-d');
+        
+        try {
+            $validated = $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'phone' => [
+                    'nullable',
+                    'string',
+                    'regex:/^(0|\+84)[3|5|7|8|9][0-9]{8}$/',
+                    'max:15'
+                ],
+                'address' => ['nullable', 'string', 'max:255'],
+                'birthday' => [
+                    'nullable',
+                    'date',
+                    'before_or_equal:'.$maxDate
+                ],
+                'gender' => ['nullable', 'string', 'in:Nam,Nữ'],
+            ], [
+                'name.required' => 'Vui lòng nhập họ tên',
+                'phone.regex' => 'Số điện thoại không hợp lệ (VD: 0912345678)',
+                'birthday.before_or_equal' => 'Người dùng phải ít nhất 10 tuổi',
+            ]);
+
+            $user->update($validated);
+            return redirect()->back()->with('success', 'Cập nhật thành công');
+
+        } catch (ValidationException $e) {
+            return redirect()->back()
+                ->withErrors($e->errors())
+                ->withInput();
+        } catch (Exception $e) {
+            return redirect()->back()
+                ->withErrors(['error' => 'Có lỗi xảy ra: ' . $e->getMessage()])
+                ->withInput();
+        }
+    }
+
 }

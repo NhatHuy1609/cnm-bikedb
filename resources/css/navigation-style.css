@@ -1,0 +1,72 @@
+/* Navigation menu styles */
+.nav-menu {
+    position: relative;
+    isolation: isolate;
+}
+
+.nav-menu > div {
+    position: relative;
+}
+
+/* First level dropdown */
+.nav-menu > div > div {
+    position: absolute;
+    z-index: 1000;
+}
+
+/* Second level dropdown */
+.nav-menu > div > div > div > div {
+    position: absolute;
+    z-index: 1001;
+}
+
+/* Ensure hover states work properly */
+.nav-menu > div:hover {
+    z-index: 1002;
+}
+
+/* Fix dropdown visibility */
+.nav-menu .group:hover .group-hover\:block {
+    display: block !important;
+}
+
+.nav-menu .group\/subsubitem:hover .group-hover\/subsubitem\:block {
+    display: block !important;
+}
+
+/* Z-index management */
+.group {
+    position: relative;
+    z-index: 30;
+}
+
+.group:hover {
+    z-index: 50;
+}
+
+.group > div {
+    z-index: 40;
+}
+
+.group\/subsubitem {
+    position: relative;
+    z-index: 35;
+}
+
+.group\/subsubitem > div {
+    z-index: 45;
+}
+
+/* Transition effects */
+.group-hover\:block,
+.group-hover\/subsubitem\:block {
+    transition: opacity 0.2s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.group:hover .group-hover\:block,
+.group\/subsubitem:hover .group-hover\/subsubitem\:block {
+    opacity: 1;
+    visibility: visible;
+} 

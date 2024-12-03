@@ -1,5 +1,5 @@
 <header class="header">
-        <div class="container" style="max-width: 1200px;">
+        <div class="container">
             <div class="header-main">
                 <div class="row">
                     <div class="col-md-3 col-100-h">
@@ -14,7 +14,7 @@
                             </a>
                         </div>
                         <div class="mobile-cart visible-sm visible-xs">
-                            <a href="{{ route('users.cart.show', 1) }}" title="Cart">
+                            <a href="{{ route('users.cart.show') }}" title="Cart">
                                 <i class="ion ion-md-basket"></i>
                                 <span class="cnt crl-bg count_item_pr">1</span>
                             </a>
@@ -38,7 +38,7 @@
                         <div class="index-cart cart-wishlist">
                             <ul class="clearfix">
                                 <li>
-                                    <a href="{{ route('users.cart.show', Auth::id()) }}" class="header-cart">
+                                    <a href="{{ route('users.cart.show')}}" class="header-cart">
                                         <i class="ion ion-md-basket"></i> Giỏ hàng
                                     </a>
                                 </li>
@@ -51,8 +51,16 @@
                                     <div class="a-text">{{ Auth::user()->name }}<span>{{ Auth::user()->email }}</span></div>
                                 </a>
                                 <ul>
+                                <li>
+                                    <form method="GET" action="{{ route('profile.get') }}" class="logout-form">
+                                            @csrf
+                                            <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">
+                                                Profile
+                                            </a>
+                                        </form>
+                                    </li>
                                     <li>
-                                        <form method="POST" action="{{ route('logout') }}" class="logout-form">
+                                        <form method="POST" action="{{ route('auth.logout') }}" class="logout-form">
                                             @csrf
                                             <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">
                                                 Đăng xuất
@@ -75,4 +83,4 @@
                 </div>
             </div>
         </div>
-</header>
+    </header>

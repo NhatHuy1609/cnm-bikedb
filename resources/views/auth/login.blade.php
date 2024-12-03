@@ -62,9 +62,13 @@
                     </div>
 
                     <div class="form-group">
-                        <a href="{{ route('google.login') }}" class="btn btn-default btn-block" style="height: 42px; border: 1px solid #ddd;">
-                            <img src="https://www.google.com/favicon.ico" alt="Google" style="width: 18px; height: 18px; margin-right: 8px; vertical-align: middle;">
-                            <span style="vertical-align: middle; color: #555;">Tiếp tục với Google</span>
+                        <a href="{{ route('google.login') }}" 
+                           class="btn btn-default btn-block flex items-center justify-center" 
+                           style="height: 42px; border: 1px solid #ddd;">
+                            <img src="https://www.google.com/favicon.ico" 
+                                 alt="Google" 
+                                 class="w-5 h-5 mr-2">
+                            <span class="text-gray-600">Tiếp tục với Google</span>
                         </a>
                     </div>
 

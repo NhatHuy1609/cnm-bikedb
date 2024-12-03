@@ -52,7 +52,15 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <form method="POST" action="{{ route('logout') }}" class="logout-form">
+                                        <form method="GET" action="{{ route('profile.get') }}" class="logout-form">
+                                            @csrf
+                                            <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">
+                                                Profile
+                                            </a>
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <form method="POST" action="{{ route('auth.logout') }}" class="logout-form">
                                             @csrf
                                             <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">
                                                 Đăng xuất

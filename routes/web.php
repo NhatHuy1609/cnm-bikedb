@@ -15,6 +15,7 @@ use App\Http\Controllers\RatingController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Middleware\CheckLogin;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Controllers\OrderController;
 
 
 
@@ -75,4 +76,7 @@ Route::middleware(CheckLogin::class)->group(function() {
     Route::get('/chat/{query}',Chat::class)->name('chat');
     Route::get('/users_chat',Users::class)->name('users');
 
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/orders/paid', [OrderController::class, 'paidOrders'])->name('orders.paid');
+    });
 });

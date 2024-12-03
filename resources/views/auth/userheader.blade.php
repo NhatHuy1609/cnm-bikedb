@@ -60,6 +60,14 @@
                                         </form>
                                     </li>
                                     <li>
+                                        <form method="GET" action="{{ route('orders.paid') }}" class="order-form">
+                                            @csrf
+                                            <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">
+                                                Đơn hàng của tôi
+                                            </a>
+                                        </form>
+                                    </li>
+                                    <li>
                                         <form method="POST" action="{{ route('auth.logout') }}" class="logout-form">
                                             @csrf
                                             <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">

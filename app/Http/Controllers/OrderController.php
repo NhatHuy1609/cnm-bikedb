@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Order;
 
 class OrderController extends Controller
 {
@@ -60,5 +61,15 @@ class OrderController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function paidOrders()
+    {
+        $paidOrders = Order::where('user_id', auth()->id())
+                          ->where('status', 'paid')
+                          ->orderBy('created_at', 'desc')
+                          ->get();
+                          
+        return view('orders.paid', compact('paidOrders'));
     }
 }

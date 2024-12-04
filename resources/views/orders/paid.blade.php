@@ -51,13 +51,35 @@
                                         </td>
                                         <td class="text-center py-4">
                                             <div class="price-wrapper">
-                                            <span class="price-tag">{{ number_format($order->total_amount) }}đ</span>
+                                            <span class="price-tag">{{ number_format($order->orderItems->sum('price')) }}đ</span>
                                             </div>
                                         </td>
                                         <td class="text-center py-4">
                                             <div class="status-badge">
                                                 <i class="fas fa-check-circle pulse"></i>
                                                 <span>Đã thanh toán</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="order-items-row">
+                                        <td colspan="4" class="p-4">
+                                            <div class="order-items-container">
+                                                @foreach($order->orderItems as $item)
+                                                    <div class="order-item">
+                                                        <div class="product-image">
+                                                            @if($item->product->productImages->first())
+                                                                <img src="{{ $item->product->productImages->first()->link }}" alt="{{ $item->product->name }}">
+                                                            @else
+                                                                <div class="no-image">No Image</div>
+                                                            @endif
+                                                        </div>
+                                                        <div class="product-info">
+                                                            <h6 class="product-name">{{ $item->product->name }}</h6>
+                                                            <p class="product-quantity">Số lượng: {{ $item->quantity }}</p>
+                                                            <p class="product-price">{{ number_format($item->price) }}đ</p>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
                                             </div>
                                         </td>
                                     </tr>
@@ -86,38 +108,38 @@
 <style>
 .card {
     border: none;
-    border-radius: 25px;
+    /* border-radius: 0px 16px; */
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
     background: #fff;
 }
 
 .bg-gradient-primary {
-    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    background: linear-gradient(135deg, #23bf04 0%, #2dd107 100%);
+    padding: 1.5rem 1rem;
 }
 
 .order-row {
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border-bottom: 1px solid rgba(0,0,0,.05);
-    position: relative;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(0,0,0,.08);
+    cursor: pointer;
 }
 
 .order-row:hover {
-    background-color: #f8fafc;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(0,0,0,.05);
+    background-color: #f1f5f9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,.05);
 }
 
 .order-id-wrapper {
-    background: rgba(99, 102, 241, 0.1);
-    padding: 8px 16px;
-    border-radius: 12px;
-    display: inline-block;
+    background: rgba(35, 191, 4, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
 }
 
 .order-id {
     font-weight: 700;
-    color: #6366f1;
+    color: #23bf04;
     font-size: 1.1rem;
     letter-spacing: 0.5px;
 }
@@ -143,12 +165,10 @@
 }
 
 .price-tag {
-    font-weight: 700;
-    color: #10b981;
     background: rgba(16, 185, 129, 0.1);
-    padding: 10px 20px;
-    border-radius: 12px;
-    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
 }
 
 .status-badge {
@@ -186,19 +206,19 @@
     align-items: center;
     gap: 10px;
     padding: 10px 24px;
-    border: 2px solid #6366f1;
+    border: 2px solid #23bf04;
     border-radius: 12px;
-    color: #6366f1;
+    color: #23bf04;
     font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
 }
 
 .btn-detail:hover {
-    background: #6366f1;
+    background: #23bf04;
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 4px 12px rgba(35, 191, 4, 0.2);
 }
 
 .btn-detail i {
@@ -211,12 +231,14 @@
 
 .empty-state {
     text-align: center;
-    padding: 60px 20px;
+    padding: 4rem 2rem;
+    background: #f8fafc;
+    border-radius: 16px;
 }
 
 .empty-state-icon {
     font-size: 5rem;
-    color: #6366f1;
+    color: #23bf04;
     margin-bottom: 1.5rem;
     opacity: 0.5;
 }
@@ -231,20 +253,21 @@
 .btn-shop-now {
     display: inline-flex;
     align-items: center;
-    padding: 12px 32px;
-    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    padding: 0.75rem 2rem;
+    background: linear-gradient(135deg, #23bf04 0%, #2dd107 100%);
     color: white;
-    border-radius: 12px;
+    border-radius: 10px;
     font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
     border: none;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 4px 12px rgba(35, 191, 4, 0.3);
+    letter-spacing: 0.5px;
 }
 
 .btn-shop-now:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 8px 16px rgba(35, 191, 4, 0.3);
     color: white;
 }
 
@@ -263,7 +286,7 @@
 
 @media (max-width: 768px) {
     .card-body {
-        padding: 1rem;
+        padding: 0.75rem;
     }
     
     .btn-detail {
@@ -278,7 +301,7 @@
 .btn-back {
     position: absolute;
     left: 4%;
-    top: 12%;
+    top: 50%;
     transform: translateY(-50%);
     display: inline-flex;
     align-items: center;
@@ -312,6 +335,7 @@
 .card-header {
     min-height: 80px;
     width: 100%;
+    position: relative;
 }
 
 @media (max-width: 768px) {
@@ -321,6 +345,91 @@
     
     .btn-back {
         padding: 8px;
+    }
+}
+
+.order-items-row {
+    background-color: #f8fafc;
+}
+
+.order-items-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+    padding: 1.5rem;
+    background: #f8fafc;
+}
+
+.order-item {
+    background: white;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.order-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 12px rgba(0,0,0,0.08);
+}
+
+.product-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.no-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e2e8f0;
+    color: #64748b;
+    font-size: 0.75rem;
+}
+
+.product-info {
+    flex: 1;
+}
+
+.product-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+}
+
+.product-quantity {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin-bottom: 0.25rem;
+}
+
+.product-price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #10b981;
+}
+
+@media (max-width: 768px) {
+    .order-items-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .product-image {
+        width: 80px;
+        height: 80px;
     }
 }
 

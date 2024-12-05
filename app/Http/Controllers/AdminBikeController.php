@@ -255,25 +255,6 @@ class AdminBikeController extends Controller
         try {
             $bike = Product::findOrFail($id);
             
-            // Delete images from Cloudinary
-            foreach ($bike->productImages as $image) {
-                // Extract public_id from the URL
-                $publicId = $this->getPublicIdFromUrl($image->link);
-                if ($publicId) {
-                    try {
-                        $this->cloudinary->uploadApi()->destroy($publicId);
-                    } catch (\Exception $e) {
-                        Log::warning("Failed to delete image from Cloudinary: {$e->getMessage()}");
-                    }
-                }
-            }
-            
-            // Delete related records
-            $bike->productImages()->delete();
-            $bike->discount()->delete();
-            $bike->ratings()->delete();
-            
-            // Finally delete the bike
             $bike->delete();
             
             DB::commit();

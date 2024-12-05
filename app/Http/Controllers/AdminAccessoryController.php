@@ -277,26 +277,7 @@ class AdminAccessoryController extends Controller
         DB::beginTransaction();
         try {
             $accessory = Product::findOrFail($id);
-            
-            // Delete images from Cloudinary
-            foreach ($accessory->productImages as $image) {
-                // Extract public_id from the URL
-                $publicId = $this->getPublicIdFromUrl($image->link);
-                if ($publicId) {
-                    try {
-                        $this->cloudinary->uploadApi()->destroy($publicId);
-                    } catch (\Exception $e) {
-                        Log::warning("Failed to delete image from Cloudinary: {$e->getMessage()}");
-                    }
-                }
-            }
-            
-            // Delete related records
-            $accessory->productImages()->delete();
-            $accessory->discount()->delete();
-            $accessory->ratings()->delete();
-            
-            // Finally delete the accessory
+        
             $accessory->delete();
             
             DB::commit();

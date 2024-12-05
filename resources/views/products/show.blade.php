@@ -498,10 +498,10 @@
                                                 <style type="text/css ">
                                                 </style>
                                                 <span style="color:#e74c3c; "><strong>CAM KẾT GIÁ RẺ NHẤT THỊ TRƯỜNG</strong></span><br />
-                                                ** Ở đâu giá rẻ, liên hệ Onebike.vn để được giảm rẻ hơn!<br />
+                                                ** Ở đâu giá rẻ, liên hệ để được giảm rẻ hơn!<br />
                                                 ** Tặng bộ phụ kiện trị giá 100.000 khi checkin<br />
                                                 ** Bảo hành chính hãng - 1 Đổi 1 trong vòng 30 ngày<br />
-                                                ** Xe chính hãng - Dịch vụ tốt - Chốt Onebike.vn / Dngbike.com
+                                                ** Xe chính hãng - Dịch vụ tốt
                                             </p>
 
                                         </div>

@@ -91,23 +91,9 @@
                                     <li><a href="https://dngbike.com/gioi-thieu-ve-cong-ty-dngbike">Tại sao bạn nên chọn DNGBIKE</a></li>
                                 </ul>
                             </div>
-                            <a href="http://online.gov.vn/Home/WebDetails/78698" target="blank"><img src="//bizweb.dktcdn.net/100/066/626/themes/919897/assets/bct.png?1730193558341" style="max-width:70%"></a>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="copyright clearfix">
-            <div class="container">
-                <div class="inner clearfix">
-                    <div class="row">
-                        <div class="col-sm-12 text-center">
-                            <span>© Bản quyền thuộc về <b>DNGBIKE</b> <span class="s480-f hidden">| Cung cấp bởi <a href="https://www.sapo.vn/?utm_campaign=cpn:site_khach_hang-plm:footer&utm_source=site_khach_hang&utm_medium=referral&utm_content=fm:text_link-km:-sz:&utm_term=&campaign=site_khach_hang" title="Sapo" target="_blank" rel="nofollow">Sapo</a></span></span>
-
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </footer>

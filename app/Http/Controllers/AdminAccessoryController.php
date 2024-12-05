@@ -366,8 +366,37 @@ class AdminAccessoryController extends Controller
 
     public function forceDelete(string $id)
     {
-        $accessory = Product::withTrashed()->findOrFail($id);
-        $accessory->forceDelete();
-        return redirect()->route('admin.accessories.trash')->with('success', 'Accessory force deleted successfully');
+        DB::beginTransaction();
+        try {
+            $accessory = Product::onlyTrashed()->findOrFail($id);
+            
+            // Delete Cloudinary images
+            foreach ($accessory->productImages as $image) {
+                $publicId = $this->getPublicIdFromUrl($image->link);
+                if ($publicId) {
+                    try {
+                        $this->cloudinary->uploadApi()->destroy($publicId);
+                    } catch (\Exception $e) {
+                        Log::warning("Failed to delete image from Cloudinary: {$e->getMessage()}");
+                    }
+                }
+            }
+
+            // Delete related models
+            $accessory->productImages()->delete();
+            $accessory->discount()->delete();
+            $accessory->ratings()->delete();
+            $accessory->forceDelete();
+            
+            DB::commit();
+            return redirect()->route('admin.accessories.trash')
+                ->with('success', 'Accessory deleted permanently');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Failed to delete accessory permanently: ' . $e->getMessage());
+            Log::error($e->getTraceAsString());
+            return redirect()->route('admin.accessories.trash')
+                ->with('error', 'Failed to delete accessory permanently: ' . $e->getMessage());
+        }
     }
 }

@@ -352,8 +352,32 @@ class AdminBikeController extends Controller
 
     public function forceDelete(string $id)
     {
-        $bike = Product::onlyTrashed()->findOrFail($id);
-        $bike->forceDelete();
-        return redirect()->route('admin.bikes.trash')->with('success', 'Bike deleted permanently');
+        DB::beginTransaction();
+        try {
+            $bike = Product::onlyTrashed()->findOrFail($id);
+            foreach ($bike->productImages as $image) {
+                $publicId = $this->getPublicIdFromUrl($image->link);
+                if ($publicId) {
+                    try {
+                        $this->cloudinary->uploadApi()->destroy($publicId);
+                    } catch (\Exception $e) {
+                        Log::warning("Failed to delete image from Cloudinary: {$e->getMessage()}");
+                    }
+                }
+            }
+
+            $bike->productImages()->delete();
+            $bike->discount()->delete();
+            $bike->ratings()->delete();
+            $bike->forceDelete();
+            
+            DB::commit();
+            return redirect()->route('admin.bikes.trash')->with('success', 'Bike deleted permanently');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Failed to delete bike permanently: ' . $e->getMessage());
+            Log::error($e->getTraceAsString());
+            return redirect()->route('admin.bikes.trash')->with('error', 'Failed to delete bike permanently: ' . $e->getMessage());
+        }
     }
 }
